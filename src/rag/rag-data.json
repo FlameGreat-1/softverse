@@ -1,0 +1,96 @@
+[
+  {
+    "id": "about",
+    "title": "About Me",
+    "content": "Emmanuel U. Iziogo is a final-year Computer Science student who enjoys building responsive, user-friendly applications using Next.js, React, TypeScript, and Tailwind CSS. She is fascinated by how technology solves real-world problems and enjoys exploring new tools that push her creativity further. Outside of coding, she loves scrolling through social media or watching Kdramas. She is just that girl!"
+  },
+  {
+    "id": "skills",
+    "title": "Skills",
+    "content": "React.js, Next.js, JavaScript, TypeScript, Tailwind CSS, HTML, CSS, Git, GitHub, Figma, AWS basics including EC2, Amplify, Cognito, VPC, S3, PostgreSQL, Terraform."
+  },
+  {
+    "id": "education",
+    "title": "Education",
+    "content": "Studying BSc Computer Science at Lagos State University with modules Software Engineering, Web and Internet Technology, Basic Java, basic C++, Algorithms and Data Structures, Systems Design and Security, Data Driven Computing, Databases, Computer Architecture and Networking. Expected graduation September 2026. Completed Full-Stack Engineering program at AltSchool Africa with modules including HTML, CSS, JavaScript, TypeScript, React, Next.js, and accessibility."
+  },
+  {
+    "id": "story_origin",
+    "title": "My Tech Journey",
+    "content": "I started my tech journey fresh out of highschool out of curiosity and a desire to understand how the apps and websites I used every day were built. This led me to apply to study Computer Science in the University. During my university years I worked on improving my tech skills and enrolled in the Full-Stack Engineering program at AltSchool Africa, where I enhanced my frontend skills. As I built more projects, I fell in love with creating interfaces that feel intuitive, responsive, and visually appealing. During my third year of uni, in my second semester, I went for my SIWES internship which lasted six months. During this period, I explored other tech fields and expanded my interests into UI/UX design, cloud engineering, automation, AWS, Terraform, AI/ML, and backend concepts. Today, I enjoy combining strong frontend skills with backend knowledge to build scalable, real-world applications."
+  },
+  {
+    "id": "project_portfolio",
+    "title": "Portfolio Website",
+    "content": "A fully responsive personal portfolio website designed to showcase my projects, experience, and skills. It features smooth animations, reusable components, a clean UI, and optimized routing. Built with modern frontend tools and deployed on Vercel. Serves as the central hub for my online presence."
+  },
+  {
+    "id": "project_interneefy",
+    "title": "Interneefy – Internship Management System",
+    "content": "Interneefy is a full-stack internship management system built as my SIWES project. It streamlines the internship lifecycle for organizations, offering dashboards for admins, supervisors, and interns. Users can register, assign and track tasks, submit reports, and monitor performance. Designed with scalability, clarity, and real-world usability in mind. Built with Next.js, React.js, TypeScript, Tailwind CSS, Node.js, PostgreSQL, and Prisma ORM."
+  },
+  {
+    "id": "project_tictactoe",
+    "title": "Tic Tac Toe Game",
+    "content": "A simple and interactive implementation of the classic Tic-Tac-Toe game. Built as part of The Odin Project curriculum, focusing on DOM manipulation, game logic, modular JavaScript patterns, and responsive layout. Built with HTML, CSS, and JavaScript."
+  },
+  {
+    "id": "project_todo",
+    "title": "Advanced Todo Application",
+    "content": "A feature-rich todo application with CRUD operations, pagination, dynamic routing, and database persistence. Built with React.js, Next.js, TypeScript, Tailwind CSS, Daisy UI, and Supabase."
+  },
+  {
+    "id": "project_etchasketch",
+    "title": "Etch A Sketch",
+    "content": "A web-based drawing playground inspired by the classic Etch A Sketch toy. Built as part of The Odin Project curriculum. Users can draw on a grid, choose different sizes, and reset the canvas. Built with HTML, CSS, and JavaScript."
+  },
+  {
+    "id": "project_space_tourism",
+    "title": "Space Tourism Website",
+    "content": "A responsive multipage space-themed website built from a Frontend Mentor challenge. Includes navigation between destinations, crew members, and technology pages. Built with TypeScript, React.js, Next.js, and Tailwind CSS."
+  },
+  {
+    "id": "project_loan_dashboard",
+    "title": "Loan Dashboard",
+    "content": "A static loan dashboard application that allows users to visualize loan metrics and repayment data. Includes charts, responsive layout, and clean design. Built with React.js, Tailwind CSS, JavaScript, and Chart.js."
+  },
+  {
+    "id": "project_positivus",
+    "title": "Positivus Landing Page",
+    "content": "A modern landing page for Positivus, showcasing their services and offerings. Designed with a clean layout, smooth flow, and responsive design. Built with HTML, CSS, and JavaScript."
+  },
+  {
+    "id": "project_ecommerce",
+    "title": "E-commerce Product Page",
+    "content": "A responsive e-commerce product detail page created from a Frontend Mentor challenge. Includes product gallery, add-to-cart functionality, and clean responsive UI. Built with React.js, Tailwind CSS, and TypeScript."
+  },
+  {
+    "id": "career",
+    "title": "Career Goals",
+    "content": "Aiming to become a strong software engineer with fullstack capabilities, with interests in AI/ML, accessible user interfaces, and building scalable applications."
+  },
+  {
+    "id": "experience_siwes",
+    "title": "Engineering Intern – Cecure Intelligence Limited",
+    "content": "During my SIWES internship at Cecure Intelligence Limited in the Engineering Department, I rotated through Full-Stack Engineering, design engineering, cloud engineering, and machine learning/AI. Mentored by senior engineers, I gained hands-on experience building secure, scalable, and user-friendly digital solutions. Strengthened skills in React, TypeScript, Tailwind CSS, Figma, Terraform, and AWS services. Contributed to documentation and learnt best engineering practices."
+  },
+  {
+    "id": "values",
+    "title": "Personality & Work Values",
+    "content": "Ifeoluwa values clean design, reliability, attention to detail, and consistent improvement. She enjoys taking feedback, learning quickly, and asking the right questions. Her work style is organized, curious, and focused. She loves building things that are both aesthetically pleasing and technically sound."
+  },
+  {
+    "id": "fun_facts",
+    "title": "Fun Facts",
+    "content": "She loves Kdramas, enjoys scrolling through social media in her free time, and likes exploring new tech tools. She is one of the 20 winners of upskill 3.0(2025) with Cardtonic."
+  },
+  {
+    "id": "contact",
+    "title": "Contact & Socials",
+    "content": "You can reach me through my portfolio or social platforms. I am open to collaborations, voluntary and paid opportunities, and frontend-focused roles.",
+    "email": "osinuaifeoluwa1@gmail.com",
+    "github": "https://github.com/FlameGreat-1",
+    "linkedin": "https://www.linkedin.com/in/flamegreat",
+    "portfolio": "https://softverse.vercel.app/"
+  }
+]
