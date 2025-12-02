@@ -113,7 +113,7 @@ const ProjectsPage = () => {
                     title="exoper"
                     subtitle="AI Security Guardrails. One Gateway. Every Model. Every AI request passes through EXOPER's zero-trust gateway. Identity verification, policy enforcement, threat detection, and immutable logging across all models, all environments. On-premises or cloud. No vendor lock-in."
                     thumbnail="/images/exoper.png"
-                    stack="· Go · Rust · Next.js · TypeScript · Tailwind CSS · PostgreSQL · Docker · Kubernetes · CI/CD"
+                    stack="· Go · Rust · Next.js · TypeScript · Tailwind CSS · PostgreSQL · Docker · CI/CD"
                     liveUrl="https://exoper.com"
                     githubUrl="https://github.com/FlameGreat-1/exoper"
                   />
