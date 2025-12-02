@@ -54,7 +54,7 @@ export async function POST(req: Request) {
     });
 
     // Gemini 2.0 Flash model with streaming
-    const modelName = "gemini-2.0-flash-exp";
+    const modelName = "gemini-2.0-flash";
     const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:streamGenerateContent?alt=sse&key=${apiKey}`;
 
     const response = await fetch(apiUrl, {
