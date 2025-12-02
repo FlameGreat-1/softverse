@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // Only use webpack polling in development (WSL)
+  // we Only use webpack polling in development (WSL)
   ...(process.env.NODE_ENV === 'development' && {
     webpack: (config, { isServer }) => {
       if (!isServer) {
