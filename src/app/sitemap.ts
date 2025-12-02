@@ -1,7 +1,7 @@
 export default function sitemap() {
   return [
     {
-      url: "https://softverse.vercel.app",
+      url: "https://softvers-e.vercel.app",
       lastModified: new Date(),
     },
   ];

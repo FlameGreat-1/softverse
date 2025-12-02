@@ -106,7 +106,7 @@ const ProjectsPage = () => {
                     subtitle="A personal portfolio website to showcase my projects and skills."
                     thumbnail="/images/Portfolio.png"
                     stack="Next.js · TypeScript · Tailwind CSS "
-                    liveUrl="https://softverse.vercel.app/"
+                    liveUrl="https://softvers-e.vercel.app/"
                     githubUrl="https://github.com/FlameGreat-1/Softverse"
                   />
                   <ProjectCard

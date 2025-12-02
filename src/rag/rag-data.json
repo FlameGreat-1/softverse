@@ -39,7 +39,6 @@
     "title": "Portfolio Website",
     "content": "A fully responsive personal portfolio website designed to showcase my projects, experience, and skills. It features smooth animations, reusable components, a clean UI, and optimized routing. Built with modern frontend tools and deployed on Vercel. Serves as the central hub for my online presence."
   },
-  [
   {
     "id": "exoper",
     "title": "Exoper",
@@ -107,6 +106,6 @@
     "email": "softverse.com@gmail.com",
     "github": "https://github.com/FlameGreat-1",
     "linkedin": "https://www.linkedin.com/in/flamegreat",
-    "portfolio": "https://softverse.vercel.app/"
+    "portfolio": "https://softvers-e.vercel.app/"
   }
 ]

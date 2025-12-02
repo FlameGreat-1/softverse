@@ -12,7 +12,7 @@ const allProjects = [
       "A personal portfolio website to showcase my experience and skills.",
     thumbnail: "/images/Portfolio.png",
     stack: "Next.js · TypeScript · Tailwind CSS ",
-    liveUrl: "https://softverse.vercel.app",
+    liveUrl: "https://softvers-e.vercel.app",
     githubUrl: "https://github.com/FlameGreat-1/flamo",
   },
   {
