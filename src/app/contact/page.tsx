@@ -181,8 +181,8 @@ const ContactPage = () => {
 
           <div className="flex-1 flex flex-col items-center justify-between text-center text-[14px]">
             <Image
-              src="/animations/miku.gif"
-              alt="dancing gif"
+              src="/animations/cartoo.png"
+              alt="cartoon"
               width={200}
               height={200}
               className="w-[240px] h-[250px] md:h-[350px]"
