@@ -25,14 +25,12 @@ export default function RagChat() {
   async function sendMessage() {
     if (!input.trim() || loading) return;
 
-    // Add user message
     const userQuery = input.trim();
     setMessages((prev) => [...prev, { sender: "user", text: userQuery }]);
     setInput("");
     setLoading(true);
     setIsStreaming(true);
 
-    // Add empty bot message that will be updated during streaming
     setMessages((prev) => [...prev, { sender: "bot", text: "" }]);
 
     try {
@@ -48,11 +46,9 @@ export default function RagChat() {
         throw new Error(`HTTP error! status: ${res.status}`);
       }
 
-      // Check if response is streaming or JSON
       const contentType = res.headers.get("content-type");
 
       if (contentType?.includes("text/plain")) {
-        // Handle streaming response
         const reader = res.body?.getReader();
         const decoder = new TextDecoder();
 
@@ -73,7 +69,6 @@ export default function RagChat() {
           const chunk = decoder.decode(value, { stream: true });
           accumulatedText += chunk;
 
-          // Update the last message (bot message) with accumulated text
           setMessages((prev) => {
             const newMessages = [...prev];
             if (newMessages.length > 0) {
@@ -86,7 +81,6 @@ export default function RagChat() {
           });
         }
       } else if (contentType?.includes("application/json")) {
-        // Handle JSON response (fallback for errors or non-streaming)
         const data = await res.json();
         setMessages((prev) => {
           const newMessages = [...prev];
@@ -122,11 +116,20 @@ export default function RagChat() {
 
   return (
     <div className="flex flex-col h-[450px] w-full">
-      {/* CHAT WINDOW */}
+      {/* CHAT WINDOW — hidden scrollbar */}
       <div
         ref={scrollRef}
-        className="flex-1 overflow-y-auto rounded-xl bg-white/[0.03] border border-white/[0.06] p-5 space-y-5 scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent"
+        className="chat-scroll flex-1 overflow-y-auto rounded-xl bg-white/[0.03] border border-white/[0.06] p-5 space-y-5"
+        style={{
+          scrollbarWidth: "none",
+          msOverflowStyle: "none",
+        }}
       >
+        {/* Hide webkit scrollbar via inline workaround */}
+        <style>{`
+          .chat-scroll::-webkit-scrollbar { display: none; }
+        `}</style>
+
         {messages.length === 0 && (
           <div className="flex flex-col items-center justify-center h-full gap-3 text-center">
             <div className="w-12 h-12 rounded-full bg-my-primary/10 border border-my-primary/20 flex items-center justify-center text-2xl">
@@ -149,19 +152,18 @@ export default function RagChat() {
             }`}
           >
             <div
-              className={`max-w-[80%] px-4 py-3 text-[14px] leading-relaxed whitespace-pre-wrap ${
+              className={`px-4 py-3 text-[14px] leading-relaxed whitespace-pre-wrap ${
                 msg.sender === "user"
-                  ? "bg-my-primary/15 border border-my-primary/30 rounded-2xl rounded-br-md text-gray-100"
-                  : "bg-white/[0.06] border border-white/10 rounded-2xl rounded-bl-md text-gray-200"
+                  ? "max-w-[75%] bg-my-primary/15 border border-my-primary/30 rounded-2xl rounded-br-sm text-gray-100"
+                  : "w-full bg-white/[0.04] border border-white/[0.08] rounded-2xl text-gray-300"
               }`}
             >
               {msg.sender === "bot" && (
-                <span className="block text-[10px] uppercase tracking-widest text-my-primary/60 font-semibold mb-1.5">
+                <span className="block text-[10px] uppercase tracking-widest text-my-primary/60 font-semibold mb-2">
                   AI
                 </span>
               )}
               {msg.text || (
-                // Show typing indicator for empty bot message while streaming
                 isStreaming &&
                 i === messages.length - 1 && (
                   <span className="inline-flex gap-1.5 py-1">
