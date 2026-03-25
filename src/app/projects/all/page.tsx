@@ -46,7 +46,7 @@ const allProjects = [
   {
     title: "Sidesone",
     subtitle:
-      "Agency Freelance portfolio connecting clients with skilled freelancers for various projects and services.",
+      "Agency Freelance portfolio. Recovered locked production server, rebuilt and refactored applications achieving 62% performance improvement, re-engineered Stripe payment integration, and migrated to containerized infrastructure serving 3,000+ users.",
     thumbnail: "/images/sidesone.png",
     stack: "· Typescript · Next.js · Tailwind CSS · MongoDB · AWS ",
     liveUrl: "https://sidesone.no",
@@ -60,6 +60,24 @@ const allProjects = [
     stack: "· Python FastAPI · TypeScript · Express.js · Node.js · Tailwind CSS · MongoDB ",
     liveUrl: "https://cosmicforge-frontend.vercel.app",
     githubUrl: "https://github.com/FlameGreat-1/Raphex-Backend",
+  },
+  {
+    title: "JTNC GROUP",
+    subtitle:
+      "Backend trading infrastructure for managing algorithmic trading signals and broker order routing. Microservice-based system with a client-facing portal and control center deployed on Oracle Cloud.",
+    thumbnail: "/images/jtnc.png",
+    stack: "· Python · Oracle Cloud · CI/CD · Microservices ",
+    liveUrl: "https://qfaa.jtncgroup.com",
+    githubUrl: "https://github.com/FlameGreat-1",
+  },
+  {
+    title: "Autonoms AI",
+    subtitle:
+      "AI agent marketplace platform enabling businesses and enterprises to browse, purchase, and deploy pre-built AI agents with seamless developer integrations and automated deployment workflows.",
+    thumbnail: "/images/autonoms.png",
+    stack: "· React · Next.js · TypeScript · PostgreSQL · AWS · CI/CD ",
+    liveUrl: "https://autonoms.ai",
+    githubUrl: "https://github.com/FlameGreat-1",
   },
   {
     title: "Honestiq",

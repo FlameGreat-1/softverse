@@ -304,9 +304,9 @@ export default function Home() {
 
           <AboutPage />
 
-          <ProjectsPage />
-
           <ExperiencePage />
+
+          <ProjectsPage />
 
           <ContactPage />
         </main>

@@ -80,8 +80,233 @@ const experiencePage = () => {
           }}
         />
 
-        {/* Experience 1 */}
+        {/* Experience 1 - JTNC GROUP */}
         <ExperienceSection index={0}>
+          <p className="text-sm font-semibold text-gray-300 mb-2">2022 — 2024</p>
+
+          <ScrollReveal
+            size="md"
+            align="left"
+            enableBlur={true}
+            baseOpacity={0.2}
+            staggerDelay={0.03}
+            containerClassName="mb-1"
+            textClassName="text-xl font-semibold text-white"
+          >
+            Backend Engineer
+          </ScrollReveal>
+
+          <p className="text-my-primary font-medium mt-1">
+            <a href="https://qfaa.jtncgroup.com" target="_blank">
+              JTNC GROUP
+            </a>
+          </p>
+
+          <p className="text-gray-400 text-sm mt-1">
+            November 2022 — October 2024 · 2 years
+          </p>
+          <p className="text-gray-400 text-sm">
+            U.S.A · Full-time (Remote)
+          </p>
+
+          <ul className="mt-4 max-w-2xl space-y-2 list-disc list-inside">
+            <ExperienceItem delay={0.1}>
+              Designed and Rebuilt backend trading infrastructure in Python, replacing the existing React/Tailwind architecture with a microservice-based system deployed on Oracle Cloud
+            </ExperienceItem>
+            <ExperienceItem delay={0.2}>
+              Designed a client-facing portal and control center for managing algorithmic trading signals and broker order routing on behalf of clients
+            </ExperienceItem>
+            <ExperienceItem delay={0.3}>
+              Built a secondary server to replicate the production environment alongside a dedicated testing and staging pipeline with CI/CD automation
+            </ExperienceItem>
+            <ExperienceItem delay={0.4}>
+              Stack: Python, Oracle Cloud, CI/CD pipelines, microservices architecture
+            </ExperienceItem>
+          </ul>
+        </ExperienceSection>
+
+        {/* Experience 2 - Autonoms AI */}
+        <ExperienceSection index={1}>
+          <p className="text-sm font-semibold text-gray-300 mb-2">2022 — 2023</p>
+
+          <ScrollReveal
+            size="md"
+            align="left"
+            enableBlur={true}
+            baseOpacity={0.2}
+            staggerDelay={0.03}
+            containerClassName="mb-1"
+            textClassName="text-xl font-semibold text-white"
+          >
+            Fullstack Engineer
+          </ScrollReveal>
+
+          <p className="text-my-primary font-medium mt-1">
+            <a href="https://autonoms.ai" target="_blank">
+              Autonoms AI
+            </a>
+          </p>
+
+          <p className="text-gray-400 text-sm mt-1">
+            November 2022 — April 2023 · 6 months
+          </p>
+          <p className="text-gray-400 text-sm">
+            Remote · Full-time
+          </p>
+
+          <ul className="mt-4 max-w-2xl space-y-2 list-disc list-inside">
+            <ExperienceItem delay={0.1}>
+              Contributed to the development of an AI agent marketplace platform enabling businesses and enterprises to browse, purchase, and deploy pre-built AI agents
+            </ExperienceItem>
+            <ExperienceItem delay={0.2}>
+              Built and maintained the agent deployment pipeline, supporting seamless developer integrations and automated deployment workflows for enterprise clients
+            </ExperienceItem>
+            <ExperienceItem delay={0.3}>
+              Contributed to frontend development of the marketplace storefront and seller/buyer portal, supporting agent listings, discovery, and transactions
+            </ExperienceItem>
+            <ExperienceItem delay={0.4}>
+              Delivered using React, Next.js, TypeScript, and PostgreSQL, deployed on AWS with CI/CD automation
+            </ExperienceItem>
+          </ul>
+        </ExperienceSection>
+
+        {/* Experience 3 - Sidesone */}
+        <ExperienceSection index={2}>
+          <p className="text-sm font-semibold text-gray-300 mb-2">2024</p>
+
+          <ScrollReveal
+            size="md"
+            align="left"
+            enableBlur={true}
+            baseOpacity={0.2}
+            staggerDelay={0.03}
+            containerClassName="mb-1"
+            textClassName="text-xl font-semibold text-white"
+          >
+            Fullstack Engineer
+          </ScrollReveal>
+
+          <p className="text-my-primary font-medium mt-1">
+            <a href="https://sidesone.no" target="_blank">
+              Sidesone
+            </a>
+          </p>
+
+          <p className="text-gray-400 text-sm mt-1">
+            October 2024 · Contract
+          </p>
+          <p className="text-gray-400 text-sm">
+            Norway · Remote
+          </p>
+
+          <ul className="mt-4 max-w-2xl space-y-2 list-disc list-inside">
+            <ExperienceItem delay={0.1}>
+              Recovered locked production server using chroot environment, restoring full codebases, databases (3,200+ records), SSL certificates, and n8n automation workflows with zero data loss
+            </ExperienceItem>
+            <ExperienceItem delay={0.2}>
+              Rebuilt and refactored one of 4 production applications, achieving 62% performance improvement and containerizing all services to eliminate resource contention and daily crashes
+            </ExperienceItem>
+            <ExperienceItem delay={0.3}>
+              Re-engineered broken Stripe payment integration with Webhooks and 3D Secure 2 authentication, resolving false payment confirmations and ensuring PCI compliance
+            </ExperienceItem>
+            <ExperienceItem delay={0.4}>
+              Migrated from single-VPS to isolated containerized environments, serving 3,000+ users on stable, scalable infrastructure
+            </ExperienceItem>
+          </ul>
+        </ExperienceSection>
+
+        {/* Experience 4 - CosmicForge Healthnet */}
+        <ExperienceSection index={3}>
+          <p className="text-sm font-semibold text-gray-300 mb-2">2025</p>
+
+          <ScrollReveal
+            size="md"
+            align="left"
+            enableBlur={true}
+            baseOpacity={0.2}
+            staggerDelay={0.03}
+            containerClassName="mb-1"
+            textClassName="text-xl font-semibold text-white"
+          >
+            AI Engineer
+          </ScrollReveal>
+
+          <p className="text-my-primary font-medium mt-1">
+            <a href="https://cosmicforge-frontend.vercel.app" target="_blank">
+              CosmicForge Healthnet Limited
+            </a>
+          </p>
+
+          <p className="text-gray-400 text-sm mt-1">
+            January 2025 — July 2025 · 7 months
+          </p>
+          <p className="text-gray-400 text-sm">
+            Lagos State, Nigeria · Full-time (Hybrid)
+          </p>
+
+          <ul className="mt-4 max-w-2xl space-y-2 list-disc list-inside">
+            <ExperienceItem delay={0.1}>
+              Fine-tuned and deployed LLaMA 3 (70B parameters) to RunPod cloud for diagnosis, lab analysis, and genetics insights
+            </ExperienceItem>
+            <ExperienceItem delay={0.2}>
+              Developed RESTful APIs using Python and FastAPI serving AI predictions with real-time patient analytics
+            </ExperienceItem>
+            <ExperienceItem delay={0.3}>
+              Integrated AI voice assistant (VAPI + Whisper) for interactive patient communication and clinical support
+            </ExperienceItem>
+            <ExperienceItem delay={0.4}>
+              Managed Azure cloud deployment ensuring secure, scalable, production-ready infrastructure
+            </ExperienceItem>
+          </ul>
+        </ExperienceSection>
+
+        {/* Experience 5 - Raspaas */}
+        <ExperienceSection index={4}>
+          <p className="text-sm font-semibold text-gray-300 mb-2">2021 — 2022</p>
+
+          <ScrollReveal
+            size="md"
+            align="left"
+            enableBlur={true}
+            baseOpacity={0.2}
+            staggerDelay={0.03}
+            containerClassName="mb-1"
+            textClassName="text-xl font-semibold text-white"
+          >
+            Software Developer
+          </ScrollReveal>
+
+          <p className="text-my-primary font-medium mt-1">
+            <a href="https://raspaas.up.railway.app" target="_blank">
+              Raspaas
+            </a>
+          </p>
+
+          <p className="text-gray-400 text-sm mt-1">
+            March 2021 — August 2022 · 1 year 6 months
+          </p>
+          <p className="text-gray-400 text-sm">
+            Sri Lanka · Full-time (Remote)
+          </p>
+
+          <ul className="mt-4 max-w-2xl space-y-2 list-disc list-inside">
+            <ExperienceItem delay={0.1}>
+              Built and deployed 2 enterprise-grade systems: AI-powered invoice management platform (InvoTex OCR) and multi-tenant HR system with face recognition (ZKTeco) devices for &lt;1s real-time attendance logging
+            </ExperienceItem>
+            <ExperienceItem delay={0.2}>
+              Engineered InvoTex OCR using Document AI, Google Cloud Vision, and LlamaLayoutMv5, achieving 97% extraction accuracy processing 1,000+ invoices (up to 1GB) in under 5 minutes via Django, FastAPI, React.js, and PostgreSQL
+            </ExperienceItem>
+            <ExperienceItem delay={0.3}>
+              Architected RASPAAS HR system with Django, Celery, Docker, and PostgreSQL, integrating biometric (REALAND)
+            </ExperienceItem>
+            <ExperienceItem delay={0.4}>
+              Implemented JWT authentication, RBAC authorization, multi-level approval workflows, and automated payroll with compliance tracking
+            </ExperienceItem>
+          </ul>
+        </ExperienceSection>
+
+        {/* Experience 6 - Exoper */}
+        <ExperienceSection index={5}>
           <p className="text-sm font-semibold text-gray-300 mb-2">2025 — Present</p>
 
           <ScrollReveal
@@ -125,98 +350,8 @@ const experiencePage = () => {
           </ul>
         </ExperienceSection>
 
-        {/* Experience 2 */}
-        <ExperienceSection index={1}>
-          <p className="text-sm font-semibold text-gray-300 mb-2">2025</p>
-
-          <ScrollReveal
-            size="md"
-            align="left"
-            enableBlur={true}
-            baseOpacity={0.2}
-            staggerDelay={0.03}
-            containerClassName="mb-1"
-            textClassName="text-xl font-semibold text-white"
-          >
-            AI Engineer
-          </ScrollReveal>
-
-          <p className="text-my-primary font-medium mt-1">
-            <a href="https://cosmicforge-frontend.vercel.app" target="_blank">
-              CosmicForge Healthnet Limited
-            </a>
-          </p>
-
-          <p className="text-gray-400 text-sm mt-1">
-            January 2025 — July 2025 · 7 months
-          </p>
-          <p className="text-gray-400 text-sm">
-            Lagos State, Nigeria · Full-time (Hybrid)
-          </p>
-
-          <ul className="mt-4 max-w-2xl space-y-2 list-disc list-inside">
-            <ExperienceItem delay={0.1}>
-              Fine-tuned and deployed LLaMA 3 (13B parameters) to RunPod cloud for diagnosis, lab analysis, and genetics insights
-            </ExperienceItem>
-            <ExperienceItem delay={0.2}>
-              Developed RESTful APIs using Python and FastAPI serving AI predictions with real-time patient analytics
-            </ExperienceItem>
-            <ExperienceItem delay={0.3}>
-              Integrated AI voice assistant (VAPI + Whisper) for interactive patient communication and clinical support
-            </ExperienceItem>
-            <ExperienceItem delay={0.4}>
-              Managed Azure cloud deployment ensuring secure, scalable, production-ready infrastructure
-            </ExperienceItem>
-          </ul>
-        </ExperienceSection>
-
-        {/* Experience 3 */}
-        <ExperienceSection index={2}>
-          <p className="text-sm font-semibold text-gray-300 mb-2">2022 — 2024</p>
-
-          <ScrollReveal
-            size="md"
-            align="left"
-            enableBlur={true}
-            baseOpacity={0.2}
-            staggerDelay={0.03}
-            containerClassName="mb-1"
-            textClassName="text-xl font-semibold text-white"
-          >
-            Lead Engineer
-          </ScrollReveal>
-
-          <p className="text-my-primary font-medium mt-1">
-            <a href="https://buildhive.vercel.app" target="_blank">
-              Lunexa
-            </a>
-          </p>
-
-          <p className="text-gray-400 text-sm mt-1">
-            November 2022 — October 2024 · 2 years
-          </p>
-          <p className="text-gray-400 text-sm">
-            Australia · Full-time (Remote)
-          </p>
-
-          <ul className="mt-4 max-w-2xl space-y-2 list-disc list-inside">
-            <ExperienceItem delay={0.1}>
-              Led end-to-end design, development, and deployment of 3 large-scale technical and construction applications
-            </ExperienceItem>
-            <ExperienceItem delay={0.2}>
-              Oversaw backend architecture, Full-Stack Engineering, cloud infrastructure, and system security
-            </ExperienceItem>
-            <ExperienceItem delay={0.3}>
-              Built secure payment pipelines, optimized performance, and ensured production-grade scalability
-            </ExperienceItem>
-            <ExperienceItem delay={0.4}>
-              Delivered high-performing solutions using TypeScript, Next.js, Node.js, Tailwind CSS, React Query on Oracle Cloud with CI/CD automation
-            </ExperienceItem>
-          </ul>
-        </ExperienceSection>
-
-        {/* Experience 4 */}
-        <ExperienceSection index={3}>
+        {/* Experience 7 - FUTO (KEPT AS-IS) */}
+        <ExperienceSection index={6}>
           <p className="text-sm font-semibold text-gray-300 mb-2">2022 — 2023</p>
 
           <ScrollReveal
@@ -256,51 +391,6 @@ const experiencePage = () => {
             </ExperienceItem>
             <ExperienceItem delay={0.4}>
               Implemented real-time monitoring and control interfaces supporting operational decision-making
-            </ExperienceItem>
-          </ul>
-        </ExperienceSection>
-
-        {/* Experience 5 */}
-        <ExperienceSection index={4}>
-          <p className="text-sm font-semibold text-gray-300 mb-2">2021 — 2022</p>
-
-          <ScrollReveal
-            size="md"
-            align="left"
-            enableBlur={true}
-            baseOpacity={0.2}
-            staggerDelay={0.03}
-            containerClassName="mb-1"
-            textClassName="text-xl font-semibold text-white"
-          >
-            Software Developer
-          </ScrollReveal>
-
-          <p className="text-my-primary font-medium mt-1">
-            <a href="https://raspaas.up.railway.app" target="_blank">
-              Raspaas
-            </a>
-          </p>
-
-          <p className="text-gray-400 text-sm mt-1">
-            March 2021 — August 2022 · 1 year 6 months
-          </p>
-          <p className="text-gray-400 text-sm">
-            Sri Lanka · Full-time (Remote)
-          </p>
-
-          <ul className="mt-4 max-w-2xl space-y-2 list-disc list-inside">
-            <ExperienceItem delay={0.1}>
-              Built and deployed 2 enterprise-grade systems: AI-powered invoice management platform (InvoTex OCR) and multi-tenant HR system
-            </ExperienceItem>
-            <ExperienceItem delay={0.2}>
-              Engineered InvoTex OCR using Document AI, Google Cloud Vision, and LlamaLayoutMv5, achieving 97% extraction accuracy processing 1,000+ invoices (up to 1GB) in under 5 minutes via Django, FastAPI, React.js, and PostgreSQL
-            </ExperienceItem>
-            <ExperienceItem delay={0.3}>
-              Architected RASPAAS HR system with Django, Celery, Docker, and PostgreSQL, integrating biometric (REALAND) and face recognition (ZKTeco) devices for &lt;1s real-time attendance logging
-            </ExperienceItem>
-            <ExperienceItem delay={0.4}>
-              Implemented JWT authentication, RBAC authorization, multi-level approval workflows, and automated payroll with compliance tracking
             </ExperienceItem>
           </ul>
         </ExperienceSection>

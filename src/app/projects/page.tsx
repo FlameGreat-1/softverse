@@ -100,7 +100,31 @@ const ProjectsPage = () => {
                 exit={{ opacity: 0, y: -8 }}
                 transition={{ duration: 0.45, ease: "easeInOut" }}
               >
-                <div className="flex flex-nowrap gap-6 justify-between items-start w-full flex-col sm:flex-row">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
+                  <ProjectCard
+                    title="JTNC GROUP"
+                    subtitle="Backend trading infrastructure for managing algorithmic trading signals and broker order routing. Microservice-based system with a client-facing portal and control center deployed on Oracle Cloud."
+                    thumbnail="/images/jtnc.png"
+                    stack="· Python · Oracle Cloud · CI/CD · Microservices "
+                    liveUrl="https://qfaa.jtncgroup.com"
+                    githubUrl="https://github.com/FlameGreat-1"
+                  />
+                  <ProjectCard
+                    title="Autonoms AI"
+                    subtitle="AI agent marketplace platform enabling businesses and enterprises to browse, purchase, and deploy pre-built AI agents with seamless developer integrations and automated deployment workflows."
+                    thumbnail="/images/autonoms.png"
+                    stack="· React · Next.js · TypeScript · PostgreSQL · AWS · CI/CD "
+                    liveUrl="https://autonoms.ai"
+                    githubUrl="https://github.com/FlameGreat-1"
+                  />
+                  <ProjectCard
+                    title="Sidesone"
+                    subtitle="Agency Freelance portfolio. Recovered locked production server, rebuilt and refactored applications achieving 62% performance improvement, re-engineered Stripe payment integration, and migrated to containerized infrastructure serving 3,000+ users."
+                    thumbnail="/images/sidesone.png"
+                    stack="· Typescript · Next.js · Tailwind CSS · MongoDB · AWS "
+                    liveUrl="https://sidesone.no"
+                    githubUrl="https://github.com/FlameGreat-1/sideones"
+                  />
                   <ProjectCard
                     title="Portfolio Website"
                     subtitle="A personal portfolio website to showcase my projects and skills."
