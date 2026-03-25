@@ -34,22 +34,33 @@ export default function FloatingRobot() {
           </div>
         </DialogTrigger>
 
-        {/* Chatbox Dialog */}
+        {/* Chatbox Dialog — enlarged & premium */}
         <DialogContent
-          className="w-[95%] bg-[#0A0A0F]/90 border border-white/10
-          text-white max-w-md md:w-full rounded-2xl shadow-2xl p-6"
+          className="w-[95%] max-w-2xl md:w-full rounded-2xl shadow-[0_0_60px_rgba(199,120,221,0.15)] p-0 overflow-hidden
+          bg-gradient-to-b from-[#111118] to-[#0A0A0F] border border-white/10 text-white"
         >
-          <DialogTitle>AI chatbox</DialogTitle>
-          <h2 className="text-xl font-semibold mb-2">Chat with my AI 🤖</h2>
-          <p className="text-sm text-gray-300 mb-4">
-            You can ask questions about me, my projects, anything on this site
-            and general questions.
-          </p>
+          {/* Header */}
+          <div className="px-6 pt-6 pb-4 border-b border-white/5">
+            <DialogTitle className="flex items-center gap-2 text-xs font-medium uppercase tracking-widest text-my-primary/70 mb-2">
+              <span className="inline-block w-2 h-2 rounded-full bg-my-primary animate-pulse" />
+              AI Assistant
+            </DialogTitle>
+            <h2 className="text-2xl font-bold tracking-tight">
+              Chat with my AI{" "}
+              <span className="inline-block animate-bounce">🤖</span>
+            </h2>
+            <p className="text-sm text-gray-400 mt-1 leading-relaxed">
+              Ask questions about me, my projects, tech stack, or anything on
+              this site.
+            </p>
+          </div>
 
-          <RagChat />
+          {/* Chat body */}
+          <div className="px-6 pb-6">
+            <RagChat />
+          </div>
         </DialogContent>
       </Dialog>
     </div>
   );
 }
-

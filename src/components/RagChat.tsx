@@ -121,43 +121,69 @@ export default function RagChat() {
   }
 
   return (
-    <div className="flex flex-col h-[330px] w-full">
+    <div className="flex flex-col h-[450px] w-full">
       {/* CHAT WINDOW */}
       <div
         ref={scrollRef}
-        className="flex-1 overflow-y-auto bg-white/5 border border-white/10 rounded-lg p-4 space-y-4"
+        className="flex-1 overflow-y-auto rounded-xl bg-white/[0.03] border border-white/[0.06] p-5 space-y-5 scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent"
       >
         {messages.length === 0 && (
-          <p className="text-gray-400 text-sm text-center mt-10">
-            Ask me anything about Emmanuel 👨🏽‍💻✨
-          </p>
+          <div className="flex flex-col items-center justify-center h-full gap-3 text-center">
+            <div className="w-12 h-12 rounded-full bg-my-primary/10 border border-my-primary/20 flex items-center justify-center text-2xl">
+              💬
+            </div>
+            <p className="text-gray-400 text-sm font-medium">
+              Ask me anything about Emmanuel
+            </p>
+            <p className="text-gray-500 text-xs max-w-[260px]">
+              Projects, skills, experience, tech stack — I&apos;m here to help.
+            </p>
+          </div>
         )}
 
         {messages.map((msg, i) => (
           <div
             key={i}
-            className={`max-w-[80%] px-3 py-2 rounded-lg text-sm whitespace-pre-wrap ${
-              msg.sender === "user"
-                ? "bg-my-primary/20 ml-auto border border-my-primary/40"
-                : "bg-white/10 border border-white/20"
+            className={`flex ${
+              msg.sender === "user" ? "justify-end" : "justify-start"
             }`}
           >
-            {msg.text || (
-              // Show typing indicator for empty bot message while streaming
-              (isStreaming && i === messages.length - 1) && (
-                <span className="inline-flex gap-1">
-                  <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></span>
-                  <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: "0.2s" }}></span>
-                  <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: "0.4s" }}></span>
+            <div
+              className={`max-w-[80%] px-4 py-3 text-[14px] leading-relaxed whitespace-pre-wrap ${
+                msg.sender === "user"
+                  ? "bg-my-primary/15 border border-my-primary/30 rounded-2xl rounded-br-md text-gray-100"
+                  : "bg-white/[0.06] border border-white/10 rounded-2xl rounded-bl-md text-gray-200"
+              }`}
+            >
+              {msg.sender === "bot" && (
+                <span className="block text-[10px] uppercase tracking-widest text-my-primary/60 font-semibold mb-1.5">
+                  AI
                 </span>
-              )
-            )}
+              )}
+              {msg.text || (
+                // Show typing indicator for empty bot message while streaming
+                isStreaming &&
+                i === messages.length - 1 && (
+                  <span className="inline-flex gap-1.5 py-1">
+                    <span className="w-2 h-2 bg-my-primary/50 rounded-full animate-bounce"></span>
+                    <span
+                      className="w-2 h-2 bg-my-primary/50 rounded-full animate-bounce"
+                      style={{ animationDelay: "0.15s" }}
+                    ></span>
+                    <span
+                      className="w-2 h-2 bg-my-primary/50 rounded-full animate-bounce"
+                      style={{ animationDelay: "0.3s" }}
+                    ></span>
+                  </span>
+                )
+              )}
+            </div>
           </div>
         ))}
       </div>
 
       {/* INPUT BAR */}
-      <div className="mt-3 flex items-center gap-2">
+      <div className="mt-4 flex items-center gap-3 bg-white/[0.04] border border-white/[0.08] rounded-xl p-2">
         <input
           value={input}
           onChange={(e) => setInput(e.target.value)}
@@ -167,16 +193,27 @@ export default function RagChat() {
             }
           }}
           disabled={loading}
-          className="flex-1 p-2 text-sm bg-white/10 border border-white/20 rounded-lg outline-none focus:border-my-primary/50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-          placeholder="Ask a question..."
+          className="flex-1 px-3 py-2.5 text-sm bg-transparent outline-none placeholder:text-gray-500 disabled:opacity-50 disabled:cursor-not-allowed"
+          placeholder="Type your question..."
         />
 
         <button
           onClick={sendMessage}
           disabled={loading || !input.trim()}
-          className="px-4 py-2 bg-my-primary text-black font-semibold rounded-lg hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
+          className="px-5 py-2.5 bg-my-primary text-black text-sm font-bold rounded-lg
+          hover:shadow-[0_0_20px_rgba(199,120,221,0.3)] transition-all duration-200
+          disabled:opacity-40 disabled:cursor-not-allowed disabled:shadow-none
+          active:scale-95"
         >
-          {loading ? "..." : "Send"}
+          {loading ? (
+            <span className="inline-flex gap-1">
+              <span className="w-1.5 h-1.5 bg-black/60 rounded-full animate-bounce"></span>
+              <span className="w-1.5 h-1.5 bg-black/60 rounded-full animate-bounce" style={{ animationDelay: "0.15s" }}></span>
+              <span className="w-1.5 h-1.5 bg-black/60 rounded-full animate-bounce" style={{ animationDelay: "0.3s" }}></span>
+            </span>
+          ) : (
+            "Send"
+          )}
         </button>
       </div>
     </div>
