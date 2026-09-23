@@ -2,13 +2,14 @@
 
 import React from "react";
 import Image from "next/image";
-import ThreeDHoverGallery from "@/components/3d-hover-gallery";
 
 const skillsData = {
-  Programming: ["Python", "JavaScript", "TypeScript", "Go", "LaTeX", "MATLAB"],
-  "Back-end": ["Django", "Node.js", "Express.js", "Go", "FastAPI"],
-  "Front-end": ["React", "Next.js", "HTML5", "SCSS", "Tailwind CSS"],
-  DevOps: ["AWS", "Docker", "Kubernetes", "CI/CD"],
+  Languages: ["Go", "JavaScript", "Python", "TypeScript", "PHP (Laravel)", "Shell"],
+  Frontend: ["React.js", "Next.js", "Tailwind CSS", "HTML5", "SCSS"],
+  Backend: ["Node.js", "Express.js", "FastAPI", "Django", "REST APIs", "WebSockets", "Microservices"],
+  Security: ["JWT", "RBAC", "OAuth 2.0", "AES-256", "KMS / Vault", "TLS/SSL", "HIPAA", "GDPR", "MiFID II", "ISO 27001", "SOC 2", "PCI-DSS"],
+  Infrastructure: ["Kubernetes", "Docker", "CI/CD", "Azure", "AWS", "Oracle Cloud", "RunPod", "Linux VPS"],
+  "AI/ML": ["LLaMA 3", "QLoRA", "PEFT", "PyTorch", "LangChain", "RAG", "Vector DB", "OpenAI", "Gemini", "Claude", "Whisper", "VAPI"]
 };
 
 const aboutPage = () => {
@@ -46,7 +47,7 @@ const aboutPage = () => {
         height={0}
         className="w-96 h-[0.5px] sm:w-96 mx-auto"
       />
-      <div className="flex lg:flex-row flex-col gap-20 justify-between items-center px-5 sm:px-32 w-full">
+      <div className="flex lg:flex-row flex-col gap-20 justify-between items-center px-3 sm:px-12 lg:px-32 w-full">
         <div className="flex-[1.2]">
           <h2 className="font-semibold text-[24px] lg:text-[32px] flex items-center mb-6">
             <span className="text-my-primary">#</span>about-me{" "}
@@ -61,9 +62,7 @@ const aboutPage = () => {
             </span>
           </h2>
           <p className="text-center sm:text-left text-[1rem] pt-5 leading-relaxed font-mono">
-            Full-Stack Engineer with 5+ years of experience architecting and deploying scalable applications, RESTful services, and AI-powered solutions. Proven expertise in end-to-end software development, cloud infrastructure, and system security across SaaS platforms and enterprise systems.
-            <br /><br />
-            Specialized in integrating LLMs, automating workflows, and delivering production-ready systems with high availability and real-time intelligence. Chemical Engineering background provides unique analytical approach to complex software challenges and data-driven solutions.
+            Full Stack Engineer and Founder with 6+ years of experience building scalable, production-grade systems across fintech, healthtech, edtech, and algorithmic trading. Expert in backend engineering, AI/LLM integration, cloud infrastructure, and system security — delivering high-performance, compliant platforms from microservices and real-time systems to fine-tuned LLMs and automated trading engines.
           </p>
         </div>
         <div className="flex-1 flex justify-center sm:mt-6 mt-10 relative min-h-[400px]">
@@ -71,55 +70,41 @@ const aboutPage = () => {
           <Image
             src="/assets/star.svg"
             alt="star"
-            width={0}
-            height={0}
-            className="-z-10 w-28 h-28 absolute -top-9 left-0 sm:left-5"
+            width={120}
+            height={120}
+            className="z-10 md:-z-10 w-24 h-24 md:w-32 md:h-32 absolute -top-4 -left-4 md:-top-16 md:-left-24 lg:-top-16 lg:-left-20"
           />
           <Image
             src="/assets/smiley.svg"
             alt="smiley"
-            width={0}
-            height={0}
-            className="w-20 h-20 absolute top-16 -right-4 sm:right-2"
+            width={100}
+            height={100}
+            className="z-10 md:-z-10 w-16 h-16 md:w-24 md:h-24 absolute top-16 -right-6 md:top-20 md:-right-28 lg:top-32 lg:-right-24"
           />
           <Image
             src="/assets/prop.webp"
             alt="prop"
-            width={0}
-            height={0}
-            className="-z-10 w-36 h-36 absolute -bottom-5 -left-9 sm:-left-3"
+            width={160}
+            height={160}
+            className="z-10 md:-z-10 w-28 h-28 md:w-40 md:h-40 absolute -bottom-6 -left-10 md:-bottom-20 md:-left-28 lg:-bottom-16 lg:-left-28"
           />
 
-          {/* 3D Gallery for portfolio pictures */}
-          <div className="w-full h-full flex items-center justify-center">
-            <ThreeDHoverGallery
-              images={[
-                "/images/my-picture-1.png",
-                "/images/my-picture-2.png",
-                "/images/my-picture-3.png",
-              ]}
-              itemWidth={2}
-              itemHeight={8}
-              gap={0.2}
-              perspective={30}
-              hoverScale={8}
-              transitionDuration={0.6}
-              grayscaleStrength={0.5}
-              brightnessLevel={0.6}
-              activeWidth={20}
-              rotationAngle={20}
-              zDepth={5}
-              enableKeyboardNavigation={true}
-              autoPlay={true}
-              autoPlayDelay={3000}
-              className="!min-h-0 !h-auto bg-transparent"
-              style={{ minHeight: 0, height: 'auto' }}
-            />
+          <div className="w-full h-full flex items-center justify-center pt-8 md:pt-0">
+            <div className="relative group perspective-1000 rotate-6 transition-transform duration-500 hover:rotate-0 mt-8 md:mt-0">
+              <div className="absolute -inset-1.5 bg-gradient-to-r from-my-primary to-purple-600 rounded-2xl blur-md opacity-30 group-hover:opacity-60 transition duration-700"></div>
+              <Image
+                src="/images/my-picture-1.png"
+                alt="My Picture"
+                width={500}
+                height={700}
+                className="w-[280px] h-[380px] sm:w-[340px] sm:h-[460px] md:w-[420px] md:h-[580px] lg:w-[440px] lg:h-[600px] relative rounded-2xl object-cover shadow-[0_20px_50px_rgba(0,0,0,0.5)] transition-all duration-500 hover:scale-[1.02] hover:-translate-y-2 grayscale-[20%] hover:grayscale-0 border border-white/10"
+              />
+            </div>
           </div>
         </div>
       </div>
 
-      <div className="mx-auto w-[95%] sm:w-[75%] px-4 sm:px-8 py-3 sm:py-4 rounded-2xl border border-white/20 bg-white/5 backdrop-blur-sm font-semibold shadow-[inset_1px_1px_2px_rgba(255,255,255,0.4)]">
+      <div className="mx-1 sm:mx-6 lg:mx-32 px-2 sm:px-6 lg:px-8 py-4 sm:py-6 rounded-2xl border border-white/20 bg-white/5 backdrop-blur-sm font-semibold shadow-[inset_1px_1px_2px_rgba(255,255,255,0.4)] mt-12 sm:mt-0">
         <p className="text-[22px]">
           <span className="text-my-primary text-[26px]">/</span>skills
         </p>
@@ -134,7 +119,7 @@ const aboutPage = () => {
                 {skills.map((skill) => (
                   <p
                     key={skill}
-                    className="px-2 sm:px-3 py-1 sm:py-2 flex items-center justify-between rounded-full bg-white/5 backdrop-blur-sm shadow-[inset_1px_1px_2px_rgba(255,255,255,0.4)]"
+                    className="px-3 sm:px-4 py-1.5 sm:py-2 flex items-center justify-between rounded-full bg-white/5 backdrop-blur-sm shadow-[inset_1px_1px_2px_rgba(255,255,255,0.4)]"
                   >
                     {skill}
                   </p>

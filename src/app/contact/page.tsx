@@ -67,7 +67,7 @@ const ContactPage = () => {
   return (
     <section
       id="contact"
-      className="space-y-16 my-40 mb-20 px-5 sm:px-32 relative scroll-mt-10 md:scroll-mt-32"
+      className="space-y-16 my-40 mb-20 px-3 sm:px-12 lg:px-32 relative scroll-mt-10 md:scroll-mt-32"
     >
       <div className="absolute inset-0 -z-10">
         <Image

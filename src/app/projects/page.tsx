@@ -30,7 +30,7 @@ const ProjectsPage = () => {
   return (
     <section
       id="projects"
-      className="space-y-16 my-40 px-5 sm:px-32 relative scroll-mt-10 md:scroll-mt-32"
+      className="space-y-16 my-40 px-3 sm:px-12 lg:px-32 relative scroll-mt-10 md:scroll-mt-32"
     >
       <Image
         src="/assets/dots-small.svg"

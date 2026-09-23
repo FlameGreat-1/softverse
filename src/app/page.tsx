@@ -11,6 +11,7 @@ import CustomCursor from "@/components/CustomCursor";
 
 const titles = [
   "<Full-Stack Engineer/>",
+  "<Founder/>",
 ];
 
 const services = [
@@ -230,7 +231,7 @@ export default function Home() {
           </nav>
         </header>
 
-        <main className="text-white min-h-screen px-4 sm:px-8">
+        <main className="text-white min-h-screen px-3 sm:px-8">
           {/* SEO boost */}
           <h1 className="sr-only">Emmanuel U. Iziogo Portfolio</h1>
 
@@ -240,7 +241,7 @@ export default function Home() {
             id="home"
           >
             <div className="flex flex-col justify-center">
-              <div className="text-center mt-[42vh]">
+              <div className="text-center mt-[25vh] md:mt-[30vh] lg:mt-[38vh]">
                 <h3 className="font-bold text-[18px] sm:text-[28px] md:text-[30px]">
                   Hi, I&apos;m{" "}
                   <span className="text-my-primary">Emmanuel U. Iziogo</span>
