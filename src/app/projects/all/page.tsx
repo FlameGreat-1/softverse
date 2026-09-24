@@ -23,24 +23,8 @@ const allProjects = [
     status: "Active",
     slug: "exoper",
   },
-  {
-    title: "Raspaas",
-    description:
-      "Multitenant HR management System with integrated biometric (REALAND) and face recognition (ZKTeco) devices. Payroll automation, and compliance tracking and RBAC authorization.",
-    thumbnail: "/images/raspaas.png",
-    category: "SOFTWARE",
-    status: "Active",
-    slug: "raspaas",
-  },
-  {
-    title: "BuildHive",
-    description:
-      "Freelance Marketplace Platform connecting clients with skilled freelancers for various projects and services in the constructions and technical industries.",
-    thumbnail: "/images/buildhive.png",
-    category: "MARKETPLACE",
-    status: "Active",
-    slug: "buildhive",
-  },
+
+
   {
     title: "Sidesone",
     description:
@@ -77,33 +61,7 @@ const allProjects = [
     status: "Active",
     slug: "autonoms-ai",
   },
-  {
-    title: "Honestiq",
-    description:
-      "Agency Software Solutions portfolio.",
-    thumbnail: "/images/honestiq.png",
-    category: "AGENCY",
-    status: "Active",
-    slug: "honestiq",
-  },
-  {
-    title: "Basse",
-    description:
-      "Web3 mentorship platform connecting mentors and mentees in the blockchain space.",
-    thumbnail: "/images/basse.png",
-    category: "WEB3",
-    status: "Completed",
-    slug: "basse",
-  },
-  {
-    title: "NSW CleaningCompany",
-    description:
-      "Cleaning service website for NSW CleaningCompany offering residential and commercial cleaning solutions.",
-    thumbnail: "/images/nsw.png",
-    category: "BUSINESS",
-    status: "Completed",
-    slug: "nsw-cleaningcompany",
-  },
+
 ];
 
 const AllProjectsPage = () => {
