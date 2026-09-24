@@ -119,16 +119,16 @@ export default function ExoperCaseStudy() {
           </div>
         </div>
 
-        <motion.div 
-          ref={deviceRef} 
-          style={{ scale, opacity }} 
+        <motion.div
+          ref={deviceRef}
+          style={{ scale, opacity }}
           className="relative w-full h-[300px] lg:h-[450px]"
         >
-          <Image 
-            src="/images/exoper2.png" 
-            alt="Exoper Application Screenshot" 
-            fill 
-            className="object-contain" 
+          <Image
+            src="/images/exoper2.png"
+            alt="Exoper Application Screenshot"
+            fill
+            className="object-contain"
             sizes="(max-width: 1024px) 100vw, 50vw"
             priority
           />
@@ -137,7 +137,7 @@ export default function ExoperCaseStudy() {
 
       {/* Content Sections */}
       <div id="case-study-details" className="space-y-32 scroll-mt-32">
-        
+
         {/* The Problem & The Solution */}
         <div className="grid lg:grid-cols-12 gap-12 lg:gap-8">
           <div className="lg:col-span-4">
@@ -145,7 +145,7 @@ export default function ExoperCaseStudy() {
           </div>
           <div className="lg:col-span-8 text-gray-400 space-y-6 leading-relaxed">
             <p>
-              For years, retail and institutional traders have struggled not with a lack of strategy, but with a lack of execution rigor. The market is unforgiving, and emotional decision-making, psychological drift, and poor risk management consistently erode profitability. Most traders fail because they cannot maintain strict discipline over a sustained period of time.
+              For years, retail traders have struggled not with a lack of strategy, but with a lack of execution rigor. The market is unforgiving, and emotional decision-making, psychological drift, and poor risk management consistently erode profitability. Most traders fail because they cannot maintain strict discipline over a sustained period of time.
             </p>
             <p>
               Additionally, the landscape of trading technology is heavily fragmented. Traders are forced to juggle external charting software, separate macroeconomic calendars, manual trade journals, and clunky broker terminals. This friction leads to missed opportunities, poor trade logging, and an inability to objectively review performance.
@@ -230,7 +230,7 @@ export default function ExoperCaseStudy() {
             <div className="flex flex-col gap-3">
               {[
                 { title: "Exoper Algorithm", desc: "The proprietary Exoper Algorithm powers the top-down technical and macroeconomic analysis, autonomously interpreting market conditions across 13 timeframes in strict alignment with the user's trading system." },
-                { title: "Core Knowledge Base (RAG)", desc: "The system is deeply integrated with an advanced RAG (Retrieval-Augmented Generation) pipeline. This core knowledge base works in tandem with the trader's personalized system, allowing the AI to trade with the nuanced discretion and contextual awareness of a professional trader." },
+                { title: "Core Knowledge Base", desc: "The system is deeply integrated with an advanced RAG (Retrieval-Augmented Generation) pipeline. This core knowledge base works in tandem with the trader's personalized system, allowing the AI to trade with the nuanced discretion and contextual awareness of a professional trader." },
                 { title: "Trading System Builder", desc: "Design your personalized edge across 14 deep categories including Identity, Risk, Structural Frameworks, Confluence, and Psychology." },
                 { title: "Automated Trading Plan", desc: "The AI digests your Trading System to generate a rigid Trading Plan, complete with an edge summary, risk envelopes, and discipline scorecards." },
                 { title: "Monitoring & Management", desc: "Autonomously monitor live and pending orders. The system actively runs confirmations, executes pending orders when confirmations are met, manages trades during high-impact news, moves stops to break-even, applies trailing stops, and closes trades efficiently." },
@@ -240,7 +240,7 @@ export default function ExoperCaseStudy() {
                 { title: "Automated Journaling", desc: "Exoper automatically syncs every execution, tracking R:R, win rates, and emotional discipline with zero manual entry required." }
               ].map((feature, idx) => (
                 <div key={idx} className="border border-gray-800 rounded-xl overflow-hidden bg-[#15121b]">
-                  <button 
+                  <button
                     onClick={() => setActiveFeature(activeFeature === idx ? null : idx)}
                     className={`w-full flex justify-between items-center px-6 py-4 font-semibold text-sm transition-colors text-left ${activeFeature === idx ? 'bg-[#8b31ff] text-white' : 'text-gray-300 hover:bg-[#1a1721]'}`}
                   >
@@ -249,7 +249,7 @@ export default function ExoperCaseStudy() {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                     </svg>
                   </button>
-                  
+
                   {activeFeature === idx && (
                     <div className="px-6 py-5 text-gray-400 text-sm leading-relaxed bg-[#110e16]">
                       {feature.desc}
@@ -270,7 +270,7 @@ export default function ExoperCaseStudy() {
             <p>
               Building an institutional-grade, low-latency financial trading platform requires a strictly typed, memory-safe, and highly distributed infrastructure:
             </p>
-            
+
             <div className="space-y-6">
               <div>
                 <h4 className="text-white font-semibold mb-2">Microservices Backend</h4>
@@ -294,7 +294,9 @@ export default function ExoperCaseStudy() {
                 { name: 'TypeScript', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg' },
                 { name: 'Python', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg' },
                 { name: 'Kubernetes', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/kubernetes/kubernetes-plain.svg' },
-                { name: 'Linux', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/linux/linux-original.svg' }
+                { name: 'Docker', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg' },
+                { name: 'Linux', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/linux/linux-original.svg' },
+                { name: 'Vite', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vitejs/vitejs-original.svg' }
               ].map((tech, idx) => (
                 <div key={idx} className="flex flex-col items-center justify-center gap-3 p-4 border border-gray-800 rounded-xl bg-[#110e16] hover:border-gray-600 transition-colors">
                   <img src={tech.icon} alt={tech.name} className={`w-8 h-8 object-contain ${tech.invert ? 'invert' : ''}`} />
