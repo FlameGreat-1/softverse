@@ -23,14 +23,14 @@ export default function ProjectCard({
   return (
     <div className="flex flex-col gap-4 w-full">
       {/* Thumbnail with Hover Overlay */}
-      <Link href={`/projects/${slug}`} className="group relative w-full h-[250px] sm:h-[300px] overflow-hidden rounded-2xl block bg-[#1a1620]">
+      <Link href={`/projects/${slug}`} className="group relative w-full aspect-[16/10] overflow-hidden rounded-2xl block bg-[#1a1620]">
         <Image
           src={thumbnail}
           alt={`${title} thumbnail`}
           fill
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           priority={true}
-          className="object-cover transition-transform duration-700 group-hover:scale-105"
+          className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
         />
         {/* Overlay */}
         <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">

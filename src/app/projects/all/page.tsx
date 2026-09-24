@@ -135,7 +135,7 @@ const AllProjectsPage = () => {
   };
 
   return (
-    <section className="px-10 sm:px-32 py-20 bg-bg-dark">
+    <section className="px-4 sm:px-12 lg:px-24 py-20 bg-bg-dark">
       <div className="mb-8">
         <Link
           href="/#projects"
