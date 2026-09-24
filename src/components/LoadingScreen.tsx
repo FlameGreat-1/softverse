@@ -119,16 +119,16 @@ export default function LoadingScreen() {
               <span className="text-3xl md:text-4xl font-extrabold text-my-primary tracking-wider">
                 &lt;
               </span>
-              <motion.div 
+              <motion.div
                 className="flex items-center origin-center"
                 animate={{ scale: [1, 0.85, 1.15, 1] }}
                 transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
               >
                 <span className="text-3xl md:text-4xl font-extrabold text-my-primary tracking-wider">
-                  FG
+                  Dev
                 </span>
                 <span className="w-4 h-4 md:w-5 md:h-5 rounded-full bg-white text-my-primary text-[9px] md:text-[11px] font-bold flex items-center justify-center mx-0.5 -translate-y-2.5 md:-translate-y-3 relative z-20">
-                  2
+                  A+
                 </span>
               </motion.div>
               <span className="text-3xl md:text-4xl font-extrabold text-my-primary tracking-wider">

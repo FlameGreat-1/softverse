@@ -118,12 +118,14 @@ const ProjectsPage = () => {
                     slug="autonoms-ai"
                   />
                   <ProjectCard
-                    title="exoper"
-                    category="SECURITY"
+                    title="Exoper"
+                    category="TRADING"
                     status="Active"
-                    description="AI Security Guardrails. One Gateway. Every Model. Every AI request passes through EXOPER's zero-trust gateway."
-                    thumbnail="/images/exoper.png"
+                    description="A non-custodial AI-powered trading technology platform for technical/macro analysis, automated execution, and disciplined trade management."
+                    thumbnail="/images/exoper1.png"
                     slug="exoper"
+                    imageClass="object-contain object-center"
+                    bgClass="bg-[#080808]"
                   />
                 </div>
 
