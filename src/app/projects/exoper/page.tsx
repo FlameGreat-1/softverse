@@ -138,72 +138,93 @@ export default function ExoperCaseStudy() {
       {/* Content Sections */}
       <div id="case-study-details" className="space-y-32 scroll-mt-32">
         
-        {/* The Challenge / Core Vision */}
+        {/* The Problem & The Solution */}
         <div className="grid lg:grid-cols-12 gap-12 lg:gap-8">
           <div className="lg:col-span-4">
-            <h2 className="text-3xl font-bold">The Core Vision</h2>
+            <h2 className="text-3xl font-bold">The Problem</h2>
           </div>
           <div className="lg:col-span-8 text-gray-400 space-y-6 leading-relaxed">
             <p>
-              Most traders fail not because of a bad strategy, but because of a lack of discipline and execution rigor. They drift from their own rules, fail to properly journal, and let psychology override logical decision-making. 
+              For years, retail and institutional traders have struggled not with a lack of strategy, but with a lack of execution rigor. The market is unforgiving, and emotional decision-making, psychological drift, and poor risk management consistently erode profitability. Most traders fail because they cannot maintain strict discipline over a sustained period of time.
             </p>
             <p>
-              Exoper was built for the top 1% to enforce trading discipline through AI. It evaluates trading history to identify patterns relating to habits, behavior, and performance, taking the heavy lifting out of technical and macroeconomic analysis so traders can focus on high-quality decision-making.
+              Additionally, the landscape of trading technology is heavily fragmented. Traders are forced to juggle external charting software, separate macroeconomic calendars, manual trade journals, and clunky broker terminals. This friction leads to missed opportunities, poor trade logging, and an inability to objectively review performance.
             </p>
           </div>
         </div>
 
-        {/* The Solution & Engineering */}
         <div className="grid lg:grid-cols-12 gap-12 lg:gap-8 border-t border-gray-800 pt-32">
           <div className="lg:col-span-4">
-            <h2 className="text-3xl font-bold">My Role & Engineering</h2>
+            <h2 className="text-3xl font-bold">The Solution</h2>
           </div>
           <div className="lg:col-span-8 text-gray-400 space-y-6 leading-relaxed">
             <p>
-              As Founder and Lead Engineer, I established the architectural vision and actively built Exoper alongside a team of 3 engineers. We developed a highly resilient platform supporting forex, metals, crypto, and stocks, achieving 97% platform uptime and over 60% signal accuracy out of the gate.
+              Exoper was engineered to eliminate emotional trading and enforce institutional-grade discipline. It is a unified, non-custodial trading technology platform that brings AI-powered technical and macroeconomic analysis, execution, and advanced behavioral analytics into a single seamless ecosystem.
             </p>
             <p>
-              I engineered a state-of-the-art multi-LLM analysis engine utilizing OpenAI, Gemini, and Claude. Integrated with RAG pipelines and the TradingEconomics API, it performs comprehensive top-down technical analysis across 13 timeframes and deep macroeconomic analysis across all indicators—completing end-to-end analysis and order routing to the broker in just 50–70 seconds with millisecond execution latency.
-            </p>
-            <p>
-              Additionally, I architected a headless MetaTrader terminal provisioning system on Linux VPS using Wine, Xvfb, and Kubectl. This securely connects to brokers and prop firms, deploying custom MQL5 Expert Advisors for autonomous trade execution, trailing management, and real-time WebSocket monitoring.
+              By leveraging a multi-LLM engine and an autonomous execution layer, Exoper completely transforms how a trader interacts with the market. It evaluates your trading history to identify psychological patterns, monitors rule adherence, and provides the algorithmic infrastructure necessary to operate with absolute precision and confidence.
             </p>
           </div>
         </div>
 
-        {/* Why Exoper? */}
+        {/* Autonomous Execution */}
         <div className="grid lg:grid-cols-12 gap-12 lg:gap-8 border-t border-gray-800 pt-32">
           <div className="lg:col-span-4">
-            <h2 className="text-3xl font-bold">Platform Pillars</h2>
-            <p className="text-gray-500 mt-4 text-sm font-semibold uppercase tracking-widest">Built for the top 1%</p>
+            <h2 className="text-3xl font-bold">Intelligent Infrastructure</h2>
           </div>
           <div className="lg:col-span-8 text-gray-400 space-y-6 leading-relaxed">
-            <div className="grid md:grid-cols-2 gap-8">
-              <div>
-                <h4 className="text-white font-semibold mb-2">Autonomous Trading</h4>
-                <p className="text-sm">Technical analysis, macroeconomic analysis, execution, and trade management are handled autonomously with you in the loop while the system trades with precision and confidence.</p>
-              </div>
-              <div>
-                <h4 className="text-white font-semibold mb-2">Intelligent Infrastructure</h4>
-                <p className="text-sm">Elevate your performance with a comprehensive trading system, advanced journaling, and an algorithmic engine designed for smarter, data-driven execution.</p>
-              </div>
-              <div>
-                <h4 className="text-white font-semibold mb-2">Absolute Fund Security</h4>
-                <p className="text-sm">Maintain complete ownership and control over your capital. Our non-custodial framework ensures your funds never leave your secure broker accounts.</p>
-              </div>
-              <div>
-                <h4 className="text-white font-semibold mb-2">Granular Control</h4>
-                <p className="text-sm">Command every aspect of your trading algorithms. Maintain absolute authority over market timing, trade execution, and dynamic risk management.</p>
-              </div>
-            </div>
+            <p>
+              At its core, Exoper provides an intelligent trading infrastructure designed for the top 1%. It elevates your performance by integrating a comprehensive trading system with an algorithmic engine built for smarter, data-driven execution. You command every aspect of the algorithms, maintaining absolute authority over market timing and dynamic risk parameters.
+            </p>
+            <p>
+              The platform executes trades with the precision and confidence of a seasoned discretionary trader, but with the speed and structural rigor of a machine. It continuously monitors live trades and pending orders from inception to closure, ensuring that your edge is protected at all times.
+            </p>
+            <p>
+              Security and control remain paramount. Exoper's non-custodial framework ensures your funds never leave your secure broker accounts. You maintain complete ownership over your capital while benefiting from institutional-grade execution speeds.
+            </p>
           </div>
         </div>
 
-        {/* Features / How It Works */}
+        {/* Behavioral Analytics */}
         <div className="grid lg:grid-cols-12 gap-12 lg:gap-8 border-t border-gray-800 pt-32">
           <div className="lg:col-span-4">
-            <h2 className="text-3xl font-bold">How It Works</h2>
-            <p className="text-gray-500 mt-4 text-sm font-semibold uppercase tracking-widest">Connection to Execution</p>
+            <h2 className="text-3xl font-bold">Behavioral Analytics</h2>
+          </div>
+          <div className="lg:col-span-8 text-gray-400 space-y-6 leading-relaxed">
+            <p>
+              One of the most revolutionary aspects of Exoper is its approach to journaling and performance review. Instead of manually logging trades, Exoper automatically syncs every execution, calculates your win rate, and tracks your average Risk-to-Reward ratio with zero manual effort.
+            </p>
+            <p>
+              The platform goes beyond simple numbers. It dissects every setup, allowing you to review the decisions behind every trade. You can tag strategies, track confluence scores, and visually analyze exact entry and exit points on the chart.
+            </p>
+            <p>
+              Over time, Exoper AI autonomously analyzes your performance, tracking discipline, psychology, and rule adherence to help you evolve into a master trader. It provides immediate feedback, letting you know exactly what is making you money and what behaviors are holding you back.
+            </p>
+          </div>
+        </div>
+
+        {/* My Role */}
+        <div className="grid lg:grid-cols-12 gap-12 lg:gap-8 border-t border-gray-800 pt-32">
+          <div className="lg:col-span-4">
+            <h2 className="text-3xl font-bold">My Role</h2>
+          </div>
+          <div className="lg:col-span-8 text-gray-400 space-y-6 leading-relaxed">
+            <p>
+              As Founder and Lead Engineer, I established the architectural vision and actively built Exoper alongside a talented team of 3 engineers. Drawing from my 5 years of experience in forex trading, I intimately understood the bottlenecks traders faced and engineered the exact solution needed to overcome them.
+            </p>
+            <p>
+              I personally architected the multi-LLM analysis engine (integrating OpenAI, Gemini, Claude) with RAG pipelines and the TradingEconomics API. This engine performs full top-down technical analysis across 13 timeframes and comprehensive macroeconomic analysis, routing orders to the broker in just 50–70 seconds with millisecond execution latency.
+            </p>
+            <p>
+              Furthermore, I developed the headless MetaTrader terminal provisioning system on Linux VPS using Wine, Xvfb, and Kubectl. This complex infrastructure allowed for seamless, secure connectivity across brokers and prop firms, powering the MQL5 Expert Advisors I built for real-time trade execution and WebSocket streaming.
+            </p>
+          </div>
+        </div>
+
+        {/* Features */}
+        <div className="grid lg:grid-cols-12 gap-12 lg:gap-8 border-t border-gray-800 pt-32">
+          <div className="lg:col-span-4">
+            <h2 className="text-3xl font-bold">Core Features</h2>
           </div>
           <div className="lg:col-span-8">
             <div className="flex flex-col gap-3">
@@ -271,6 +292,21 @@ export default function ExoperCaseStudy() {
                 </div>
               ))}
             </div>
+          </div>
+        </div>
+
+        {/* Project Summary */}
+        <div className="grid lg:grid-cols-12 gap-12 lg:gap-8 border-t border-gray-800 pt-32 mb-32">
+          <div className="lg:col-span-4">
+            <h2 className="text-3xl font-bold">Project Summary</h2>
+          </div>
+          <div className="lg:col-span-8 text-gray-400 space-y-6 leading-relaxed">
+            <p>
+              Exoper is a testament to the power of combining deep domain expertise with cutting-edge engineering. By merging advanced multi-LLM analysis with robust, low-latency execution infrastructure, we created a platform that genuinely levels the playing field for traders.
+            </p>
+            <p>
+              It stands as proof that with the right technological guardrails and analytical rigor, emotional trading can be systematically eliminated, allowing traders to operate with institutional precision, structure, and absolute confidence.
+            </p>
           </div>
         </div>
 
