@@ -230,10 +230,12 @@ export default function ExoperCaseStudy() {
             <div className="flex flex-col gap-3">
               {[
                 { title: "Exoper Algorithm", desc: "The proprietary Exoper Algorithm powers the top-down technical and macroeconomic analysis, autonomously interpreting market conditions across 13 timeframes in strict alignment with the user's trading system." },
+                { title: "Core Knowledge Base (RAG)", desc: "The system is deeply integrated with an advanced RAG (Retrieval-Augmented Generation) pipeline. This core knowledge base works in tandem with the trader's personalized system, allowing the AI to trade with the nuanced discretion and contextual awareness of a professional trader." },
                 { title: "Trading System Builder", desc: "Design your personalized edge across 14 deep categories including Identity, Risk, Structural Frameworks, Confluence, and Psychology." },
                 { title: "Automated Trading Plan", desc: "The AI digests your Trading System to generate a rigid Trading Plan, complete with an edge summary, risk envelopes, and discipline scorecards." },
                 { title: "Monitoring & Management", desc: "Autonomously monitor live and pending orders. The system actively runs confirmations, executes pending orders when confirmations are met, manages trades during high-impact news, moves stops to break-even, applies trailing stops, and closes trades efficiently." },
                 { title: "Execution & AI Guards", desc: "Configure exact execution parameters and toggle automated safety guards to block trades during news, low liquidity, or when parameters are breached." },
+                { title: "Multi-Asset Coverage", desc: "Trade seamlessly across a vast array of global markets including Forex, Metals, Stocks, Crypto, Deriv Synthetics, and Volatilities." },
                 { title: "Broker Connectivity", desc: "Provision your MT5 terminal securely and connect to multiple accounts without your funds ever leaving your broker." },
                 { title: "Automated Journaling", desc: "Exoper automatically syncs every execution, tracking R:R, win rates, and emotional discipline with zero manual entry required." }
               ].map((feature, idx) => (
