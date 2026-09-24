@@ -56,6 +56,19 @@ export default function JtncGroupCaseStudy() {
         </div>
       </div>
 
+      {/* Hero Carousel */}
+      <div className="mb-16">
+        <div className="relative w-full aspect-video rounded-2xl overflow-hidden border border-gray-800">
+          <Image
+            src="/images/jtnc.png"
+            alt="JTNC Group Main Preview"
+            fill
+            className="object-cover"
+            priority
+          />
+        </div>
+      </div>
+
       {/* Intro & Actions */}
       <div className="grid lg:grid-cols-2 gap-12 items-center mb-32">
         <div className="space-y-8">
@@ -81,7 +94,7 @@ export default function JtncGroupCaseStudy() {
           className="relative w-full h-[300px] lg:h-[450px]"
         >
           <Image
-            src="/images/jtnc.png"
+            src="/images/Jntc2.jpg"
             alt="JTNC Group Application Screenshot"
             fill
             className="object-contain"
