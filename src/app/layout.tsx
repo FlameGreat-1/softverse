@@ -3,6 +3,7 @@ import { Fira_Code } from "next/font/google";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/next";
 import LoadingScreen from "@/components/LoadingScreen";
+import Navbar from "@/components/Navbar";
 import Script from "next/script";
 
 const firaCode = Fira_Code({ subsets: ["latin"], weight: ["300", "700"] });
@@ -49,7 +50,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={firaCode.className}>
+      <body className={`${firaCode.className} bg-[#0A0A0F] text-white min-h-screen`}>
         <Script
           id="schema-org"
           type="application/ld+json"
@@ -73,6 +74,7 @@ export default function RootLayout({
           }}
         />
         <LoadingScreen />
+        <Navbar />
         {children}
         <Analytics />
       </body>

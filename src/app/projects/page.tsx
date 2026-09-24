@@ -57,7 +57,7 @@ const ProjectsPage = () => {
               alt="line"
               width={32}
               height={1}
-              className="sm:w-60 w-32 h-[0.5px]"
+              className="sm:w-60 w-32 h-auto"
             />
           </span>
         </h2>
@@ -102,70 +102,42 @@ const ProjectsPage = () => {
               >
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
                   <ProjectCard
-                    title="JTNC GROUP"
-                    subtitle="Backend trading infrastructure for managing algorithmic trading signals and broker order routing. Microservice-based system with a client-facing portal and control center deployed on Oracle Cloud."
-                    thumbnail="/images/jtnc.png"
-                    stack="· Python · Oracle Cloud · CI/CD · Microservices "
-                    liveUrl="https://qfaa.jtncgroup.com"
-                    githubUrl="https://github.com/FlameGreat-1"
+                    title="CosmicForge HealthNet"
+                    category="HEALTHCARE"
+                    status="Active"
+                    description="AI-powered telemedicine platform that connects patients with healthcare professionals for virtual consultations and medical advice."
+                    thumbnail="/images/cosmicforge1.png"
+                    slug="cosmicforge"
                   />
                   <ProjectCard
                     title="Autonoms AI"
-                    subtitle="AI agent marketplace platform enabling businesses and enterprises to browse, purchase, and deploy pre-built AI agents with seamless developer integrations and automated deployment workflows."
+                    category="SOFTWARE"
+                    status="Active"
+                    description="AI agent marketplace platform enabling businesses and enterprises to browse, purchase, and deploy pre-built AI agents with seamless developer integrations."
                     thumbnail="/images/autonoms.png"
-                    stack="· React · Next.js · TypeScript · PostgreSQL · AWS · CI/CD "
-                    liveUrl="https://autonoms.ai"
-                    githubUrl="https://github.com/FlameGreat-1"
-                  />
-                  <ProjectCard
-                    title="Sidesone"
-                    subtitle="Agency Freelance portfolio. Recovered locked production server, rebuilt and refactored applications achieving 62% performance improvement, re-engineered Stripe payment integration, and migrated to containerized infrastructure serving 3,000+ users."
-                    thumbnail="/images/sidesone.png"
-                    stack="· Typescript · Next.js · Tailwind CSS · MongoDB · AWS "
-                    liveUrl="https://sidesone.no"
-                    githubUrl="https://github.com/FlameGreat-1/sideones"
-                  />
-                  <ProjectCard
-                    title="Portfolio Website"
-                    subtitle="A personal portfolio website to showcase my projects and skills."
-                    thumbnail="/images/Portfolio.png"
-                    stack="Next.js · TypeScript · Tailwind CSS "
-                    liveUrl="https://softvers-e.vercel.app/"
-                    githubUrl="https://github.com/FlameGreat-1/Softverse"
+                    slug="autonoms-ai"
                   />
                   <ProjectCard
                     title="exoper"
-                    subtitle="AI Security Guardrails. One Gateway. Every Model. Every AI request passes through EXOPER's zero-trust gateway. Identity verification, policy enforcement, threat detection, and immutable logging across all models, all environments. On-premises or cloud. No vendor lock-in."
+                    category="SECURITY"
+                    status="Active"
+                    description="AI Security Guardrails. One Gateway. Every Model. Every AI request passes through EXOPER's zero-trust gateway."
                     thumbnail="/images/exoper.png"
-                    stack="· Go · Rust · Next.js · TypeScript · Tailwind CSS · PostgreSQL · Docker · CI/CD"
-                    liveUrl="https://exoper.com"
-                    githubUrl="https://github.com/FlameGreat-1/exoper"
-                  />
-                  <ProjectCard
-                    title="Raspaas"
-                    subtitle="Multitenant HR management System with integrated biometric (REALAND) and face recognition (ZKTeco) devices. Payroll automation, and compliance tracking and RBAC authorization."
-                    thumbnail="/images/raspaas.png"
-                    stack="Python · Django · JavaScript · HTML · CSS, · PostgreSQL · Docker · Celery "
-                    liveUrl="https://raspaas.up.railway.app"
-                    githubUrl="https://github.com/FlameGreat-1/Raspaas"
+                    slug="exoper"
                   />
                 </div>
 
-                <p className="flex justify-end my-10 lg:mr-10">
+                <div className="flex justify-center mt-12 mb-10 w-full relative z-20">
                   <Link
                     href="/projects/all"
-                    className="flex items-center text-sm hover:text-my-primary"
+                    className="px-8 py-3 rounded-full border border-my-primary/50 text-my-primary font-semibold hover:bg-my-primary/10 transition-all duration-300 shadow-[0_0_15px_rgba(199,121,221,0.3)] hover:shadow-[0_0_25px_rgba(199,121,221,0.6)] flex items-center gap-2 group"
                   >
-                    view more
-                    <Image
-                      src="/assets/view-all-arrow.svg"
-                      alt="arrow icon"
-                      width={20}
-                      height={20}
-                      className="inline-block ml-2"
-                    />
+                    <span>VIEW ALL PROJECTS</span>
+                    <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    </svg>
                   </Link>
-                </p>
+                </div>
               </motion.div>
             ) : (
               <motion.div

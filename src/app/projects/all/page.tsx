@@ -8,103 +8,101 @@ import Link from "next/link";
 const allProjects = [
   {
     title: "Portfolio Website",
-    subtitle:
-      "A personal portfolio website to showcase my experience and skills.",
+    description: "A personal portfolio website to showcase my experience and skills.",
     thumbnail: "/images/Portfolio.png",
-    stack: "Next.js · TypeScript · Tailwind CSS ",
-    liveUrl: "https://softvers-e.vercel.app",
-    githubUrl: "https://github.com/FlameGreat-1/flamo",
+    category: "WEB",
+    status: "Active",
+    slug: "portfolio",
   },
   {
     title: "Exoper",
-    subtitle:
+    description:
       "AI Security Guardrails. One Gateway. Every Model. Every AI request passes through EXOPER's zero-trust gateway. Identity verification, policy enforcement, threat detection, and immutable logging across all models, all environments. On-premises or cloud. No vendor lock-in.",
     thumbnail: "/images/exoper.png",
-    stack:
-      "· Go · Rust · Next.js · TypeScript · Tailwind CSS · PostgreSQL · Docker · CI/CD",
-    liveUrl: "https://exoper.com",
-    githubUrl: "https://github.com/FlameGreat-1/exoper",
+    category: "SECURITY",
+    status: "Active",
+    slug: "exoper",
   },
   {
     title: "Raspaas",
-    subtitle:
+    description:
       "Multitenant HR management System with integrated biometric (REALAND) and face recognition (ZKTeco) devices. Payroll automation, and compliance tracking and RBAC authorization.",
     thumbnail: "/images/raspaas.png",
-    stack: "· Python · Django · JavaScript · HTML · CSS, · PostgreSQL · Docker · Celery ",
-    liveUrl: "https://raspaas.up.railway.app",
-    githubUrl: "https://github.com/FlameGreat-1/Raspaas",
+    category: "SOFTWARE",
+    status: "Active",
+    slug: "raspaas",
   },
   {
     title: "BuildHive",
-    subtitle:
+    description:
       "Freelance Marketplace Platform connecting clients with skilled freelancers for various projects and services in the constructions and technical industries.",
     thumbnail: "/images/buildhive.png",
-    stack: "TypeScript · React.js · Next.js · Tailwind CSS · SQL · Oracle Cloud ",
-    liveUrl: "https://buildhive.vercel.app",
-    githubUrl: "https://github.com/FlameGreat-1/BuildHive-Frontend",
+    category: "MARKETPLACE",
+    status: "Active",
+    slug: "buildhive",
   },
   {
     title: "Sidesone",
-    subtitle:
+    description:
       "Agency Freelance portfolio. Recovered locked production server, rebuilt and refactored applications achieving 62% performance improvement, re-engineered Stripe payment integration, and migrated to containerized infrastructure serving 3,000+ users.",
     thumbnail: "/images/sidesone.png",
-    stack: "· Typescript · Next.js · Tailwind CSS · MongoDB · AWS ",
-    liveUrl: "https://sidesone.no",
-    githubUrl: "https://github.com/FlameGreat-1/sideones",
+    category: "INFRASTRUCTURE",
+    status: "Completed",
+    slug: "sidesone",
   },
   {
     title: "CosmicForge HealthNet",
-    subtitle:
+    description:
       "AI-powered telemedicine platform that connects patients with healthcare professionals for virtual consultations and medical advice.",
-    thumbnail: "/images/cosmicforge.png",
-    stack: "· Python FastAPI · TypeScript · Express.js · Node.js · Tailwind CSS · MongoDB ",
-    liveUrl: "https://cosmicforge-frontend.vercel.app",
-    githubUrl: "https://github.com/FlameGreat-1/Raphex-Backend",
+    thumbnail: "/images/cosmicforge1.png",
+    category: "HEALTHCARE",
+    status: "Active",
+    slug: "cosmicforge",
   },
   {
     title: "JTNC GROUP",
-    subtitle:
+    description:
       "Backend trading infrastructure for managing algorithmic trading signals and broker order routing. Microservice-based system with a client-facing portal and control center deployed on Oracle Cloud.",
     thumbnail: "/images/jtnc.png",
-    stack: "· Python · Oracle Cloud · CI/CD · Microservices ",
-    liveUrl: "https://qfaa.jtncgroup.com",
-    githubUrl: "https://github.com/FlameGreat-1",
+    category: "FINTECH",
+    status: "Active",
+    slug: "jtnc-group",
   },
   {
     title: "Autonoms AI",
-    subtitle:
+    description:
       "AI agent marketplace platform enabling businesses and enterprises to browse, purchase, and deploy pre-built AI agents with seamless developer integrations and automated deployment workflows.",
     thumbnail: "/images/autonoms.png",
-    stack: "· React · Next.js · TypeScript · PostgreSQL · AWS · CI/CD ",
-    liveUrl: "https://autonoms.ai",
-    githubUrl: "https://github.com/FlameGreat-1",
+    category: "SOFTWARE",
+    status: "Active",
+    slug: "autonoms-ai",
   },
   {
     title: "Honestiq",
-    subtitle:
+    description:
       "Agency Software Solutions portfolio.",
     thumbnail: "/images/honestiq.png",
-    stack: "Typescript · Node.js · React.js · Tailwind CSS ",
-    liveUrl: "https://honestiq-solutions.vercel.app",
-    githubUrl: "https://github.com/FlameGreat-1/honsestiq",
+    category: "AGENCY",
+    status: "Active",
+    slug: "honestiq",
   },
   {
     title: "Basse",
-    subtitle:
+    description:
       "Web3 mentorship platform connecting mentors and mentees in the blockchain space.",
     thumbnail: "/images/basse.png",
-    stack: "Next.js · Tailwind CSS · Framer Motion · TypeScript · Solidity · Hardhat · Ethers.js · IPFS ",
-    liveUrl: "https://bassse3.vercel.app",
-    githubUrl: "https://github.com/FlameGreat-1/Basse",
+    category: "WEB3",
+    status: "Completed",
+    slug: "basse",
   },
   {
     title: "NSW CleaningCompany",
-    subtitle:
+    description:
       "Cleaning service website for NSW CleaningCompany offering residential and commercial cleaning solutions.",
     thumbnail: "/images/nsw.png",
-    stack: "Python · Django · React.js · Tailwind CSS · PostgreSQL ",
-    liveUrl: "https://nswcleaningcompany.com/",
-    githubUrl: "https://github.com/FlameGreat-1/ncwcc",
+    category: "BUSINESS",
+    status: "Completed",
+    slug: "nsw-cleaningcompany",
   },
 ];
 
@@ -156,7 +154,7 @@ const AllProjectsPage = () => {
             alt="line"
             width={22}
             height={1}
-            className="sm:60 w-32 h-[0.5px]"
+            className="sm:60 w-32 h-auto"
           />
         </span>
       </h2>
@@ -167,11 +165,11 @@ const AllProjectsPage = () => {
           <ProjectCard
             key={index}
             title={project.title}
-            subtitle={project.subtitle}
+            description={project.description}
             thumbnail={project.thumbnail}
-            stack={project.stack}
-            liveUrl={project.liveUrl}
-            githubUrl={project.githubUrl}
+            category={project.category}
+            status={project.status}
+            slug={project.slug}
           />
         ))}
       </div>

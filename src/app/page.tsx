@@ -21,37 +21,16 @@ const services = [
   { text: "cloud infrastructure services", color: "#F472B6" }, // Pink
 ];
 
-const navLinks = [
-  { href: "/", label: "home" },
-  { href: "#about", label: "about" },
-  { href: "#projects", label: "projects" },
-  { href: "#experience", label: "experience" },
-  { href: "#contact", label: "contact" },
-];
+
 
 export default function Home() {
   const [index, setIndex] = useState(0); // current title
   const [subIndex, setsubIndex] = useState(0); // current letter
   const [blink, setBlink] = useState(true);
   const [reverse, setReverse] = useState(false);
-  const [isOpen, setIsOpen] = useState(false); // mobile nav state
   const [serviceIndex, setServiceIndex] = useState(0); // current service
   const [isZooming, setIsZooming] = useState(true); // zoom animation state
 
-  const handleNavClick = (
-    e: React.MouseEvent<HTMLAnchorElement>,
-    href: string
-  ) => {
-    if (href.startsWith("#")) {
-      e.preventDefault();
-      const sectionId = href.substring(1); // Remove the #
-      const element = document.getElementById(sectionId);
-      if (element) {
-        element.scrollIntoView({ behavior: "smooth", block: "start" });
-      }
-    }
-    setIsOpen(false); // Close mobile menu
-  };
 
   useEffect(() => {
     if (index === titles.length) return;
@@ -154,82 +133,7 @@ export default function Home() {
       />
 
       <section className="relative z-10">
-        <header>
-          <nav className="z-20 fixed top-4 sm:top-6 left-1/2 transform -translate-x-1/2 px-4 sm:px-8 py-3 flex items-center justify-between w-[90%] sm:w-[70%] lg:w-[55%] h-14 sm:h-16 rounded-full border border-white/20 bg-white/1 backdrop-blur-sm font-semibold shadow-[inset_1px_0.5px_2px_rgba(255,255,255,0.9)]">
-            {/* Logo */}
-            <Image
-              src="/assets/softverse.svg"
-              alt="Softverse Logo"
-              width={35}
-              height={35}
-              className="sm:w-[75px]"
-            />
 
-            {/* Desktop Links */}
-            <ul className="hidden md:flex gap-3 lg:gap-4 text-white font-semibold text-[14px]">
-              {navLinks.map((link) => (
-                <li key={link.href}>
-                  <a
-                    href={link.href}
-                    onClick={(e) => handleNavClick(e, link.href)}
-                    className="flex items-center hover:underline hover:text-my-primary"
-                  >
-                    <span className="text-my-primary text-[16px] lg:text-[18px] mr-1">
-                      #
-                    </span>
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-
-            {/* Hamburger for tablets and below */}
-            <button
-              className="md:hidden fixed top-4 right-6 z-50 text-white"
-              onClick={() => setIsOpen(!isOpen)}
-            >
-              <svg
-                className="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d={
-                    isOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"
-                  }
-                />
-              </svg>
-            </button>
-
-            {/* Mobile dropdown */}
-            <ul
-              className={`z-50 md:hidden fixed top-16 right-4 w-[92%] bg-bg-dark border border-my-primary/40 backdrop-blur-md rounded-xl p-4 flex flex-col gap-4 text-white font-semibold transition-all duration-300 overflow-hidden ${
-                isOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
-              }`}
-            >
-              {navLinks.map((link) => (
-                <li key={link.href}>
-                  <a
-                    href={link.href}
-                    className="flex items-center hover:underline hover:text-my-primary"
-                    onClick={(e) => {
-                      handleNavClick(e, link.href);
-                      setIsOpen(false);
-                    }}
-                  >
-                    <span className="text-my-primary text-[18px] mr-1">#</span>
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </nav>
-        </header>
 
         <main className="text-white min-h-screen px-3 sm:px-8">
           {/* SEO boost */}

@@ -1,94 +1,62 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import Link from "next/link";
 
 type Props = {
   title: string;
-  subtitle: string;
+  category: string;
+  status: string;
+  description: string;
   thumbnail: string;
-  stack: string;
-  liveUrl?: string;
-  githubUrl?: string;
+  slug: string;
 };
 
 export default function ProjectCard({
   title,
-  subtitle,
+  category,
+  status,
+  description,
   thumbnail,
-  stack,
-  liveUrl,
-  githubUrl,
+  slug,
 }: Props) {
-  const [isExpanded, setIsExpanded] = useState(false);
-  const MAX_LENGTH = 100; // Adjust this value as needed
-  const shouldTruncate = subtitle.length > MAX_LENGTH;
-
-  const displaySubtitle = shouldTruncate && !isExpanded 
-    ? subtitle.slice(0, MAX_LENGTH) + "..."
-    : subtitle;
-
   return (
-    <div className="bg-[#0f0f12] border border-white/6 w-full h-[450px] overflow-hidden shadow-lg">
-      {/* Thumbnail */}
-      <div className="h-[40%] w-full bg-gradient-to-br from-[#1f1b22] to-[#2b232f] relative">
+    <div className="flex flex-col gap-4 w-full">
+      {/* Thumbnail with Hover Overlay */}
+      <Link href={`/projects/${slug}`} className="group relative w-full h-[250px] sm:h-[300px] overflow-hidden rounded-2xl block bg-[#1a1620]">
         <Image
           src={thumbnail}
           alt={`${title} thumbnail`}
-          width={280}
-          height={140}
-          className="absolute inset-0 w-full h-full"
+          fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          priority={true}
+          className="object-cover transition-transform duration-700 group-hover:scale-105"
         />
-      </div>
-
-      {/* Content */}
-      <div className="p-4 flex flex-col justify-between h-[55%]">
-        <div 
-          className="flex-1 overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
-        >
-          <p className="text-xs text-gray-400">{stack}</p>
-
-          <h3 className="mt-2 font-mono text-[18px] font-semibold">{title}</h3>
-
-          <p className="text-[12px] text-gray-400 mt-1">
-            {displaySubtitle}
-          </p>
-          
-          {shouldTruncate && (
-            <button
-              onClick={() => setIsExpanded(!isExpanded)}
-              className="text-my-primary text-[11px] mt-1 hover:underline"
-            >
-              {isExpanded ? "less" : "more"}
-            </button>
-          )}
-        </div>
-
-        <div className="flex justify-between items-center mt-4 text-sm">
-          <div className="flex gap-2">
-            {liveUrl && (
-              <a
-                href={liveUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="border border-white px-2 py-1 cursor-pointer hover:bg-white/10 transition"
-              >
-                Live ↔
-              </a>
-            )}
-
-            {githubUrl && (
-              <a
-                href={githubUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="border border-white px-2 py-1 cursor-pointer hover:bg-white/10 transition"
-              >
-                Github &gt;
-              </a>
-            )}
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+          <div className="px-6 py-3 bg-my-primary text-white font-bold rounded-full text-sm tracking-wide shadow-[0_0_30px_#C778DD] transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
+            VIEW CASE STUDY ➔
           </div>
         </div>
+      </Link>
+
+      {/* Content */}
+      <div className="flex flex-col gap-2 px-1">
+        <div className="flex items-center gap-3">
+          <h3 className="font-bold text-[20px] text-white">{title}</h3>
+          <span className="px-2 py-0.5 bg-[#8b31ff] text-white text-[10px] font-bold tracking-wider rounded uppercase">
+            {category}
+          </span>
+        </div>
+
+        <div className="flex items-center gap-2">
+          <div className={`w-2.5 h-2.5 rounded-full ${status.toLowerCase() === 'active' ? 'bg-[#22c55e]' : 'bg-gray-400'}`}></div>
+          <span className="text-gray-400 text-sm">{status}</span>
+        </div>
+
+        <p className="text-sm text-gray-400 leading-relaxed mt-1 line-clamp-3">
+          {description}
+        </p>
       </div>
     </div>
   );

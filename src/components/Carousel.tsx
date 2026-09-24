@@ -15,6 +15,7 @@ type Props = {
   autoPlayInterval?: number;
   showIndicators?: boolean;
   showArrows?: boolean;
+  className?: string;
 };
 
 export default function Carousel({
@@ -23,6 +24,7 @@ export default function Carousel({
   autoPlayInterval = 3000,
   showIndicators = true,
   showArrows = true,
+  className,
 }: Props) {
   const [[page, direction], setPage] = useState<[number, number]>([0, 0]);
   const imageIndex = ((page % slides.length) + slides.length) % slides.length;
@@ -83,7 +85,7 @@ export default function Carousel({
   return (
     <div className="relative w-full select-none">
       <div
-        className="relative w-full h-[180px] sm:h-[450px] overflow-hidden rounded-md"
+        className={`relative w-full overflow-hidden ${className || 'h-[180px] sm:h-[450px] rounded-md'}`}
         onMouseEnter={() => {
           isPaused.current = true;
           stopAutoPlay();
@@ -118,7 +120,8 @@ export default function Carousel({
               src={slides[imageIndex].src}
               alt={`slide-${imageIndex}`}
               fill
-              className="object-fit w-full h-full bg-my-primary"
+              sizes="(max-width: 1024px) 100vw, 80vw"
+              className="object-cover w-full h-full bg-[#15121b]"
               priority
             />
 
