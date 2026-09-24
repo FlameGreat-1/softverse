@@ -162,25 +162,25 @@ export default function ExoperCaseStudy() {
               Exoper was engineered to eliminate emotional trading and enforce institutional-grade discipline. It is a unified, non-custodial trading technology platform that brings AI-powered technical and macroeconomic analysis, execution, and advanced behavioral analytics into a single seamless ecosystem.
             </p>
             <p>
-              By leveraging a multi-LLM engine and an autonomous execution layer, Exoper completely transforms how a trader interacts with the market. It evaluates your trading history to identify psychological patterns, monitors rule adherence, and provides the algorithmic infrastructure necessary to operate with absolute precision and confidence.
+              However, Exoper does not dictate how you trade. Instead, it empowers you to be the architect of your own edge. Users build their highly personalized Trading Systems—defining their identity, risk appetite, confluences, structural frameworks, and psychology rules. Exoper's AI then utilizes this unique system to power top-down technical and macroeconomic analysis precisely tailored to your edge.
             </p>
           </div>
         </div>
 
-        {/* Autonomous Execution */}
+        {/* System & Execution */}
         <div className="grid lg:grid-cols-12 gap-12 lg:gap-8 border-t border-gray-800 pt-32">
           <div className="lg:col-span-4">
-            <h2 className="text-3xl font-bold">Intelligent Infrastructure</h2>
+            <h2 className="text-3xl font-bold">Trading System & Execution</h2>
           </div>
           <div className="lg:col-span-8 text-gray-400 space-y-6 leading-relaxed">
             <p>
-              At its core, Exoper provides an intelligent trading infrastructure designed for the top 1%. It elevates your performance by integrating a comprehensive trading system with an algorithmic engine built for smarter, data-driven execution. You command every aspect of the algorithms, maintaining absolute authority over market timing and dynamic risk parameters.
+              Once a user defines their Trading System, Exoper automatically generates a comprehensive Trading Plan. This includes an AI-generated profile of their unique edge, rigid account risk parameters (daily loss limits, weekly drawdowns), and weekly audit prompts designed to enforce discipline.
             </p>
             <p>
-              The platform executes trades with the precision and confidence of a seasoned discretionary trader, but with the speed and structural rigor of a machine. It continuously monitors live trades and pending orders from inception to closure, ensuring that your edge is protected at all times.
+              When it comes to the market, traders have granular control over their Execution Rules. You configure exact parameters such as maximum concurrent trades, execution modes (Auto, Limit, Instant), and dynamic AI Guards. These guards act as safety nets—automatically blocking trades during high-impact news, low liquidity hours, or when minimum risk-to-reward ratios are not met.
             </p>
             <p>
-              Security and control remain paramount. Exoper's non-custodial framework ensures your funds never leave your secure broker accounts. You maintain complete ownership over your capital while benefiting from institutional-grade execution speeds.
+              The platform executes these trades with the precision and confidence of a seasoned discretionary trader, but with the speed and structural rigor of a machine. Security remains paramount; Exoper's non-custodial framework ensures your funds never leave your secure broker accounts.
             </p>
           </div>
         </div>
@@ -192,13 +192,13 @@ export default function ExoperCaseStudy() {
           </div>
           <div className="lg:col-span-8 text-gray-400 space-y-6 leading-relaxed">
             <p>
-              One of the most revolutionary aspects of Exoper is its approach to journaling and performance review. Instead of manually logging trades, Exoper automatically syncs every execution, calculates your win rate, and tracks your average Risk-to-Reward ratio with zero manual effort.
+              One of the most revolutionary aspects of Exoper is its approach to journaling and performance review. Instead of manually logging trades, Exoper automatically syncs every execution into a Daily Journal, calculating win rates, Risk-to-Reward ratios, and P&L with zero manual effort.
             </p>
             <p>
-              The platform goes beyond simple numbers. It dissects every setup, allowing you to review the decisions behind every trade. You can tag strategies, track confluence scores, and visually analyze exact entry and exit points on the chart.
+              The platform goes beyond simple numbers. It features a Discipline Scorecard that actively tracks rule adherence, emotional control, patience (waiting for sweeps), and execution precision. It dissects every setup, allowing you to review the decisions behind every trade.
             </p>
             <p>
-              Over time, Exoper AI autonomously analyzes your performance, tracking discipline, psychology, and rule adherence to help you evolve into a master trader. It provides immediate feedback, letting you know exactly what is making you money and what behaviors are holding you back.
+              Over time, Exoper AI autonomously analyzes your performance, tracking your psychology and rule adherence to help you evolve into a master trader. It provides immediate feedback, letting you know exactly what is making you money and what behaviors are holding you back.
             </p>
           </div>
         </div>
@@ -213,7 +213,7 @@ export default function ExoperCaseStudy() {
               As Founder and Lead Engineer, I established the architectural vision and actively built Exoper alongside a talented team of 3 engineers. Drawing from my 5 years of experience in forex trading, I intimately understood the bottlenecks traders faced and engineered the exact solution needed to overcome them.
             </p>
             <p>
-              I personally architected the multi-LLM analysis engine (integrating OpenAI, Gemini, Claude) with RAG pipelines and the TradingEconomics API. This engine performs full top-down technical analysis across 13 timeframes and comprehensive macroeconomic analysis, routing orders to the broker in just 50–70 seconds with millisecond execution latency.
+              I personally architected the multi-LLM analysis engine (integrating OpenAI, Gemini, Claude) with RAG pipelines and the TradingEconomics API. This engine performs full top-down technical analysis across 13 timeframes and comprehensive macroeconomic analysis based strictly on the user's custom system, routing orders to the broker in just 50–70 seconds with millisecond execution latency.
             </p>
             <p>
               Furthermore, I developed the headless MetaTrader terminal provisioning system on Linux VPS using Wine, Xvfb, and Kubectl. This complex infrastructure allowed for seamless, secure connectivity across brokers and prop firms, powering the MQL5 Expert Advisors I built for real-time trade execution and WebSocket streaming.
@@ -228,7 +228,15 @@ export default function ExoperCaseStudy() {
           </div>
           <div className="lg:col-span-8">
             <div className="flex flex-col gap-3">
-              {features.map((feature, idx) => (
+              {[
+                { title: "Exoper Algorithm", desc: "The proprietary Exoper Algorithm powers the top-down technical and macroeconomic analysis, autonomously interpreting market conditions across 13 timeframes in strict alignment with the user's trading system." },
+                { title: "Trading System Builder", desc: "Design your personalized edge across 14 deep categories including Identity, Risk, Structural Frameworks, Confluence, and Psychology." },
+                { title: "Automated Trading Plan", desc: "The AI digests your Trading System to generate a rigid Trading Plan, complete with an edge summary, risk envelopes, and discipline scorecards." },
+                { title: "Monitoring & Management", desc: "Autonomously monitor live and pending orders. The system actively runs confirmations, executes pending orders when confirmations are met, manages trades during high-impact news, moves stops to break-even, applies trailing stops, and closes trades efficiently." },
+                { title: "Execution & AI Guards", desc: "Configure exact execution parameters and toggle automated safety guards to block trades during news, low liquidity, or when parameters are breached." },
+                { title: "Broker Connectivity", desc: "Provision your MT5 terminal securely and connect to multiple accounts without your funds ever leaving your broker." },
+                { title: "Automated Journaling", desc: "Exoper automatically syncs every execution, tracking R:R, win rates, and emotional discipline with zero manual entry required." }
+              ].map((feature, idx) => (
                 <div key={idx} className="border border-gray-800 rounded-xl overflow-hidden bg-[#15121b]">
                   <button 
                     onClick={() => setActiveFeature(activeFeature === idx ? null : idx)}
