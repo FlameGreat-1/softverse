@@ -14,15 +14,7 @@ const allProjects = [
     status: "Active",
     slug: "portfolio",
   },
-  {
-    title: "Exoper",
-    description:
-      "AI Security Guardrails. One Gateway. Every Model. Every AI request passes through EXOPER's zero-trust gateway. Identity verification, policy enforcement, threat detection, and immutable logging across all models, all environments. On-premises or cloud. No vendor lock-in.",
-    thumbnail: "/images/exoper.png",
-    category: "SECURITY",
-    status: "Active",
-    slug: "exoper",
-  },
+
 
 
   {
@@ -35,15 +27,6 @@ const allProjects = [
     slug: "sidesone",
   },
   {
-    title: "CosmicForge HealthNet",
-    description:
-      "AI-powered telemedicine platform that connects patients with healthcare professionals for virtual consultations and medical advice.",
-    thumbnail: "/images/cosmicforge1.png",
-    category: "HEALTHCARE",
-    status: "Active",
-    slug: "cosmicforge",
-  },
-  {
     title: "JTNC GROUP",
     description:
       "Backend trading infrastructure for managing algorithmic trading signals and broker order routing. Microservice-based system with a client-facing portal and control center deployed on Oracle Cloud.",
@@ -52,16 +35,6 @@ const allProjects = [
     status: "Active",
     slug: "jtnc-group",
   },
-  {
-    title: "Autonoms AI",
-    description:
-      "AI agent marketplace platform enabling businesses and enterprises to browse, purchase, and deploy pre-built AI agents with seamless developer integrations and automated deployment workflows.",
-    thumbnail: "/images/autonoms.png",
-    category: "SOFTWARE",
-    status: "Active",
-    slug: "autonoms-ai",
-  },
-
 ];
 
 const AllProjectsPage = () => {
