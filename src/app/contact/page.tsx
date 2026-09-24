@@ -89,7 +89,7 @@ const ContactPage = () => {
           alt="Background pattern"
           width={80}
           height={80}
-          className="-z-10 absolute -bottom-32 -right-20 w-[270px]"
+          className="-z-10 absolute -bottom-32 -right-20 w-[270px] h-auto"
         />
       </div>
 
@@ -102,7 +102,7 @@ const ContactPage = () => {
               alt="line"
               width={32}
               height={1}
-              className="w-32 sm:w-60 h-[0.5px]"
+              className="w-32 sm:w-60 h-auto"
             />
           </span>
         </h2>

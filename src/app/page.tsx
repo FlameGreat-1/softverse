@@ -120,14 +120,14 @@ export default function Home() {
       <Image
         src="/assets/ellipse-large.png"
         alt="Background pattern"
-        className="absolute top-[-150px] right-[-150px] w-[250px] sm:w-[540px]"
+        className="absolute top-[-150px] right-[-150px] w-[250px] sm:w-[540px] h-auto"
         width={540}
         height={540}
       />
       <Image
         src="/assets/ellipse-large.png"
         alt="Background pattern"
-        className="absolute top-[420px] left-[-120px] w-[250px] sm:w-[540px]"
+        className="absolute top-[420px] left-[-120px] w-[250px] sm:w-[540px] h-auto"
         width={540}
         height={540}
       />
@@ -238,7 +238,7 @@ export default function Home() {
               alt="line"
               width={2}
               height={0}
-              className="sm:h-48 h-64 opacity-40"
+              className="sm:h-48 h-64 opacity-40 w-auto"
             />
           </div>
 

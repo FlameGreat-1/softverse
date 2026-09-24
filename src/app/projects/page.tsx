@@ -45,7 +45,7 @@ const ProjectsPage = () => {
         alt="Background pattern"
         width={80}
         height={80}
-        className="absolute top-48 -left-40 w-[250px] sm:w-[500px] -z-10"
+        className="absolute top-48 -left-40 w-[250px] sm:w-[500px] -z-10 h-auto"
       />
 
       <div>

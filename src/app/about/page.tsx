@@ -23,14 +23,14 @@ const aboutPage = () => {
         alt="bg"
         width={540}
         height={540}
-        className="absolute top-[-200px] left-0 w-[200px] sm:w-[400px] opacity-20"
+        className="absolute top-[-200px] left-0 w-[200px] sm:w-[400px] opacity-20 h-auto"
       />
       <Image
         src="/assets/ellipse-large.png"
         alt="bg"
         width={540}
         height={540}
-        className="absolute -bottom-40 -right-44 w-[200px] sm:w-[600px]"
+        className="absolute -bottom-40 -right-44 w-[200px] sm:w-[600px] h-auto"
       />
       <Image
         src="/assets/pattern-big.svg"
@@ -57,7 +57,7 @@ const aboutPage = () => {
                 alt="line"
                 width={22}
                 height={1}
-                className="sm:60 w-32 h-[0.5px]"
+                className="sm:w-60 w-32 h-auto"
               />
             </span>
           </h2>

@@ -17,8 +17,8 @@ export default function CosmicForgeCaseStudy() {
 
   // Scroll UP (element moves down viewport toward 0): Gets bigger (1.5) and disappears (opacity 0)
   // Scroll DOWN (element moves up viewport toward 1): Gets smaller (0.1) and disappears (opacity 0)
-  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [1.5, 1, 0.1]);
-  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
+  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [1.5, 1, 0.4]);
+  const opacity = useTransform(scrollYProgress, [0, 0.1, 0.95, 1], [0, 1, 1, 0]);
 
   const carouselImages = [
     { src: "/images/cosmicforge1.png", caption: "Dashboard Overview" },
@@ -86,7 +86,7 @@ export default function CosmicForgeCaseStudy() {
           autoPlayInterval={5000}
           showIndicators={true}
           showArrows={true}
-          className="h-[300px] sm:h-[500px] lg:h-[700px] rounded-2xl"
+          className="w-full aspect-video rounded-2xl"
         />
       </div>
 
@@ -109,13 +109,13 @@ export default function CosmicForgeCaseStudy() {
             </div>
           </div>
 
-          <div className="flex flex-wrap items-center gap-4 pt-4">
+          <div className="flex items-center justify-start gap-2 sm:gap-4 pt-4 w-full">
             <button onClick={() => {
               document.getElementById('case-study-details')?.scrollIntoView({ behavior: 'smooth' });
-            }} className="px-6 py-3 bg-[#111] hover:bg-gray-800 border border-gray-700 rounded-full text-sm font-semibold transition-colors flex items-center gap-2">
-              CONTINUE READING <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" /></svg>
+            }} className="px-3 sm:px-6 py-3 bg-[#111] hover:bg-gray-800 border border-gray-700 rounded-full text-[10px] sm:text-sm font-semibold transition-colors flex items-center justify-center gap-1 sm:gap-2 whitespace-nowrap flex-1 sm:flex-none">
+              CONTINUE READING <svg className="w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" /></svg>
             </button>
-            <Link href="https://www.cosmicforge-healthnet.com" target="_blank" className="px-6 py-3 bg-my-primary hover:bg-[#a65abf] shadow-[0_0_20px_#C778DD55] rounded-full text-white text-sm font-semibold transition-all flex items-center gap-2">
+            <Link href="https://www.cosmicforge-healthnet.com" target="_blank" className="px-3 sm:px-6 py-3 bg-my-primary hover:bg-[#a65abf] shadow-[0_0_20px_#C778DD55] rounded-full text-white text-[10px] sm:text-sm font-semibold transition-all flex items-center justify-center gap-1 sm:gap-2 whitespace-nowrap flex-1 sm:flex-none">
               VISIT WEBSITE <span className="-rotate-45">➔</span>
             </Link>
           </div>

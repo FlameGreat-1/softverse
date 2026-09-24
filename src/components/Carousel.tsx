@@ -121,8 +121,9 @@ export default function Carousel({
               alt={`slide-${imageIndex}`}
               fill
               sizes="(max-width: 1024px) 100vw, 80vw"
-              className="object-cover w-full h-full bg-[#15121b]"
+              className="object-cover object-top w-full h-full bg-[#15121b]"
               priority
+              unoptimized={slides[imageIndex].src.toLowerCase().endsWith('.gif')}
             />
 
             {/* Caption */}
