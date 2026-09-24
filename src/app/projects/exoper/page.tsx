@@ -125,7 +125,7 @@ export default function ExoperCaseStudy() {
           className="relative w-full h-[300px] lg:h-[450px]"
         >
           <Image
-            src="/images/exoper2.png"
+            src="/images/exoper7.png"
             alt="Exoper Application Screenshot"
             fill
             className="object-contain"
