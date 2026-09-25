@@ -58,12 +58,12 @@ export default function JtncGroupCaseStudy() {
 
       {/* Hero Carousel */}
       <div className="mb-16">
-        <div className="relative w-full aspect-video rounded-2xl overflow-hidden border border-gray-800">
+        <div className="relative w-full aspect-video rounded-2xl overflow-hidden border border-gray-800 bg-[#080808]">
           <Image
             src="/images/jtnc.png"
             alt="JTNC Group Main Preview"
             fill
-            className="object-cover"
+            className="object-contain"
             priority
           />
         </div>
@@ -107,72 +107,35 @@ export default function JtncGroupCaseStudy() {
       {/* Content Sections */}
       <div id="case-study-details" className="space-y-32 scroll-mt-32">
         
-        {/* About & Bridging the Gap */}
+        {/* Project Context */}
         <div className="grid lg:grid-cols-12 gap-12 lg:gap-8 border-t border-gray-800 pt-32">
           <div className="lg:col-span-4">
-            <h2 className="text-3xl font-bold">About JTNC Group</h2>
-            <p className="text-my-primary mt-2 font-medium">Decades of Experience. One Mission: Empower the Modern Trader.</p>
+            <h2 className="text-3xl font-bold">Project Context</h2>
+            <p className="text-my-primary mt-2 font-medium">Democratizing Institutional Tools for Retail</p>
           </div>
           <div className="lg:col-span-8 text-gray-400 space-y-6 leading-relaxed">
             <p>
-              At JTNC Group, we bring together over 20 years of real-world trading experience with a relentless drive to deliver institutional-quality tools to individual investors. Our founders have managed the movement of tens of millions of dollars across global markets, leading trading desks, building hedge fund strategies, and advising clients through every type of market condition, from bubbles to breakdowns.
+              JTNC Group's mission is to bridge the gap between retail trading and institutional hedge-fund capabilities by providing proprietary predictive analytics and advanced market structure tools. The product relies on processing massive streams of real-time financial data to automate complex execution logic on behalf of individual investors.
             </p>
             <p>
-              That depth of experience isn't theoretical, it's lived, earned, and embedded into everything we build.
-            </p>
-            <h3 className="text-xl font-semibold text-white pt-6">Bridging the Gap Between Retail and Institutional</h3>
-            <p>
-              What sets JTNC Group apart isn't just our trading pedigree, it's our vision for the future of retail trading. We've built a proprietary technology stack that leverages machine learning, predictive analytics, and advanced market structure analysis tools that were once the exclusive domain of hedge funds and investment banks.
-            </p>
-            <p>
-              With our platform, we bring this edge to individual traders. Our mission is to democratize alpha, providing everyday investors access to powerful tools once reserved for institutions.
+              During my tenure as a Backend Engineer, my core responsibility was architecting and rebuilding the trading infrastructure required to support this vision. This involved migrating legacy monolithic applications into a highly available microservices ecosystem capable of processing algorithmic signals at scale with minimal latency, supporting over $1B+ in AUM.
             </p>
           </div>
         </div>
 
-        {/* Where Insight Meets Innovation */}
+        {/* Architecting for Scale */}
         <div className="grid lg:grid-cols-12 gap-12 lg:gap-8 border-t border-gray-800 pt-32">
           <div className="lg:col-span-4">
-            <h2 className="text-3xl font-bold">Where Insight Meets Innovation</h2>
-          </div>
-          <div className="lg:col-span-8">
-            <p className="text-gray-400 leading-relaxed mb-8">
-              Whether you're new to trading or a seasoned professional, our ecosystem is designed to help you succeed. We don't just sell signals. We provide the infrastructure, the logic, and the confidence to help you trade smarter and win more often.
-            </p>
-            <ul className="space-y-4">
-              {[
-                "Proprietary signal generation backed by statistical edge",
-                "Battle-tested models built for dynamic markets",
-                "Automated execution with full user control",
-                "Education and support from a team that's traded through it all"
-              ].map((item, idx) => (
-                <li key={idx} className="flex items-start gap-4">
-                  <div className="mt-1 w-2 h-2 rounded-full bg-my-primary shrink-0"></div>
-                  <p className="text-gray-300">{item}</p>
-                </li>
-              ))}
-            </ul>
-            <p className="text-gray-400 leading-relaxed mt-8 font-medium">
-              At JTNC Group, we don't follow the market. We anticipate it.
-            </p>
-          </div>
-        </div>
-
-        {/* Scaled Growth & Solutions */}
-        <div className="grid lg:grid-cols-12 gap-12 lg:gap-8 border-t border-gray-800 pt-32">
-          <div className="lg:col-span-4">
-            <h2 className="text-3xl font-bold">Solutions & Scale</h2>
-            <p className="text-my-primary mt-2 font-medium">Built for Today. Designed to Scale for Tomorrow.</p>
+            <h2 className="text-3xl font-bold">Architecting for Scale</h2>
+            <p className="text-my-primary mt-2 font-medium">Engineered for diverse accounts and robust growth</p>
           </div>
           <div className="lg:col-span-8">
             <div className="flex flex-col gap-3">
               {[
-                { title: "Under $25K Accounts", desc: "We execute single-leg options trades to help you stay compliant with pattern day trading (PDT) rules. No complex spreads. Just clean, directional setups using Calls and Puts." },
-                { title: "Over $25K Accounts", desc: "You'll have access to our spread-based strategies, which take advantage of volatility and price structure while maintaining defined risk." },
-                { title: "Liquidity and Precision", desc: "At launch, Quantum Flo Auto Algo will trade only the most liquid options markets: SPY, SPX, and QQQ. Our first priority is execution quality, especially as our user base grows." },
-                { title: "Intelligent Scaling Algorithms", desc: "Leveraging five proprietary execution models from our prime broker, the algo will scale in and out of trades across multiple strikes and timeframes avoiding size distortion or slippage." },
-                { title: "Basket Expansion", desc: "We'll introduce a curated basket of highly liquid, option-rich stocks (think: AAPL, MSFT, NVDA, etc.) to diversify signal output and accommodate additional user flow." },
-                { title: "Futures & Crypto Auto Algo", desc: "Dedicated versions for equity index futures and crypto markets are in the pipeline, offering global exposure, enhanced leverage, and around-the-clock volatility capture." }
+                { title: "Dynamic Logic for Account Constraints", desc: "Engineered routing pipelines that adapted execution models based on the client's capital. For accounts under $25K, the system automatically routed single-leg options to comply with Pattern Day Trading (PDT) rules, while seamlessly transitioning to spread-based volatility strategies for larger portfolios." },
+                { title: "Intelligent Scaling Algorithms", desc: "Integrated five proprietary execution models directly with prime brokers, allowing the Quantum Flo engine to dynamically scale in and out of trades across multiple strikes without inducing size distortion or slippage." },
+                { title: "High-Liquidity Data Ingestion", desc: "Designed the initial data pipelines to strictly target the most liquid options markets (SPY, SPX, QQQ), ensuring maximum execution efficiency before expanding the architecture to support a curated basket of highly liquid tech equities." },
+                { title: "Extensible Microservices", desc: "Built the foundation in Python and Oracle Cloud to allow rapid horizontal scaling, paving the way for future integrations such as the Futures Auto Algo and cross-border Crypto market execution without altering core system topology." }
               ].map((feature, idx) => (
                 <div key={idx} className="border border-gray-800 rounded-xl overflow-hidden bg-[#15121b]">
                   <button 
@@ -205,23 +168,23 @@ export default function JtncGroupCaseStudy() {
           </div>
         </div>
 
-        {/* How It Works */}
+        {/* Engine Implementation */}
         <div className="grid lg:grid-cols-12 gap-12 lg:gap-8 border-t border-gray-800 pt-32">
           <div className="lg:col-span-4">
-            <h2 className="text-3xl font-bold">How It Works</h2>
-            <p className="text-my-primary mt-2 font-medium">Institutional Intelligence. Retail Simplicity. Fully Automated.</p>
+            <h2 className="text-3xl font-bold">Algorithmic Engine</h2>
+            <p className="text-my-primary mt-2 font-medium">Translating trading theory into reliable Python execution</p>
           </div>
           <div className="lg:col-span-8">
             <p className="text-gray-400 leading-relaxed mb-8">
-              The Quantum Flo Auto Algo is the culmination of years of development inside our hedge fund and trading research group. It borrows directly from our systematic trading technology, the same tools we've used for over two years in our Weekly Superstars service.
+              A major technical challenge was translating JTNC's battle-tested trading models into a fully automated execution framework capable of analyzing market conditions and reacting with machine-speed precision. 
             </p>
             
             <div className="flex flex-col gap-3">
               {[
-                { title: "1. Predict the Probable Range", desc: "Each day, the algo forecasts the likely price range of the market with a confidence level of 70% or higher. This range acts like a trading 'band,' guiding the algorithm on where price is expected to move in the next 24 hours." },
-                { title: "2. Follow the Herd (When It Matters)", desc: "Next, the algo analyzes if herd behavior, largely driven by where institutional flows are likely to participate in a directional move. This logic is derived from our MSI indicator, which anticipates where sentiment and positioning are aligned to fuel momentum." },
-                { title: "3. Strike with Accuracy", desc: "Armed with range and sentiment signals, the algo uses options market microstructure to identify high-probability entry points—levels that are either well-supported by buyers or heavily defended by sellers. The algo will wait for price to reach these levels and execute trades accordingly." },
-                { title: "4. Automated Exits & Full Control", desc: "If herd behavior fades, or if price exits the predicted range, the trade is automatically closed preserving gains or minimizing risk. You maintain complete control at all times via your broker. Pause it. Shut it off. Take over a trade manually." }
+                { title: "Predictive Range Modeling", desc: "Developed the backend services that aggregated market data to calculate daily probable price ranges with 70%+ confidence intervals, generating trading 'bands' to constrain the algorithm's operational window." },
+                { title: "MSI Indicator Integration", desc: "Built the signal processors necessary to interpret the proprietary Market State Indicator (MSI). This required ingesting massive sentiment and institutional flow data to detect herd behavior and align the system with directional momentum." },
+                { title: "Options Microstructure Execution", desc: "Engineered the logic that parsed options market microstructure in real-time, identifying well-supported buyer/seller levels to pinpoint high-probability entries. The system autonomously awaited these thresholds before triggering API-based broker execution." },
+                { title: "Risk Mitigation & Automated Exits", desc: "Implemented state machines that continuously evaluated open positions against the predicted range. If institutional flow faded or price exited the forecasted bands, the system autonomously liquidated positions, all while offering the client a manual override capability via the control center." }
               ].map((process, idx) => (
                 <div key={idx} className="border border-gray-800 rounded-xl overflow-hidden bg-[#15121b]">
                   <button 
@@ -286,9 +249,11 @@ export default function JtncGroupCaseStudy() {
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-8">
               {[
                 { name: 'Python', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg' },
+                { name: 'React', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg' },
                 { name: 'Oracle Cloud', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/oracle/oracle-original.svg' },
                 { name: 'PostgreSQL', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg' },
-                { name: 'CI/CD', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/githubactions/githubactions-original.svg' }
+                { name: 'CI/CD', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/githubactions/githubactions-original.svg' },
+                { name: 'GitHub', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg', invert: true }
               ].map((tech, idx) => (
                 <div key={idx} className="flex flex-col items-center justify-center gap-3 p-4 border border-gray-800 rounded-xl bg-[#110e16] hover:border-gray-600 transition-colors">
                   <img src={tech.icon} alt={tech.name} className={`w-8 h-8 object-contain ${tech.invert ? 'invert' : ''}`} />
