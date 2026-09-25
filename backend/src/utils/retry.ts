@@ -17,7 +17,7 @@ export async function withRetry<T>(
     } catch (error) {
       attempt++;
       if (attempt > maxRetries) {
-        throw new Error(\`Operation failed after \${maxRetries} retries: \${error}\`);
+        throw new Error(`Operation failed after ${maxRetries} retries: ${error}`);
       }
       
       // Exponential backoff: baseDelay * 2^(attempt - 1)
@@ -25,7 +25,7 @@ export async function withRetry<T>(
       // Add jitter to prevent thundering herd
       const jitter = Math.random() * 200;
       
-      console.warn(\`[Retry \${attempt}/\${maxRetries}] Operation failed, retrying in \${delayMs + Math.round(jitter)}ms...\`);
+      console.warn(`[Retry ${attempt}/${maxRetries}] Operation failed, retrying in ${delayMs + Math.round(jitter)}ms...`);
       await new Promise((resolve) => setTimeout(resolve, delayMs + jitter));
     }
   }

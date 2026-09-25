@@ -85,32 +85,16 @@ export function ScrollReveal({
     once: false
   });
 
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"]
-  });
-
-  // Transform rotation based on scroll
-  const rotation = useTransform(
-    scrollYProgress,
-    [0, 0.5, 1],
-    [baseRotation, 0, 0]
-  );
-
   // Split text into words and spaces, ensuring each part is an object
-  const splitText = useMemo(() => { // Using useMemo is good here
+  const splitText = useMemo(() => { 
     const text = typeof children === "string" ? children : "";
-    // Split by spaces, keeping the spaces as separate elements in the array.
-    // Each 'part' will either be a word or a sequence of spaces.
     return text.split(/(\s+)/).map((part, index) => {
-      // Return an object for both words and spaces, with a 'type' property
-      // to differentiate them in the rendering loop.
       return {
         value: part,
-        isSpace: part.match(/^\s+$/) && part.length > 0, // Check if it's a non-empty string of only whitespace
-        originalIndex: index, // Keep original index for stable keys
+        isSpace: part.match(/^\s+$/) && part.length > 0, 
+        originalIndex: index, 
       };
-    }).filter(item => item.value.length > 0); // Filter out any empty strings that might result from split
+    }).filter(item => item.value.length > 0); 
   }, [children]);
 
   const containerVariants = {
@@ -135,10 +119,8 @@ export function ScrollReveal({
       filter: "blur(0px)",
       y: 0,
       transition: {
-        // Removed `type: "spring"` here. Framer Motion infers "spring"
-        // when damping, stiffness, or mass are present.
         ...springConfig,
-        duration, // This is a common property for all transition types
+        duration,
       },
     },
   };
@@ -146,7 +128,9 @@ export function ScrollReveal({
   return (
     <motion.div
       ref={containerRef}
-      style={{ rotate: rotation }}
+      initial={{ rotate: baseRotation }}
+      animate={isInView ? { rotate: 0 } : { rotate: baseRotation }}
+      transition={{ duration, ease: "easeOut" }}
       className={cn(
         "my-5 transform-gpu",
         containerClassName
@@ -162,7 +146,6 @@ export function ScrollReveal({
         )}
         variants={containerVariants}
         initial="hidden"
-        // Changed to `isInView` to match the behavior of triggering on view
         animate={isInView ? "visible" : "hidden"}
       >
         {splitText.map((item) => ( // Map over 'item' directly as it's always an object
