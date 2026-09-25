@@ -189,7 +189,7 @@ const ExperienceModal = ({ exp, onClose }: { exp: Experience; onClose: () => voi
   };
 
   return (
-    <div className="fixed inset-0 z-[99999] flex items-center justify-center px-2 py-4 sm:p-4 lg:pt-16 lg:pb-2 lg:px-4">
+    <div className="fixed inset-0 z-[99999] flex items-center justify-center pt-16 pb-2 px-2 sm:px-4">
       {/* Backdrop */}
       <motion.div 
         initial={{ opacity: 0 }}
@@ -204,7 +204,7 @@ const ExperienceModal = ({ exp, onClose }: { exp: Experience; onClose: () => voi
         initial={{ opacity: 0, scale: 0.95, y: 20 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.95, y: 20 }}
-        className="relative w-full max-w-2xl bg-[#111] border border-gray-800 rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh] lg:max-h-full"
+        className="relative w-full max-w-2xl bg-[#111] border border-gray-800 rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-full"
       >
         {/* Header styling like macOS */}
         <div className="bg-[#1a1a1a] px-4 py-3 border-b border-gray-800 flex items-center justify-end gap-2 shrink-0">
