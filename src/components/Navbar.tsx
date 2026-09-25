@@ -4,13 +4,14 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { Home, User, LayoutGrid, Briefcase, Calendar, Mail, Rocket, X, ChevronRight } from "lucide-react";
+import { Home, User, LayoutGrid, Briefcase, Calendar, Mail, Rocket, X, ChevronRight, FileText } from "lucide-react";
 
 const navLinks = [
   { href: "/", label: "Home", icon: Home },
   { href: "/#about", label: "About", icon: User },
   { href: "/#projects", label: "Projects", icon: LayoutGrid },
   { href: "/#experience", label: "Experience", icon: Briefcase },
+  { href: "/blog", label: "Blog", icon: FileText },
   { href: "/consultation", label: "Consult Me", badge: "Free", icon: Calendar },
 ];
 
@@ -19,6 +20,8 @@ export default function Navbar() {
   const [activeSection, setActiveSection] = useState("/");
   const router = useRouter();
   const pathname = usePathname();
+
+  if (pathname.startsWith("/admin")) return null;
 
   useEffect(() => {
     // If not on the home page, just use the pathname

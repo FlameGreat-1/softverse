@@ -2,11 +2,16 @@
 
 import Link from "next/link";
 import { ArrowUpRight, ArrowUp } from "lucide-react";
+import { usePathname } from "next/navigation";
 
 export default function Footer() {
+  const pathname = usePathname();
+  
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
+
+  if (pathname.startsWith("/admin")) return null;
 
   return (
     <footer className="w-full bg-transparent border-t border-white/5 pt-24 pb-12 px-6 lg:px-12 relative z-10">
@@ -57,6 +62,7 @@ export default function Footer() {
             <Link href="/about" className="text-gray-400 hover:text-white transition-colors text-sm">About Me</Link>
             <Link href="/#projects" className="text-gray-400 hover:text-white transition-colors text-sm">Projects</Link>
             <Link href="/#experience" className="text-gray-400 hover:text-white transition-colors text-sm">Experience</Link>
+            <Link href="/blog" className="text-gray-400 hover:text-white transition-colors text-sm">Blog</Link>
             <Link href="/consultation" className="text-gray-400 hover:text-white transition-colors text-sm">Consultation</Link>
           </div>
 
