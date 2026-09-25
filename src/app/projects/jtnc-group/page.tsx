@@ -19,7 +19,7 @@ export default function JtncGroupCaseStudy() {
   const opacity = useTransform(scrollYProgress, [0, 0.1, 0.95, 1], [0, 1, 1, 0]);
 
   return (
-    <div className="min-h-screen text-white px-4 sm:px-12 lg:px-32 py-32 bg-[#0b090f] overflow-hidden">
+    <div className="min-h-screen text-white px-4 sm:px-12 lg:px-32 py-32 bg-[#0b090f] overflow-x-hidden">
       {/* Top Nav */}
       <div className="mb-12">
         <Link href="/projects/all" className="text-gray-400 hover:text-white flex items-center gap-2 transition-colors text-sm font-semibold tracking-wide w-fit">

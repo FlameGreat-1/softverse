@@ -35,6 +35,15 @@ const allProjects = [
     status: "Active",
     slug: "jtnc-group",
   },
+  {
+    title: "Inflexa Technologies",
+    description:
+      "A scalable, multi-vendor e-commerce platform powering offline-first educational ecosystems. Node.js backend integrating global logistics and idempotent payments.",
+    thumbnail: "/images/Inflexa1.png",
+    category: "EDTECH",
+    status: "Completed",
+    slug: "inflexa",
+  },
 ];
 
 const AllProjectsPage = () => {
