@@ -31,6 +31,7 @@ export async function POST(req: Request) {
   try {
     const body = await req.json();
     const query = body.query as string;
+    const history = body.history || [];
 
     if (!query) {
       return NextResponse.json({ answer: "Please ask a question!" });
@@ -44,18 +45,29 @@ export async function POST(req: Request) {
       });
     }
 
-    // Search for relevant context in portfolio data
-    const relevantContext = findRelevantContext(query);
-
-    // Build the prompt with config
-    const prompt = buildPrompt(query, relevantContext, {
-      maxTokens: 200,
+    // Build the system instruction with full context injection
+    const systemPrompt = buildSystemPrompt({
+      maxTokens: 300,
       responseStyle: 'adaptive'
     });
 
-    // Gemini 2.0 Flash model with streaming
-    const modelName = "gemini-2.0-flash";
+    // Gemini 3.5 Flash model with streaming
+    const modelName = "gemini-3.5-flash";
     const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:streamGenerateContent?alt=sse&key=${apiKey}`;
+
+    // Map history to Gemini API contents structure, ensuring strict alternation and no empty text
+    const contents = history
+      .filter((msg: any) => msg.text && msg.text.trim() !== "")
+      .map((msg: any) => ({
+        role: msg.sender === 'user' ? 'user' : 'model',
+        parts: [{ text: msg.text }]
+      }));
+
+    // Add current user query
+    contents.push({
+      role: 'user',
+      parts: [{ text: query }]
+    });
 
     const response = await fetch(apiUrl, {
       method: "POST",
@@ -63,15 +75,10 @@ export async function POST(req: Request) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        contents: [
-          {
-            parts: [
-              {
-                text: prompt,
-              },
-            ],
-          },
-        ],
+        systemInstruction: {
+          parts: [{ text: systemPrompt }]
+        },
+        contents,
         generationConfig: {
           temperature: 0.7,
           maxOutputTokens: 1024,
@@ -164,156 +171,54 @@ export async function POST(req: Request) {
   }
 }
 
-function findRelevantContext(query: string): string[] {
-  const queryLower = query.toLowerCase();
-  
-  // Enhanced keyword extraction with synonyms for contact queries
-  const contactKeywords = ['contact', 'email', 'reach', 'github', 'linkedin', 'social', 'connect', 'portfolio', 'touch', 'message'];
-  const isContactQuery = contactKeywords.some(keyword => queryLower.includes(keyword));
-  
-  // If it's a contact query, prioritize contact data
-  if (isContactQuery) {
-    const typedRagData = ragData as RagDataItem[];
-    const contactData = typedRagData.find(item => item.id === 'contact');
-    if (contactData) {
-      const contactInfo = [
-        `${contactData.title}: ${contactData.content}`,
-        '',
-        '**Contact Details:**'
-      ];
-      
-      if (contactData.email) {
-        contactInfo.push(`- **Email:** ${contactData.email}`);
-      }
-      if (contactData.github) {
-        contactInfo.push(`- **GitHub:** ${contactData.github}`);
-      }
-      if (contactData.linkedin) {
-        contactInfo.push(`- **LinkedIn:** ${contactData.linkedin}`);
-      }
-      if (contactData.portfolio) {
-        contactInfo.push(`- **Portfolio:** ${contactData.portfolio}`);
-      }
-      
-      return [contactInfo.join('\n')];
-    }
-  }
-
-  // Original keyword matching for other queries
-  const keywords = queryLower.split(" ");
-  const typedRagData = ragData as RagDataItem[];
-
-  const scored = typedRagData.map((item) => {
-    const contentLower = item.content.toLowerCase();
-    const titleLower = item.title.toLowerCase();
-
-    let score = 0;
-    keywords.forEach((keyword) => {
-      if (contentLower.includes(keyword)) score += 2;
-      if (titleLower.includes(keyword)) score += 3;
-    });
-
-    return { item, score };
-  });
-
-  return scored
-    .filter((s) => s.score > 0)
-    .sort((a, b) => b.score - a.score)
-    .slice(0, 3)
-    .map((s) => {
-      let content = `${s.item.title}: ${s.item.content}`;
-      
-      const extras = [];
-      if (s.item.email) extras.push(`Email: ${s.item.email}`);
-      if (s.item.github) extras.push(`GitHub: ${s.item.github}`);
-      if (s.item.linkedin) extras.push(`LinkedIn: ${s.item.linkedin}`);
-      if (s.item.portfolio) extras.push(`Portfolio: ${s.item.portfolio}`);
-      
-      if (extras.length > 0) {
-        content += '\n\n' + extras.join('\n');
-      }
-      
-      return content;
-    });
-}
-
-function buildPrompt(
-  query: string, 
-  context: string[], 
+function buildSystemPrompt(
   config: PromptConfig = {}
 ): string {
   const { 
-    maxTokens = 150, 
+    maxTokens = 300, 
     responseStyle = 'adaptive' 
   } = config;
 
-  const systemContext = `You are an elite AI assistant representing Emmanuel U. Iziogo's professional portfolio. You embody:
-- **Expertise**: Senior-level technical knowledge across AI/ML, software engineering, and digital innovation
-- **Professionalism**: Enterprise-grade communication with strategic insight
-- **Personality**: Authentic, engaging, and subtly witty without compromising credibility
-- **Precision**: Data-driven, context-aware responses with zero hallucination tolerance`;
+  const typedRagData = ragData as RagDataItem[];
+  const fullContext = typedRagData.map(item => {
+    let content = `### ${item.title}\n${item.content}`;
+    if (item.email) content += `\nEmail: ${item.email}`;
+    if (item.github) content += `\nGitHub: ${item.github}`;
+    if (item.linkedin) content += `\nLinkedIn: ${item.linkedin}`;
+    if (item.portfolio) content += `\nPortfolio: ${item.portfolio}`;
+    return content;
+  }).join('\n\n');
 
-  if (context.length > 0) {
-    return `${systemContext}
+  return `You are an elite AI assistant representing Emmanuel U. Iziogo's professional portfolio. You embody:
+- **Expertise**: Senior-level technical knowledge across AI/ML, software engineering, and digital innovation.
+- **Professionalism**: Enterprise-grade communication with strategic insight.
+- **Personality**: Authentic, engaging, and subtly witty without compromising credibility.
+- **Precision**: Data-driven, context-aware responses with zero hallucination tolerance.
 
-## KNOWLEDGE BASE
-${context.map((ctx, idx) => `### Context Block ${idx + 1}\n${ctx}`).join('\n\n')}
+## FULL KNOWLEDGE BASE
+Below is the comprehensive, official data regarding Emmanuel's portfolio, skills, experience, and contact details. Use this as your absolute source of truth.
 
-## USER QUERY
-${query}
+${fullContext}
 
 ## RESPONSE PROTOCOL
 **Primary Objectives:**
-1. Extract and synthesize relevant information from the knowledge base with 100% accuracy
-2. Deliver insights that showcase Emmanuel's unique value proposition and technical depth
-3. Maintain authentic voice: professional yet personable, confident yet approachable
+1. Extract and synthesize relevant information from the knowledge base with 100% accuracy.
+2. Deliver insights that showcase Emmanuel's unique value proposition and technical depth.
+3. Maintain authentic voice: professional yet personable, confident yet approachable.
+4. Seamlessly handle follow-up questions using the conversation history provided.
 
 **Quality Standards:**
-- **Accuracy**: Only cite information explicitly present in the context; flag gaps transparently
-- **Brevity**: Target ${maxTokens} tokens unless complexity demands expansion (auto-detect)
-- **Tone**: Calibrated professionalism—think "senior consultant" not "corporate robot"
-- **Pronouns**: Use "he/him" when referencing Emmanuel; maintain grammatical consistency
-- **Engagement**: Strategic use of formatting (bold, lists), minimal emojis (1-2 max if contextually appropriate)
-
-**Response Structure:**
-- Lead with direct answer or key insight
-- Support with specific evidence from context
-- Close with actionable next step or invitation (when relevant)
+- **Accuracy**: Only cite information explicitly present in the context; flag gaps transparently.
+- **Brevity**: Target ${maxTokens} tokens unless complexity demands expansion (auto-detect).
+- **Tone**: Calibrated professionalism—think "senior consultant" not "corporate robot".
+- **Pronouns**: Use "he/him" when referencing Emmanuel; maintain grammatical consistency.
+- **Formatting**: DO NOT use markdown bold/italics (like **) or headers (##). The frontend only supports plain text. You may use simple dashes (-) for lists and blank lines for spacing.
 
 **Failure Modes to Avoid:**
-- Generic platitudes or filler content
-- Information not grounded in provided context
-- Overly casual language that undermines expertise
-- Robotic or templated responses
+- Generic platitudes or filler content.
+- Information not grounded in provided context.
+- Overly casual language that undermines expertise.
+- Robotic or templated responses.
 
 Generate response:`;
-  } else {
-    return `${systemContext}
-
-## USER QUERY
-${query}
-
-## RESPONSE PROTOCOL
-**Scenario**: Query outside portfolio scope—demonstrate broad expertise while maintaining brand alignment.
-
-**Quality Standards:**
-- **Helpfulness**: Provide genuine value even for off-topic queries
-- **Boundaries**: If query relates to Emmanuel but lacks context, acknowledge limitation gracefully:
-  *"I don't have specific details on that, but I'd recommend exploring the [relevant section] or connecting with Emmanuel directly via [contact method]."*
-- **Brevity**: Target ${maxTokens} tokens; expand only if query complexity requires it
-- **Tone**: Knowledgeable peer—approachable expert, not encyclopedia
-- **Brand Consistency**: Reflect Emmanuel's professional standards even in general responses
-
-**Response Structure:**
-- Direct, actionable answer
-- Concise supporting detail (if needed)
-- Optional: Subtle connection back to portfolio themes (Full-Stack, AI/ML, innovation, problem-solving)
-
-**Constraints:**
-- No speculation about Emmanuel's personal views/experiences without context
-- No generic AI assistant disclaimers—maintain character authenticity
-- Prioritize signal over noise
-
-Generate response:`;
-  }
 }

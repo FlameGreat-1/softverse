@@ -7,32 +7,32 @@
   {
     "id": "skills",
     "title": "Skills",
-    "content": "Python, FastAPI, Django, Express.js, React.js, Next.js, JavaScript, TypeScript, Tailwind CSS, HTML, CSS, Git, GitHub, Figma, Amplify, Cognito, Google Cloud Vision (GCP), S3, PostgreSQL, Docker, Kubernetes"
+    "content": "Python, FastAPI, Django, Go, Rust, Express.js, React.js, Next.js, JavaScript, TypeScript, Tailwind CSS, HTML, CSS, Git, GitHub, Figma, Amplify, Cognito, Google Cloud Vision (GCP), S3, PostgreSQL, MongoDB, Docker, Kubernetes, MQL5, WebSockets"
   },
   {
     "id": "devops",
-    "title": "Devops",
-    "content": "AWS, Oracle Cloud infra, Runpod, Onrender, Vercel"
+    "title": "DevOps",
+    "content": "AWS, Oracle Cloud, Azure, Runpod, Render, Vercel, Docker, Kubernetes, CI/CD pipelines, Helm, Envoy Proxy, Linux VPS (Wine, Xvfb)"
   },
   {
     "id": "tools",
     "title": "Tools",
-    "content": "Stack overflow,Kaggle, Jupyter Notebook, Hugging Face, Git, GitHub, Figma, vs code, Shadcn, lightswind, webflow, Notion, figma, postman"
+    "content": "Jupyter Notebook, Hugging Face, Git, GitHub, Figma, VS Code, Postman, MetaTrader 5"
   },
   {
-  "id": "education",
-  "title": "Education",
-  "content": "Obtained B.ENG in Chemical Engineering. Studied core engineering principles with strong emphasis on systems analysis, process optimization, mathematical modeling, and data-driven problem solving. Gained experience working with structured methodologies, technical documentation, and multidisciplinary collaboration. Developed a rigorous approach to logical reasoning, process automation, and efficiency improvement, which I now apply to software architecture and complex system engineering."
+    "id": "education",
+    "title": "Education",
+    "content": "Obtained B.ENG in Chemical Engineering. Studied core engineering principles with strong emphasis on systems analysis, process optimization, mathematical modeling, and data-driven problem solving. Gained experience working with structured methodologies, technical documentation, and multidisciplinary collaboration. Developed a rigorous approach to logical reasoning, process automation, and efficiency improvement, which I now apply to software architecture and complex system engineering."
   },
   {
-  "id": "story_origin",
-  "title": "My Tech Journey",
-  "content": "My journey into technology began with a curiosity to understand complex systems and how real-world solutions are built. This drive led me to pursue a B.ENG in Chemical Engineering, where I developed strong foundations in systems analysis, process optimization, and data-driven problem solving. While at university, I transitioned into software development, completing a Full-Stack Engineering program at ALX Africa, Coursera, 3MTT program, refining my skills in frontend and backend technologies, modern frameworks, and software architecture. Through internships and independent projects, I gained hands-on experience in cloud infrastructure, automation, AI/ML, and UI/UX design. Today, I leverage this multidisciplinary background to architect and build scalable, efficient, and user-centric applications, combining engineering rigor with practical software solutions."
+    "id": "story_origin",
+    "title": "My Tech Journey",
+    "content": "My journey into technology began with a curiosity to understand complex systems and how real-world solutions are built. This drive led me to pursue a B.ENG in Chemical Engineering, where I developed strong foundations in systems analysis, process optimization, and data-driven problem solving. While at university, I transitioned into software development, completing a Full-Stack Engineering program at ALX Africa, Coursera, 3MTT program, refining my skills in frontend and backend technologies, modern frameworks, and software architecture. Through internships and independent projects, I gained hands-on experience in cloud infrastructure, automation, AI/ML, and UI/UX design. Today, I leverage this multidisciplinary background to architect and build scalable, efficient, and user-centric applications, combining engineering rigor with practical software solutions."
   },
   {
-  "id": "forex_experience",
-  "title": "Forex Trading Expertise",
-  "content": "Professional Forex trader with 5 years of experience in global financial markets. Possess deep expertise in technical analysis, macroeconomic trends, liquidity management, risk assessment, and market dynamics. Skilled in developing data-driven trading strategies, identifying high-probability setups, and executing trades with precision. Adept at combining analytical rigor with practical decision-making to optimize performance in fast-paced, high-stakes trading environments."
+    "id": "forex_experience",
+    "title": "Forex Trading Expertise",
+    "content": "Professional Forex trader with 5 years of experience in global financial markets. Possess deep expertise in technical analysis, macroeconomic trends, liquidity management, risk assessment, and market dynamics. Skilled in developing data-driven trading strategies, identifying high-probability setups, and executing trades with precision. This deep domain expertise drove the creation of Exoper, a structured trading AI at the edge."
   },
   {
     "id": "project_portfolio",
@@ -40,64 +40,64 @@
     "content": "A fully responsive personal portfolio website designed to showcase my projects, experience, and skills. It features smooth animations, reusable components, a clean UI, and optimized routing. Built with modern frontend tools and deployed on Vercel. Serves as the central hub for my online presence."
   },
   {
-    "id": "exoper",
-    "title": "Exoper",
-    "content": "CloudFlare for AI-Exoper is a comprehensive zero-trust AI security gateway that ensures all AI requests across models and environments are secure, auditable, and compliant. It centralizes identity verification, policy enforcement, threat detection, and immutable logging, allowing organizations to deploy AI with enterprise-grade safety. Designed for both on-premises and cloud deployments, Exoper eliminates vendor lock-in while providing scalability, reliability, and high availability. The platform emphasizes clarity, performance, and real-world usability, enabling teams to confidently manage AI operations at scale. Built with Go, Rust, Next.js, TypeScript, Tailwind CSS, PostgreSQL, Docker, Kubernetes, and CI/CD pipelines."
+    "id": "jtnc",
+    "title": "JTNC GROUP",
+    "content": "Backend Engineer (Feb 2019 - Mar 2022). Rebuilt and maintained core trading infrastructure in Python, migrating from a monolithic architecture to a scalable microservice-based system deployed on Oracle Cloud, supporting platform operations across $1B+ AUM. Engineered the QuantumFlow algorithmic trading engine optimizing low-latency order routing and real-time broker integration. Designed a client-facing portal for managing algo signals and investor accounts. Implemented end-to-end security (AES encryption, TLS/SSL, JWT, RBAC, KYC/AML) and established a mirrored staging environment with CI/CD automation."
   },
   {
-    "id": "raspaas",
-    "title": "Raspaas",
-    "content": "Raspaas is a multitenant HR management system that integrates biometric (REALAND) and facial recognition (ZKTeco) devices for workforce authentication. The platform automates payroll, enforces compliance policies, and provides role-based access control to streamline employee management across multiple organizations. Designed with usability and scalability in mind, Raspaas offers dashboards for HR admins, supervisors, and employees to track performance, attendance, and payroll seamlessly. Built to support complex workflows and secure data management, it ensures efficiency and accuracy in HR operations. Built with Python, Django, JavaScript, HTML, CSS, PostgreSQL, Docker, and Celery."
-  },
-  {
-    "id": "buildhive",
-    "title": "BuildHive",
-    "content": "BuildHive is a freelance marketplace platform that connects clients with skilled professionals in construction and technical industries. It enables project posting, freelancer discovery, real-time communication, and secure collaboration, offering a centralized hub for project management. The platform is designed for scalability and usability, providing intuitive interfaces for both clients and freelancers. Emphasizing efficiency and reliability, BuildHive supports seamless onboarding, project tracking, and feedback workflows. Built with TypeScript, React.js, Next.js, Tailwind CSS, SQL, and Oracle Cloud."
-  },
-  {
-    "id": "sidesone",
-    "title": "Sidesone",
-    "content": "Sidesone is an agency-focused freelance portfolio platform that showcases skilled professionals and connects them with clients for diverse projects and services. The platform offers portfolio management, project matching, and workflow tracking, ensuring smooth collaboration and transparent project delivery. Designed for clarity and responsive performance, Sidesone provides visually appealing interfaces for clients to browse talent and for freelancers to present work effectively. Built with TypeScript, Next.js, Tailwind CSS, MongoDB, and AWS to support scalability and reliable data handling."
+    "id": "autonoms",
+    "title": "Autonoms AI",
+    "content": "Fullstack Engineer (May 2022 - Jan 2024). Contributed to the architecture and development of an AI workforce platform coordinating specialist outbound agents deployed across 147 enterprise clients. Engineered the high-throughput agent deployment pipeline with Node.js and PostgreSQL, natively integrating with Email, LinkedIn, calendar, and CRM APIs for omni-channel outbound workflows. Built the marketplace storefront and seller/buyer portal with Next.js SSR for sub-200ms page performance. Delivered on AWS with CI/CD automation, private cloud deployment, and isolated per-client infrastructure."
   },
   {
     "id": "cosmicforge",
     "title": "CosmicForge HealthNet",
-    "content": "CosmicForge HealthNet is an AI-powered telemedicine platform that connects patients with healthcare professionals for virtual consultations and medical advice. It provides secure communication channels, scheduling, and patient data management, enabling seamless access to healthcare services remotely. Designed with scalability, user experience, and data privacy in mind, the platform supports real-world healthcare workflows and enhances patient engagement. Built with Python FastAPI, TypeScript, Express.js, Node.js, Tailwind CSS, and MongoDB, it ensures robust performance and maintainability."
+    "content": "Full Stack Developer (Mar 2024 - Feb 2025). Led a team of 4 engineers to architect and deliver a full-stack telemedicine platform supporting health records, appointments, lab orders, prescriptions, and AI-assisted diagnosis. Fine-tuned LLaMA 3 (70B) on clinical datasets for memory-efficient inference, and integrated VAPI and Whisper for AI voice-based patient communication. Engineered secure RESTful APIs and WebSocket-based real-time services with HIPAA-compliant PHI handling, integrating Paystack for transactions. Deployed on Azure with Docker and CI/CD."
   },
   {
-    "id": "honestiq",
-    "title": "Honestiq",
-    "content": "Honestiq is an agency software portfolio platform that showcases modern web and application development projects. It emphasizes responsive design, intuitive interfaces, and maintainable architecture, demonstrating practical solutions across diverse client needs. Built to provide clarity, performance, and real-world usability, Honestiq highlights agency capabilities while ensuring a seamless user experience. Built with TypeScript, Node.js, React.js, and Tailwind CSS."
+    "id": "raspaas",
+    "title": "Raspaas",
+    "content": "Software Developer (Feb 2025 - Dec 2025). Built and deployed 2 enterprise-grade systems: engineered InvoTex OCR (Document AI, Google Cloud Vision, LlamaLayoutMv5, Django, FastAPI, React.js) achieving 97% extraction accuracy on large invoices; and a multi-tenant HR system with ZKTeco face recognition and REALAND biometric devices delivering sub-1s real-time attendance logging. Implemented JWT authentication, RBAC, multi-level approval workflows, and automated payroll with compliance tracking using Django, Celery, Docker, and PostgreSQL."
   },
   {
-    "id": "basse",
-    "title": "Basse",
-    "content": "Basse is a Web3 mentorship platform connecting mentors and mentees in the blockchain space. The platform facilitates decentralized learning, mentorship workflows, smart contract interactions, and IPFS-based content storage, creating a secure and engaging ecosystem for blockchain education. Designed for scalability and usability, Basse allows users to connect, track mentorship progress, and manage learning activities seamlessly. Built with Next.js, Tailwind CSS, Framer Motion, TypeScript, Solidity, Hardhat, Ethers.js, and IPFS."
+    "id": "esq1",
+    "title": "ESQ1 Tech",
+    "content": "Software Engineer (Feb 2026 - Aug 2026). Designed and rebuilt Instapay, a fintech platform supporting utility payments and P2P transfers; integrated Flutterwave with webhook signature verification, B2B identity verification, and real-time fraud detection. Architected a Marketplace Escrow system within Instapay with automated fund holding and AES-256 encryption. Built and deployed Inflexa Technologies, a multi-vendor e-commerce platform integrating Stripe, Paystack, EasyPost, and ShipEngine for real-time shipping and idempotent payment flows."
   },
   {
-    "id": "nswcleaning",
-    "title": "NSW CleaningCompany",
-    "content": "NSW CleaningCompany is a responsive service website providing residential and commercial cleaning solutions. The platform features service listings, booking forms, and interactive user interfaces for a seamless customer experience. Designed with mobile-first principles and clarity in mind, it ensures accessibility and smooth navigation for clients. Built with Python, Django, React.js, Tailwind CSS, and PostgreSQL, it provides reliable performance and maintainable architecture."
+    "id": "exoper",
+    "title": "Exoper",
+    "content": "Founder & Lead Engineer (Sep 2025 - Present). Founded and led a team of 3 engineers in end-to-end architecture and development of Exoper, a non-custodial AI-powered trading technology platform supporting forex, metals, crypto, and stocks. Engineered a multi-LLM analysis engine (OpenAI, Gemini, Claude) with RAG pipelines and TradingEconomics API for top-down technical and macroeconomic analysis across 13 timeframes. Architected a headless MetaTrader terminal provisioning system on Linux VPS using Wine, Xvfb, and Kubectl, building MQL5 Expert Advisors for real-time WebSocket streaming. Implemented microservices architecture (Go, Rust, FastAPI, TypeScript) with Kubernetes multi-region deployment and compliance with GDPR and MiFID II."
   },
   {
-  "id": "career",
-  "title": "Career Goals",
-  "content": "Aspiring to become a successful software entrepreneur, building innovative, scalable, and impactful technology solutions. I aim to leverage my expertise in full-stack development, AI/ML, and system design to create products that solve real-world problems and drive value. Concurrently, I am committed to excelling as a top 1% Forex trader, combining deep market knowledge, technical analysis, and disciplined risk management to achieve consistent, high-performance results in global financial markets."
+    "id": "sidesone",
+    "title": "Sidesone",
+    "content": "Agency Freelance portfolio project. Recovered locked production server, rebuilt and refactored applications achieving 62% performance improvement, re-engineered Stripe payment integration, and migrated to containerized infrastructure serving 3,000+ users. Built with TypeScript, Next.js, Tailwind CSS, MongoDB, and AWS."
   },
   {
-  "id": "experience_siwes",
-  "title": "Industrial Trainee – SwinTech",
-  "content": "Completed 300 and 400 level industrial training at SwinTech, a leading computer training institute, where I gained hands-on experience in Full-Stack Development, UI/UX design, cloud engineering, and AI/ML applications. Mentored by senior professionals, I worked on building secure, scalable, and user-friendly digital solutions while adhering to best engineering practices. Strengthened technical skills in React, TypeScript, Tailwind CSS, Figma, Terraform, and AWS services. Actively contributed to technical documentation, process optimization, and collaborative problem-solving, laying a strong foundation for software engineering excellence."
+    "id": "instapay",
+    "title": "Instapay",
+    "content": "A fintech platform supporting utility payments, airtime/data top-ups, and peer-to-peer transfers. Engineered during ESQ1 Tech tenure. Designed and rebuilt with PHP Laravel, PostgreSQL, and TypeScript. Integrated Flutterwave with webhook signature verification, B2B identity verification, real-time fraud detection, and an Escrow system with AES-256 encryption."
   },
   {
-  "id": "values",
-  "title": "Personality & Work Values",
-  "content": "Emmanuel is guided by a strong commitment to clean design, robust security, reliability, and meticulous attention to detail. He approaches work with structured curiosity, consistently seeking to learn, improve, and apply best practices. Open to constructive feedback and thoughtful questioning, he thrives in collaborative environments. He is passionate about building solutions that are both aesthetically refined and technically sound, solving real-world problems and delivering meaningful impact."
+    "id": "inflexa",
+    "title": "Inflexa Technologies",
+    "content": "A scalable, multi-vendor e-commerce platform powering offline-first educational ecosystems. Built during ESQ1 Tech tenure. Node.js backend integrating global logistics (EasyPost, ShipEngine) and idempotent payments (Stripe, Paystack) with PCI-DSS-compliant checkout."
   },
   {
-  "id": "fun_facts",
-  "title": "Fun Facts",
-  "content": "Outside of professional pursuits, Emmanuel enjoys reading, adventurous activities, action movies, and dramas. He is an enthusiastic explorer of new technologies and trends. Recognized for his leadership and talent, he was among the top 20 winners of Nigeria's 3MTT Talent Hunt (2024) and awarded Best Leader of the Year (2023) at Dominion City FUTO."
+    "id": "career",
+    "title": "Career Goals",
+    "content": "Aspiring to become a successful software entrepreneur, building innovative, scalable, and impactful technology solutions. I aim to leverage my expertise in full-stack development, AI/ML, and system design to create products that solve real-world problems and drive value. Concurrently, I am committed to excelling as a top 1% Forex trader, combining deep market knowledge, technical analysis, and disciplined risk management to achieve consistent, high-performance results in global financial markets."
+  },
+  {
+    "id": "values",
+    "title": "Personality & Work Values",
+    "content": "Emmanuel is guided by a strong commitment to clean design, robust security, reliability, and meticulous attention to detail. He approaches work with structured curiosity, consistently seeking to learn, improve, and apply best practices. Open to constructive feedback and thoughtful questioning, he thrives in collaborative environments. He is passionate about building solutions that are both aesthetically refined and technically sound, solving real-world problems and delivering meaningful impact."
+  },
+  {
+    "id": "fun_facts",
+    "title": "Fun Facts",
+    "content": "Outside of professional pursuits, Emmanuel enjoys reading, adventurous activities, action movies, and dramas. He is an enthusiastic explorer of new technologies and trends. Recognized for his leadership and talent, he was among the top 20 winners of Nigeria's 3MTT Talent Hunt (2024) and awarded Best Leader of the Year (2023) at Dominion City FUTO."
   },
   {
     "id": "contact",

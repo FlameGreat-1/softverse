@@ -80,7 +80,7 @@ export default function Footer() {
             <Link href="/consultation" className="text-gray-400 hover:text-white transition-colors text-sm group flex items-center gap-1">
               Corporate Profile <ArrowUpRight className="w-3 h-3 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform" />
             </Link>
-            <Link href="/Emmanuel_CV.pdf" target="_blank" className="text-gray-400 hover:text-white transition-colors text-sm">
+            <Link href="/files/Emmanuel-Resume.pdf" target="_blank" className="text-gray-400 hover:text-white transition-colors text-sm">
               CV / Résumé
             </Link>
           </div>

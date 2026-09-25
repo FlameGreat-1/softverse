@@ -39,7 +39,7 @@ export default function RagChat() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ query: userQuery }),
+        body: JSON.stringify({ query: userQuery, history: messages }),
       });
 
       if (!res.ok) {
