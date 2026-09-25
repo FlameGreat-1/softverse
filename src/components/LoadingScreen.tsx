@@ -74,7 +74,7 @@ export default function LoadingScreen() {
           transition={{ duration: 0.6, ease: "easeInOut" }}
           className="fixed inset-0 z-[100] bg-[#0A0A0F] flex flex-col items-center justify-center"
         >
-          <div className="relative flex items-center justify-center w-32 h-32 md:w-40 md:h-40">
+          <div className="relative flex items-center justify-center w-40 h-40 md:w-48 md:h-48">
             {/* SVG Spinner */}
             <svg
               className="absolute inset-0 w-full h-full animate-[spin_1.5s_linear_infinite]"

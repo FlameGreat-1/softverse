@@ -119,7 +119,7 @@ const ProjectsPage = () => {
                   />
                   <ProjectCard
                     title="Exoper"
-                    category="TRADING"
+                    category="FINTECH"
                     status="Active"
                     description="A non-custodial AI-powered trading technology platform for technical/macro analysis, automated execution, and disciplined trade management."
                     thumbnail="/images/exoper1.png"

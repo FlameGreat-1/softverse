@@ -57,7 +57,7 @@ export default function ExoperCaseStudy() {
         </div>
         <div>
           <h4 className="text-gray-500 text-xs font-bold tracking-widest uppercase mb-2">Type</h4>
-          <p className="font-semibold text-sm">Trading Technology</p>
+          <p className="font-semibold text-sm">Fintech</p>
         </div>
         <div>
           <h4 className="text-gray-500 text-xs font-bold tracking-widest uppercase mb-2">Client</h4>
@@ -122,15 +122,15 @@ export default function ExoperCaseStudy() {
         <motion.div
           ref={deviceRef}
           style={{ scale, opacity }}
-          className="relative w-full h-[300px] lg:h-[450px]"
+          className="relative w-full aspect-video rounded-2xl overflow-hidden shadow-[0_0_30px_rgba(199,121,221,0.15)]"
         >
-          <Image
-            src="/images/exoper7.png"
-            alt="Exoper Application Screenshot"
-            fill
-            className="object-contain"
-            sizes="(max-width: 1024px) 100vw, 50vw"
-            priority
+          <video
+            src="/images/the-leap-capitalcom-popup.avc1.5d5aeaa6569f59c26129.mp4"
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="w-full h-full object-cover"
           />
         </motion.div>
       </div>

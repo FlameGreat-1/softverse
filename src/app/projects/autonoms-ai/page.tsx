@@ -71,13 +71,16 @@ export default function AutonomsCaseStudy() {
       {/* Hero Video */}
       <div className="mb-16 w-full aspect-video rounded-2xl overflow-hidden border border-gray-800 bg-black relative">
         <video 
-          src="/images/autonoms.mp4" 
           autoPlay 
           loop 
           muted 
           playsInline
+          preload="auto"
+          poster="/images/autonoms.png"
           className="w-full h-full object-cover"
-        />
+        >
+          <source src="/images/autonoms.mp4" type="video/mp4" />
+        </video>
       </div>
 
       {/* Intro & Actions */}

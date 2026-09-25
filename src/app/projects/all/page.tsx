@@ -7,22 +7,11 @@ import Link from "next/link";
 
 const allProjects = [
   {
-    title: "Portfolio Website",
-    description: "A personal portfolio website to showcase my experience and skills.",
-    thumbnail: "/images/Portfolio.png",
-    category: "WEB",
-    status: "Active",
-    slug: "portfolio",
-  },
-
-
-
-  {
     title: "Sidesone",
     description:
       "Agency Freelance portfolio. Recovered locked production server, rebuilt and refactored applications achieving 62% performance improvement, re-engineered Stripe payment integration, and migrated to containerized infrastructure serving 3,000+ users.",
     thumbnail: "/images/sidesone.png",
-    category: "INFRASTRUCTURE",
+    category: "AGENCY",
     status: "Completed",
     slug: "sidesone",
   },
@@ -43,6 +32,14 @@ const allProjects = [
     category: "EDTECH",
     status: "Completed",
     slug: "inflexa",
+  },
+  {
+    title: "Portfolio Website",
+    description: "A personal portfolio website to showcase my experience and skills.",
+    thumbnail: "/images/Portfolio.png",
+    category: "WEB",
+    status: "Active",
+    slug: "portfolio",
   },
 ];
 

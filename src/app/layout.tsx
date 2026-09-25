@@ -4,6 +4,7 @@ import "./globals.css";
 import { Analytics } from "@vercel/analytics/next";
 import LoadingScreen from "@/components/LoadingScreen";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 import Script from "next/script";
 
 const firaCode = Fira_Code({ subsets: ["latin"], weight: ["300", "700"] });
@@ -76,6 +77,7 @@ export default function RootLayout({
         <LoadingScreen />
         <Navbar />
         {children}
+        <Footer />
         <Analytics />
       </body>
     </html>

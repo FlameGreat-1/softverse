@@ -4,10 +4,11 @@ import { useState, useEffect } from "react";
 import FloatingRobot from "@/components/FloatingRobot";
 import AboutPage from "@/app/about/page";
 import Image from "next/image";
+import Link from "next/link";
 import ProjectsPage from "./projects/page";
-import ContactPage from "./contact/page";
 import ExperiencePage from "./experience/page";
 import CustomCursor from "@/components/CustomCursor";
+import Testimonials from "@/components/Testimonials";
 
 const titles = [
   "<Full-Stack Engineer/>",
@@ -213,22 +214,33 @@ export default function Home() {
 
           <ProjectsPage />
 
-          <ContactPage />
-        </main>
+          {/* Consultation CTA Banner */}
+          <section className="max-w-4xl mx-auto mt-24 mb-32 px-4 relative z-10 text-center">
+            <div className="relative p-10 md:p-16 rounded-3xl border border-my-primary/30 bg-[#120F18]/80 backdrop-blur-xl shadow-[0_0_50px_rgba(199,121,221,0.15)] overflow-hidden">
+              {/* Glowing decorative orbs inside the CTA */}
+              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-my-primary to-transparent opacity-50" />
+              <div className="absolute -top-24 -left-24 w-48 h-48 bg-my-primary/20 blur-[80px] rounded-full pointer-events-none" />
+              <div className="absolute -bottom-24 -right-24 w-48 h-48 bg-my-primary/20 blur-[80px] rounded-full pointer-events-none" />
+              
+              <h2 className="text-3xl md:text-5xl font-bold mb-6 tracking-wide leading-tight">
+                Ready to build something <span className="text-my-primary">incredible?</span>
+              </h2>
+              <p className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
+                Let's discuss your project requirements, architecture, and how we can bring your vision to life.
+              </p>
+              
+              <Link 
+                href="/consultation"
+                className="inline-flex items-center gap-3 px-8 py-4 rounded-full border border-my-primary bg-my-primary text-white font-bold text-lg md:text-xl tracking-wide hover:bg-transparent hover:text-my-primary transition-all duration-300 shadow-[0_0_20px_rgba(199,121,221,0.4)] hover:shadow-[0_0_35px_rgba(199,121,221,0.6)] group"
+              >
+                Book a Free Consultation
+                <span className="group-hover:translate-x-1 transition-transform">➔</span>
+              </Link>
+            </div>
+          </section>
 
-        <footer className="text-center py-3 mb-0">
-          <small className="text-white text-[10px]">
-            Designed and Coded by{" "}
-            <a
-              href="https://www.linkedin.com/in/flamegreat"
-              target="_blank"
-              className="underline text-my-primary"
-            >
-             Softverse
-            </a>
-            . Copyright &copy; 2025
-          </small>
-        </footer>
+          <Testimonials />
+        </main>
 
         {/* social links */}
         <div className="fixed top-0 left-3 sm:left-6 z-20 sm:block hidden">
