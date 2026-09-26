@@ -9,6 +9,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const post = await prisma.post.findUnique({
     where: { slug },
+    include: { author: true },
   });
   if (!post) return { title: 'Not Found' };
   

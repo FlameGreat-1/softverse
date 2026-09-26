@@ -3,10 +3,11 @@ import { prisma } from "@/lib/prisma";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 
-export async function GET(req: Request, { params }: { params: { id: string } }) {
+export async function GET(req: Request, { params }: { params: Promise<{ id: string }> }) {
+  const resolvedParams = await params;
   try {
     const post = await prisma.post.findUnique({
-      where: { id: params.id },
+      where: { id: resolvedParams.id },
       include: { scheduledPosts: { orderBy: { createdAt: 'desc' }, take: 1 } }
     });
     
@@ -20,7 +21,8 @@ export async function GET(req: Request, { params }: { params: { id: string } }) 
   }
 }
 
-export async function DELETE(req: Request, { params }: { params: { id: string } }) {
+export async function DELETE(req: Request, { params }: { params: Promise<{ id: string }> }) {
+  const resolvedParams = await params;
   try {
     const session = await getServerSession(authOptions);
     if (!session || !session.user) {
@@ -28,7 +30,7 @@ export async function DELETE(req: Request, { params }: { params: { id: string } 
     }
 
     await prisma.post.delete({
-      where: { id: params.id },
+      where: { id: resolvedParams.id },
     });
 
     return NextResponse.json({ message: "Post deleted successfully" }, { status: 200 });
@@ -37,7 +39,8 @@ export async function DELETE(req: Request, { params }: { params: { id: string } 
   }
 }
 
-export async function PUT(req: Request, { params }: { params: { id: string } }) {
+export async function PUT(req: Request, { params }: { params: Promise<{ id: string }> }) {
+  const resolvedParams = await params;
   try {
     const session = await getServerSession(authOptions);
     if (!session || !session.user) {
@@ -50,7 +53,7 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
     // Enterprise ACID Transaction: Wrap DB writes, cancellations, and network dispatch
     const updatedPost = await prisma.$transaction(async (tx) => {
       const post = await tx.post.update({
-        where: { id: params.id },
+        where: { id: resolvedParams.id },
         data: {
           title,
           slug,
