@@ -1,11 +1,12 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, use } from "react";
 import TipTapEditor from "@/components/admin/TipTapEditor";
 import { useRouter } from "next/navigation";
 import { CldUploadWidget } from "next-cloudinary";
 
-export default function EditPost({ params }: { params: { id: string } }) {
+export default function EditPost({ params }: { params: Promise<{ id: string }> }) {
+  const unwrappedParams = use(params);
   const router = useRouter();
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -25,7 +26,7 @@ export default function EditPost({ params }: { params: { id: string } }) {
 
   useEffect(() => {
     // Fetch the existing post data efficiently by ID
-    fetch(`/api/posts/${params.id}`)
+    fetch(`/api/posts/${unwrappedParams.id}`)
       .then((res) => {
         if (!res.ok) throw new Error("Post not found");
         return res.json();
@@ -52,7 +53,7 @@ export default function EditPost({ params }: { params: { id: string } }) {
         alert(err.message);
         router.push("/admin");
       });
-  }, [params.id, router]);
+  }, [unwrappedParams.id, router]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -66,7 +67,7 @@ export default function EditPost({ params }: { params: { id: string } }) {
           : null
       };
 
-      const res = await fetch(`/api/posts/${params.id}`, {
+      const res = await fetch(`/api/posts/${unwrappedParams.id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),

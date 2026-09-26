@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { signOut } from "next-auth/react";
-import { LayoutDashboard, PenTool, LogOut, Settings, Calendar, Menu, X } from "lucide-react";
+import { LayoutDashboard, PenTool, LogOut, Settings, Calendar, Menu, X, Mail } from "lucide-react";
 import { useState } from "react";
 
 export default function AdminSidebar() {
@@ -14,6 +14,7 @@ export default function AdminSidebar() {
 
   const links = [
     { href: "/admin", label: "Dashboard", icon: <LayoutDashboard size={18} /> },
+    { href: "/admin/requests", label: "Requests", icon: <Mail size={18} /> },
     { href: "/admin/new", label: "New Post", icon: <PenTool size={18} /> },
     { href: "/admin/scheduled", label: "Scheduled", icon: <Calendar size={18} /> },
     { href: "/admin/settings", label: "Settings", icon: <Settings size={18} /> },

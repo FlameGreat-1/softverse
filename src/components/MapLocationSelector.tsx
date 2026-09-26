@@ -31,7 +31,7 @@ function LocationMarker({ addLocation }: { addLocation: (name: string, lat: numb
       const { lat, lng } = e.latlng;
       
       try {
-        const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`);
+        const response = await fetch(`/api/geocode?lat=${lat}&lon=${lng}`);
         const data = await response.json();
         
         let placeName = data.address?.city || data.address?.state || data.address?.country || "Unknown Location";
@@ -58,7 +58,7 @@ function SearchControl({ searchText, onClear }: { searchText: string, onClear: (
     
     const search = async () => {
       try {
-        const response = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(searchText)}`);
+        const response = await fetch(`/api/geocode?q=${encodeURIComponent(searchText)}`);
         const data = await response.json();
         if (data && data.length > 0) {
           const { lat, lon } = data[0];

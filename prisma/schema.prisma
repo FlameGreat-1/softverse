@@ -58,3 +58,19 @@ model ScheduledPost {
 
   @@index([status, scheduledFor])
 }
+
+// Stores project requests submitted by clients from the frontend
+model ProjectRequest {
+  id           String   @id @default(cuid())
+  name         String
+  email        String
+  location     String?
+  projectType  String
+  businessName String?
+  timeline     String?
+  budget       String?
+  details      String   @db.Text
+  attachments  String[] @default([])
+  source       String   @default("Email Submission")
+  createdAt    DateTime @default(now())
+}
