@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import TipTapEditor from "@/components/admin/TipTapEditor";
 import { useRouter } from "next/navigation";
 import { CldUploadWidget } from "next-cloudinary";
@@ -21,6 +21,23 @@ export default function NewPost() {
     socialPlatforms: [] as string[],
     scheduledFor: "",
   });
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    const saved = localStorage.getItem("flamo_new_post_draft");
+    if (saved) {
+      try {
+        setFormData(JSON.parse(saved));
+      } catch (e) {}
+    }
+    setIsLoaded(true);
+  }, []);
+
+  useEffect(() => {
+    if (isLoaded) {
+      localStorage.setItem("flamo_new_post_draft", JSON.stringify(formData));
+    }
+  }, [formData, isLoaded]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -45,6 +62,7 @@ export default function NewPost() {
         throw new Error(data.error || "Failed to create post");
       }
 
+      localStorage.removeItem("flamo_new_post_draft");
       router.push("/admin");
     } catch (error: any) {
       alert(error.message);
@@ -54,8 +72,8 @@ export default function NewPost() {
   };
 
   return (
-    <div className="p-8 lg:p-12 max-w-6xl mx-auto text-white">
-      <div className="flex items-center justify-between mb-8">
+    <div className="p-4 md:p-8 lg:p-12 max-w-6xl mx-auto text-white">
+      <div className="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
         <div>
           <h1 className="text-3xl font-bold mb-2">Create New Post</h1>
           <p className="text-gray-400 text-sm">Write, format, and publish your new blog entry.</p>
@@ -92,10 +110,16 @@ export default function NewPost() {
 
           <div className="space-y-2">
             <label className="text-sm font-medium text-gray-400">Content (Rich Text)</label>
-            <TipTapEditor
-              content={formData.content}
-              onChange={(html) => setFormData({ ...formData, content: html })}
-            />
+            {isLoaded ? (
+              <TipTapEditor
+                content={formData.content}
+                onChange={(html) => setFormData({ ...formData, content: html })}
+              />
+            ) : (
+              <div className="min-h-[400px] border border-white/10 rounded-xl bg-black/40 flex items-center justify-center">
+                <span className="text-gray-500">Loading draft...</span>
+              </div>
+            )}
           </div>
         </div>
 

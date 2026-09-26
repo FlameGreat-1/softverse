@@ -5,9 +5,10 @@ import { Calendar, User as UserIcon } from "lucide-react";
 import DOMPurify from 'isomorphic-dompurify';
 // Important: We render TipTap HTML output directly, so we need a prose wrapper.
 
-export async function generateMetadata({ params }: { params: { slug: string } }) {
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
   const post = await prisma.post.findUnique({
-    where: { slug: params.slug },
+    where: { slug },
   });
   if (!post) return { title: 'Not Found' };
   
@@ -33,9 +34,10 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   };
 }
 
-export default async function BlogPost({ params }: { params: { slug: string } }) {
+export default async function BlogPost({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
   const post = await prisma.post.findUnique({
-    where: { slug: params.slug },
+    where: { slug },
     include: { author: true }
   });
 

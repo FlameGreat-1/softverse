@@ -86,7 +86,7 @@ export default function Navbar() {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50">
-      <nav className="absolute top-4 sm:top-6 left-1/2 transform -translate-x-1/2 px-4 sm:px-8 py-3 flex items-center justify-between w-[90%] sm:w-[90%] lg:w-[75%] h-14 sm:h-16 rounded-full border border-white/20 bg-white/1 backdrop-blur-sm font-semibold shadow-[inset_1px_0.5px_2px_rgba(255,255,255,0.9)] text-white">
+      <nav className="absolute top-4 sm:top-6 left-1/2 transform -translate-x-1/2 px-4 sm:px-8 py-3 flex items-center justify-between w-[90%] sm:w-[90%] lg:w-[75%] h-14 sm:h-16 rounded-full border border-white/20 bg-[#0A0A0F]/70 backdrop-blur-xl font-semibold shadow-[inset_1px_0.5px_2px_rgba(255,255,255,0.9)] text-white">
         {/* Logo */}
         <Link href="/">
           <Image

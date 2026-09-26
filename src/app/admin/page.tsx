@@ -18,8 +18,8 @@ export default function AdminDashboard() {
   }, []);
 
   return (
-    <div className="p-8 lg:p-12 text-white">
-      <div className="flex items-center justify-between mb-10">
+    <div className="p-4 md:p-8 lg:p-12 text-white overflow-x-hidden">
+      <div className="flex flex-col md:flex-row md:items-center justify-between mb-10 gap-4">
         <div>
           <h1 className="text-3xl font-bold mb-2">Dashboard</h1>
           <p className="text-gray-400 text-sm">Manage your blog posts, analytics, and content.</p>

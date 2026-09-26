@@ -52,10 +52,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${firaCode.className} bg-[#0A0A0F] text-white min-h-screen`}>
-        <Script
+        <script
           id="schema-org"
           type="application/ld+json"
-          strategy="beforeInteractive"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
