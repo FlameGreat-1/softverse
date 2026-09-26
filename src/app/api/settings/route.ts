@@ -15,7 +15,7 @@ export async function GET() {
     const settings = await prisma.systemSetting.findMany();
     // Enterprise Security: Never return raw decrypted tokens to the frontend DOM. 
     // Return a masked placeholder if the value exists.
-    const settingsObj = settings.reduce((acc: any, curr) => {
+    const settingsObj = settings.reduce((acc: any, curr: any) => {
       const decrypted = decrypt(curr.value);
       if (curr.key === "QSTASH_URL") {
         acc[curr.key] = decrypted;

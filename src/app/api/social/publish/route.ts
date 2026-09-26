@@ -50,7 +50,7 @@ export async function POST(req: Request) {
 
     // 2. Fetch all required OAuth credentials securely from DB and Decrypt
     const settings = await prisma.systemSetting.findMany();
-    const config = settings.reduce((acc: any, curr) => { 
+    const config = settings.reduce((acc: any, curr: any) => { 
       acc[curr.key] = decrypt(curr.value); 
       return acc; 
     }, {});
@@ -128,7 +128,7 @@ export async function POST(req: Request) {
     }
 
     // Enterprise Idempotency: Remove successful platforms from the DB array so retries don't duplicate posts
-    const remainingPlatforms = scheduledPost.platforms.filter(p => !successfulPlatforms.includes(p));
+    const remainingPlatforms = scheduledPost.platforms.filter((p: any) => !successfulPlatforms.includes(p));
 
     // 4. Update the Database with the final status and handle Retries
     if (errors.length > 0) {

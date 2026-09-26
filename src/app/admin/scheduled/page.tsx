@@ -44,7 +44,7 @@ export default async function ScheduledPostsPage() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-white/5">
-                {scheduledTasks.map((task) => (
+                {scheduledTasks.map((task: any) => (
                   <tr key={task.id} className="hover:bg-white/5 transition-colors">
                     <td className="p-4">
                       <div className="flex items-center gap-3">
@@ -59,7 +59,7 @@ export default async function ScheduledPostsPage() {
                     </td>
                     <td className="p-4">
                       <div className="flex gap-2">
-                        {task.platforms.map((platform) => (
+                        {task.platforms.map((platform: any) => (
                           <span key={platform} className="px-2 py-1 bg-white/5 border border-white/10 rounded text-xs text-gray-300">
                             {platform}
                           </span>

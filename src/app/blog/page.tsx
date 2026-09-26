@@ -55,7 +55,7 @@ export default async function BlogFeed() {
               No articles published yet. Check back soon.
             </div>
           ) : (
-            posts.map((post) => (
+            posts.map((post: any) => (
               <Link key={post.id} href={`/blog/${post.slug}`} className="group h-full">
                 <article className="flex flex-col h-full bg-[#0f0f13] border border-white/5 rounded-[2rem] overflow-hidden hover:border-my-primary/30 transition-all duration-500 hover:shadow-[0_0_40px_rgba(199,120,221,0.1)] hover:-translate-y-1">
                   

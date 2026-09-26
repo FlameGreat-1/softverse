@@ -51,7 +51,7 @@ export async function PUT(req: Request, { params }: { params: Promise<{ id: stri
     const { title, slug, content, excerpt, coverImage, published, tags, scheduleSocial, socialPlatforms, scheduledFor, socialCaption } = body;
 
     // Enterprise ACID Transaction: Wrap DB writes, cancellations, and network dispatch
-    const updatedPost = await prisma.$transaction(async (tx) => {
+    const updatedPost = await prisma.$transaction(async (tx: any) => {
       const post = await tx.post.update({
         where: { id: resolvedParams.id },
         data: {
@@ -90,7 +90,7 @@ export async function PUT(req: Request, { params }: { params: Promise<{ id: stri
         const settings = await tx.systemSetting.findMany({
           where: { key: { in: ['QSTASH_TOKEN', 'QSTASH_URL'] } }
         });
-        const settingsMap = settings.reduce((acc: any, curr) => { acc[curr.key] = curr.value; return acc; }, {});
+        const settingsMap = settings.reduce((acc: any, curr: any) => { acc[curr.key] = curr.value; return acc; }, {});
         
         if (settingsMap.QSTASH_TOKEN && settingsMap.QSTASH_URL) {
           const delaySeconds = Math.floor((scheduleTime - Date.now()) / 1000);

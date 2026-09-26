@@ -14,7 +14,7 @@ export async function POST(req: Request) {
     const { title, slug, content, excerpt, coverImage, published, tags, scheduleSocial, socialPlatforms, scheduledFor, socialCaption } = body;
 
     // Enterprise ACID Transaction: Wrap DB writes and network dispatch in a single atomic transaction
-    const post = await prisma.$transaction(async (tx) => {
+    const post = await prisma.$transaction(async (tx: any) => {
       const newPost = await tx.post.create({
         data: {
           title,
@@ -49,7 +49,7 @@ export async function POST(req: Request) {
         const settings = await tx.systemSetting.findMany({
           where: { key: { in: ['QSTASH_TOKEN', 'QSTASH_URL'] } }
         });
-        const settingsMap = settings.reduce((acc: any, curr) => { acc[curr.key] = curr.value; return acc; }, {});
+        const settingsMap = settings.reduce((acc: any, curr: any) => { acc[curr.key] = curr.value; return acc; }, {});
         
         if (settingsMap.QSTASH_TOKEN && settingsMap.QSTASH_URL) {
           const delaySeconds = Math.floor((scheduleTime - Date.now()) / 1000);
