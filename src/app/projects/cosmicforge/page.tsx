@@ -100,11 +100,11 @@ export default function CosmicForgeCaseStudy() {
           <div className="flex gap-6 items-center">
             <div className="flex flex-col">
               <span className="text-3xl font-bold text-white">37+</span>
-              <span className="text-xs text-my-primary font-bold tracking-widest uppercase">Verified Doctors & Nurses</span>
+              <span className="text-xs text-my-primary font-bold tracking-widest uppercase">Verified Doctors</span>
             </div>
             <div className="w-[1px] h-10 bg-gray-800"></div>
             <div className="flex flex-col">
-              <span className="text-3xl font-bold text-white">71+</span>
+              <span className="text-3xl font-bold text-white">171+</span>
               <span className="text-xs text-my-primary font-bold tracking-widest uppercase">Verified Patients</span>
             </div>
           </div>
@@ -121,16 +121,16 @@ export default function CosmicForgeCaseStudy() {
           </div>
         </div>
 
-        <motion.div 
-          ref={deviceRef} 
-          style={{ scale, opacity }} 
+        <motion.div
+          ref={deviceRef}
+          style={{ scale, opacity }}
           className="relative w-full h-[300px] lg:h-[450px]"
         >
-          <Image 
-            src="/images/CosmicForgeDevice.png" 
-            alt="CosmicForge Device Application" 
-            fill 
-            className="object-contain" 
+          <Image
+            src="/images/CosmicForgeDevice.png"
+            alt="CosmicForge Device Application"
+            fill
+            className="object-contain"
             sizes="(max-width: 1024px) 100vw, 50vw"
             priority
           />
@@ -139,7 +139,7 @@ export default function CosmicForgeCaseStudy() {
 
       {/* Content Sections */}
       <div id="case-study-details" className="space-y-32 scroll-mt-32">
-        
+
         {/* The Problem & The Solution */}
         <div className="grid lg:grid-cols-12 gap-12 lg:gap-8">
           <div className="lg:col-span-4">
@@ -215,7 +215,7 @@ export default function CosmicForgeCaseStudy() {
           </div>
           <div className="lg:col-span-8 text-gray-400 space-y-6 leading-relaxed">
             <p>
-              I am a core Full Stack Developer behind the CosmicForge platform. Building a comprehensive, production-grade telemedicine tool from scratch is an immense undertaking, but it's a challenge I ran toward. 
+              I am a core Full Stack Developer behind the CosmicForge platform. Building a comprehensive, production-grade telemedicine tool from scratch is an immense undertaking, but it's a challenge I ran toward.
             </p>
             <p>
               I didn't just write the code; I helped engineer the entire ecosystem—from the complex backend architecture in Python FastAPI to the highly responsive patient portals using TypeScript and Next.js.
@@ -232,7 +232,7 @@ export default function CosmicForgeCaseStudy() {
             <div className="flex flex-col gap-3">
               {features.map((feature, idx) => (
                 <div key={idx} className="border border-gray-800 rounded-xl overflow-hidden bg-[#15121b]">
-                  <button 
+                  <button
                     onClick={() => setActiveFeature(activeFeature === idx ? null : idx)}
                     className={`w-full flex justify-between items-center px-6 py-4 font-semibold text-sm transition-colors ${activeFeature === idx ? 'bg-[#8b31ff] text-white' : 'text-gray-300 hover:bg-[#1a1721]'}`}
                   >
@@ -241,7 +241,7 @@ export default function CosmicForgeCaseStudy() {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                     </svg>
                   </button>
-                  
+
                   {activeFeature === idx && (
                     <div className="px-6 py-5 text-gray-400 text-sm leading-relaxed bg-[#110e16]">
                       {feature.desc}
@@ -262,7 +262,7 @@ export default function CosmicForgeCaseStudy() {
             <p>
               To bring this ambitious platform to life, I carefully architected a modern, high-performance tech stack:
             </p>
-            
+
             <div className="space-y-6">
               <div>
                 <h4 className="text-white font-semibold mb-2">Frontend & UI/UX</h4>

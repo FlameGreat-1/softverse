@@ -55,8 +55,8 @@
     "content": "Full Stack Developer (Mar 2024 - Feb 2025). Led a team of 4 engineers to architect and deliver a full-stack telemedicine platform supporting health records, appointments, lab orders, prescriptions, and AI-assisted diagnosis. Fine-tuned LLaMA 3 (70B) on clinical datasets for memory-efficient inference, and integrated VAPI and Whisper for AI voice-based patient communication. Engineered secure RESTful APIs and WebSocket-based real-time services with HIPAA-compliant PHI handling, integrating Paystack for transactions. Deployed on Azure with Docker and CI/CD."
   },
   {
-    "id": "raspaas",
-    "title": "Raspaas",
+    "id": "razpaas",
+    "title": "Razpaas",
     "content": "Software Developer (Feb 2025 - Dec 2025). Built and deployed 2 enterprise-grade systems: engineered InvoTex OCR (Document AI, Google Cloud Vision, LlamaLayoutMv5, Django, FastAPI, React.js) achieving 97% extraction accuracy on large invoices; and a multi-tenant HR system with ZKTeco face recognition and REALAND biometric devices delivering sub-1s real-time attendance logging. Implemented JWT authentication, RBAC, multi-level approval workflows, and automated payroll with compliance tracking using Django, Celery, Docker, and PostgreSQL."
   },
   {

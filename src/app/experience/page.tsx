@@ -21,6 +21,7 @@ type Experience = {
     facebook?: string;
     linkedin?: string;
     twitter?: string;
+    pinterest?: string;
   };
   details: string[];
   hideNameText?: boolean;
@@ -86,26 +87,27 @@ const experienceData: Experience[] = [
       twitter: "https://x.com/cf_healthnet?s=21"
     },
     details: [
-      "Led a team of 4 engineers to Architect and deliver a full-stack telemedicine and patient management platform (React, Next.js, FastAPI, PostgreSQL) supporting health records, appointment scheduling, lab orders, prescriptions, pharmacy, AI-assisted diagnosis, real-time chat, and integrated wallet/billing — onboarding 71 patients and 13 verified doctors across multiple specialties",
+      "Led a team of 4 engineers to Architect and deliver a full-stack telemedicine and patient management platform (React, Next.js, FastAPI, PostgreSQL) supporting health records, appointment scheduling, lab orders, prescriptions, pharmacy, AI-assisted diagnosis, real-time chat, and integrated wallet/billing — onboarding 171 patients and 37 verified doctors across multiple specialties",
       "Fine-tuned LLaMA 3 (70B) on PubMed and MIMIC-III clinical datasets using QLoRA and PEFT, deployed on RunPod with 4-bit quantization for memory-efficient inference achieving sub-200ms inference latency; integrated VAPI and Whisper for AI voice-based patient communication, reducing average consultation response time by 40%",
       "Engineered secure RESTful APIs and WebSocket-based real-time services with JWT, RBAC, AES-256, and HIPAA-compliant PHI handling; integrated Paystack with webhook signature verification, idempotency controls, ACID-compliant transactions, and automated reconciliation; deployed on Azure with Docker, CI/CD, auto-scaling, 99% uptime, and sub-130ms API response times"
     ]
   },
   {
-    id: "raspaas",
-    companyName: "Raspaas",
+    id: "razpaas",
+    companyName: "Razpaas",
     logo: "/images/Raspaas-logo.png",
     role: "Software Developer",
     dateRange: "February 2025 — December 2025",
     duration: "10 Months",
     location: "Sri Lanka | Contract (Remote)",
-    website: "https://raspaas.up.railway.app",
+    website: "https://razpaas.lk/",
     socials: {
-      facebook: "https://www.facebook.com/Razpaas.lk"
+      facebook: "https://www.facebook.com/Razpaas.lk",
+      pinterest: "https://www.pinterest.com/razpaash/"
     },
     details: [
       "Built and deployed 2 enterprise-grade systems: engineered InvoTex OCR (Document AI, Google Cloud Vision, LlamaLayoutMv5, Django, FastAPI, React.js, PostgreSQL) achieving 97% extraction accuracy processing 1,000+ invoices up to 1GB in under 5 minutes; and a multi-tenant HR system with ZKTeco face recognition devices delivering sub-1s real-time attendance logging",
-      "Architected RASPAAS HR system with Django, Celery, Docker, and PostgreSQL integrating REALAND biometric devices for automated multi-tenant attendance tracking; implemented JWT authentication, RBAC, multi-level approval workflows, and automated payroll with compliance tracking"
+      "Architected RAZPAAS HR system with Django, Celery, Docker, and PostgreSQL integrating REALAND biometric devices for automated multi-tenant attendance tracking; implemented JWT authentication, RBAC, multi-level approval workflows, and automated payroll with compliance tracking"
     ]
   },
   {
@@ -155,17 +157,17 @@ const ExperienceModal = ({ exp, onClose }: { exp: Experience; onClose: () => voi
 
   useEffect(() => {
     document.body.style.overflow = 'hidden';
-    
+
     const checkScroll = () => {
       if (scrollRef.current) {
         const { scrollHeight, clientHeight, scrollTop } = scrollRef.current;
         setShowScrollArrow(scrollHeight > clientHeight && scrollTop < 20);
       }
     };
-    
+
     const timer = setTimeout(checkScroll, 100);
     window.addEventListener('resize', checkScroll);
-    
+
     return () => {
       document.body.style.overflow = 'unset';
       clearTimeout(timer);
@@ -181,9 +183,9 @@ const ExperienceModal = ({ exp, onClose }: { exp: Experience; onClose: () => voi
 
   const scrollDown = () => {
     if (scrollRef.current) {
-      scrollRef.current.scrollTo({ 
-        top: scrollRef.current.scrollHeight, 
-        behavior: 'smooth' 
+      scrollRef.current.scrollTo({
+        top: scrollRef.current.scrollHeight,
+        behavior: 'smooth'
       });
     }
   };
@@ -191,16 +193,16 @@ const ExperienceModal = ({ exp, onClose }: { exp: Experience; onClose: () => voi
   return (
     <div className="fixed inset-0 z-[99999] flex items-center justify-center pt-16 pb-2 px-2 sm:px-4">
       {/* Backdrop */}
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         onClick={onClose}
         className="absolute inset-0 bg-black/60 backdrop-blur-sm"
       />
-      
+
       {/* Modal Content */}
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0, scale: 0.95, y: 20 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.95, y: 20 }}
@@ -213,14 +215,14 @@ const ExperienceModal = ({ exp, onClose }: { exp: Experience; onClose: () => voi
           <div className="w-3 h-3 rounded-full bg-green-500" />
         </div>
 
-        <div 
+        <div
           ref={scrollRef}
           onScroll={handleScroll}
           className="flex-1 min-h-0 px-4 py-6 sm:p-6 md:p-8 overflow-y-auto lg:[&::-webkit-scrollbar]:hidden lg:[-ms-overflow-style:none] lg:[scrollbar-width:none]"
         >
           <div className="flex items-center gap-6 mb-8">
             <div className={`relative ${exp.logoClassName || (exp.logoType === 'wide' ? 'w-32 h-12 sm:w-48 sm:h-16' : 'w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-[#1a1a1a] border border-gray-800')} flex items-center justify-center overflow-hidden shrink-0`}>
-              <Image 
+              <Image
                 src={exp.logo}
                 alt={exp.companyName}
                 fill
@@ -244,15 +246,15 @@ const ExperienceModal = ({ exp, onClose }: { exp: Experience; onClose: () => voi
           </div>
 
           <div className="flex items-center justify-between gap-2 w-full mt-4">
-            <Link 
-              href={exp.website} 
-              target="_blank" 
+            <Link
+              href={exp.website}
+              target="_blank"
               className="flex items-center gap-2 bg-my-primary hover:bg-[#a65abf] text-white px-4 sm:px-6 py-2.5 rounded-full text-sm font-semibold transition-colors shadow-[0_0_15px_#C778DD44] whitespace-nowrap shrink-0"
             >
               <Globe className="w-4 h-4" />
               Visit Website
             </Link>
-            
+
             <div className="flex items-center gap-2 sm:gap-3">
               {exp.socials.linkedin && (
                 <Link href={exp.socials.linkedin} target="_blank" className="w-10 h-10 rounded-full bg-[#1a1a1a] hover:bg-[#222] border border-gray-800 flex items-center justify-center transition-transform hover:scale-110">
@@ -267,6 +269,11 @@ const ExperienceModal = ({ exp, onClose }: { exp: Experience; onClose: () => voi
               {exp.socials.facebook && (
                 <Link href={exp.socials.facebook} target="_blank" className="w-10 h-10 rounded-full bg-[#1a1a1a] hover:bg-[#222] border border-gray-800 flex items-center justify-center transition-transform hover:scale-110">
                   <img src="https://api.iconify.design/logos:facebook.svg" alt="Facebook" className="w-5 h-5" />
+                </Link>
+              )}
+              {exp.socials.pinterest && (
+                <Link href={exp.socials.pinterest} target="_blank" className="w-10 h-10 rounded-full bg-[#1a1a1a] hover:bg-[#222] border border-gray-800 flex items-center justify-center transition-transform hover:scale-110">
+                  <img src="https://api.iconify.design/logos:pinterest.svg" alt="Pinterest" className="w-5 h-5" />
                 </Link>
               )}
             </div>
@@ -343,7 +350,7 @@ const ExperienceSection = ({ exp, index, onSelect }: { exp: Experience; index: n
               <a href={exp.website} target="_blank">{exp.companyName}</a>
             </h3>
           )}
-          <motion.button 
+          <motion.button
             onClick={onSelect}
             onMouseEnter={onSelect}
             whileHover="hover"
@@ -353,20 +360,20 @@ const ExperienceSection = ({ exp, index, onSelect }: { exp: Experience; index: n
           >
             <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <circle cx="12" cy="12" r="10" className="stroke-my-primary transition-colors" />
-              <motion.g 
+              <motion.g
                 variants={{
                   hover: { y: [0, -5, 0], transition: { duration: 0.4, ease: "easeOut" } },
                   tap: { scale: 0.8 }
                 }}
                 className="stroke-white"
               >
-                <path d="M12 16v-4"/>
-                <path d="M12 8h.01"/>
+                <path d="M12 16v-4" />
+                <path d="M12 8h.01" />
               </motion.g>
             </svg>
           </motion.button>
         </div>
-        
+
         <div className="hidden sm:block w-1.5 h-1.5 rounded-full bg-gray-600"></div>
         <p className="text-gray-400 text-sm font-medium flex items-center gap-2">
           {exp.location}
@@ -380,7 +387,7 @@ const ExperiencePage = () => {
   const timelineRef = useRef<HTMLDivElement>(null);
   const [showAll, setShowAll] = useState(false);
   const [selectedExp, setSelectedExp] = useState<Experience | null>(null);
-  
+
   const { scrollYProgress } = useScroll({
     target: timelineRef,
     offset: ["start center", "end center"]
@@ -412,20 +419,20 @@ const ExperiencePage = () => {
         <div className="absolute left-0 sm:left-4 lg:left-24 top-0 bottom-0 w-[2px] bg-white/10 rounded-full"></div>
 
         {/* Single Animated Circle Marker - moves with scroll */}
-        <motion.div 
+        <motion.div
           className="absolute left-[-5px] sm:left-[11px] lg:left-[91px] w-3 h-3 bg-my-primary rounded-full shadow-[0_0_10px_#c779dd] z-10"
-          style={{ 
+          style={{
             top: ballY
           }}
         />
 
         {/* First 3 Experiences */}
         {experienceData.slice(0, 3).map((exp, index) => (
-          <ExperienceSection 
-            key={exp.id} 
-            exp={exp} 
-            index={index} 
-            onSelect={() => setSelectedExp(exp)} 
+          <ExperienceSection
+            key={exp.id}
+            exp={exp}
+            index={index}
+            onSelect={() => setSelectedExp(exp)}
           />
         ))}
 
@@ -440,11 +447,11 @@ const ExperiencePage = () => {
             >
               {/* Remaining Experiences */}
               {experienceData.slice(3).map((exp, index) => (
-                <ExperienceSection 
-                  key={exp.id} 
-                  exp={exp} 
-                  index={index + 3} 
-                  onSelect={() => setSelectedExp(exp)} 
+                <ExperienceSection
+                  key={exp.id}
+                  exp={exp}
+                  index={index + 3}
+                  onSelect={() => setSelectedExp(exp)}
                 />
               ))}
             </motion.div>
@@ -453,7 +460,7 @@ const ExperiencePage = () => {
 
         {!showAll && (
           <div className="flex justify-center mt-8 pb-12 relative z-20">
-            <button 
+            <button
               onClick={() => setShowAll(true)}
               className="px-8 py-3 rounded-full border border-my-primary/50 text-my-primary font-semibold hover:bg-my-primary/10 transition-all duration-300 shadow-[0_0_15px_rgba(199,121,221,0.3)] hover:shadow-[0_0_25px_rgba(199,121,221,0.6)] flex items-center gap-2 group"
             >
@@ -468,9 +475,9 @@ const ExperiencePage = () => {
 
       <AnimatePresence>
         {selectedExp && (
-          <ExperienceModal 
-            exp={selectedExp} 
-            onClose={() => setSelectedExp(null)} 
+          <ExperienceModal
+            exp={selectedExp}
+            onClose={() => setSelectedExp(null)}
           />
         )}
       </AnimatePresence>

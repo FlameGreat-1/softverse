@@ -9,6 +9,7 @@ import { useState } from "react";
 export default function AdminSidebar() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
+  const [isCollapsed, setIsCollapsed] = useState(false);
 
   if (pathname === "/admin/login") return null;
 
@@ -36,11 +37,17 @@ export default function AdminSidebar() {
         />
       )}
 
-      <aside className={`w-64 min-h-screen bg-[#0b090f] border-r border-white/10 flex flex-col fixed md:sticky top-0 z-50 transition-transform duration-300 ${isOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}`}>
-        <div className="p-6 border-b border-white/10 flex justify-between items-center">
-          <Link href="/" className="text-xl font-bold text-white tracking-wider">
+      <aside className={`min-h-screen bg-[#0b090f] border-r border-white/10 flex flex-col fixed md:sticky top-0 z-50 transition-all duration-300 ${isOpen ? 'translate-x-0 w-64' : '-translate-x-full md:translate-x-0 w-64'} ${isCollapsed ? 'md:w-20' : 'md:w-64'}`}>
+        <div className={`p-6 border-b border-white/10 flex items-center ${isCollapsed ? 'md:justify-center md:p-4 justify-between' : 'justify-between'}`}>
+          <Link href="/" className={`text-xl font-bold text-white tracking-wider truncate ${isCollapsed ? 'md:hidden' : ''}`}>
             <span className="text-my-primary">FLAMO</span> CMS
           </Link>
+          <button 
+            onClick={() => setIsCollapsed(!isCollapsed)} 
+            className="hidden md:flex text-gray-400 hover:text-white ml-auto font-mono font-bold tracking-widest text-lg"
+          >
+            &lt;&gt;
+          </button>
           <button onClick={() => setIsOpen(false)} className="md:hidden text-gray-400 hover:text-white">
             <X size={20} />
           </button>
@@ -54,14 +61,17 @@ export default function AdminSidebar() {
               key={link.href}
               href={link.href}
               onClick={() => setIsOpen(false)}
-              className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all font-medium text-sm ${
+              className={`flex items-center gap-3 py-3 rounded-xl transition-all font-medium text-sm ${
+                isCollapsed ? 'md:justify-center md:px-0 px-4' : 'px-4'
+              } ${
                 isActive 
                   ? "bg-my-primary text-black shadow-[0_0_15px_rgba(199,120,221,0.2)]" 
                   : "text-gray-400 hover:text-white hover:bg-white/5"
               }`}
+              title={isCollapsed ? link.label : undefined}
             >
               {link.icon}
-              {link.label}
+              <span className={isCollapsed ? 'md:hidden' : ''}>{link.label}</span>
             </Link>
           );
         })}
@@ -70,10 +80,13 @@ export default function AdminSidebar() {
       <div className="p-4 border-t border-white/10">
         <button
           onClick={() => signOut()}
-          className="flex items-center gap-3 px-4 py-3 w-full text-left rounded-xl transition-all font-medium text-sm text-red-400 hover:text-red-300 hover:bg-red-500/10"
+          className={`flex items-center gap-3 py-3 w-full text-left rounded-xl transition-all font-medium text-sm text-red-400 hover:text-red-300 hover:bg-red-500/10 ${
+            isCollapsed ? 'md:justify-center md:px-0 px-4' : 'px-4'
+          }`}
+          title={isCollapsed ? "Sign Out" : undefined}
         >
           <LogOut size={18} />
-          Sign Out
+          <span className={isCollapsed ? 'md:hidden' : ''}>Sign Out</span>
         </button>
       </div>
     </aside>
