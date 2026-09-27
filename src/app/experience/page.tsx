@@ -417,7 +417,7 @@ const ExperiencePage = () => {
 
         <div className="mt-8 md:mt-0 flex flex-col items-start md:items-end gap-3">
           <p className="text-gray-400 text-sm md:text-base">Wanna know more?</p>
-          <a href="/assets/resume.pdf" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-6 py-3 bg-[#c921ff] shadow-[0_0_12px_rgba(201,33,255,0.4)] text-white rounded-l-full rounded-r-xl hover:bg-[#b01be0] transition-colors font-bold">
+          <a href="/files/Emmanuel-CV.pdf" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-6 py-3 bg-[#c921ff] shadow-[0_0_12px_rgba(201,33,255,0.4)] text-white rounded-l-full rounded-r-xl hover:bg-[#b01be0] transition-colors font-bold">
             Download CV <img src="https://api.iconify.design/vscode-icons/file-type-pdf2.svg" alt="PDF" className="w-5 h-5" />
           </a>
         </div>
