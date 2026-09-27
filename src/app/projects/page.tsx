@@ -49,19 +49,19 @@ const ProjectsPage = () => {
       />
 
       <div>
-        <h2 className="font-semibold text-[24px] lg:text-[32px] flex items-center mb-6">
-          <span className="text-my-primary">#</span>projects/achievements{" "}
-          <span className="ml-6">
-            <Image
-              src="/assets/line.png"
-              alt="line"
-              width={32}
-              height={1}
-              className="sm:w-60 w-32 h-auto"
-            />
-          </span>
-        </h2>
-
+        {/* Projects Header (Yuyu style) */}
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16">
+          <div className="flex flex-col">
+            {/* Pill Badge */}
+            <div className="inline-flex items-center gap-2 px-5 py-2 rounded-l-xl rounded-r-full border border-my-primary/50 text-white w-max mb-6">
+              <span className="text-sm font-semibold">My Works</span>
+              <span className="text-lg">🤩</span>
+            </div>
+            
+            <h3 className="text-3xl md:text-5xl font-bold text-white mb-2">Projects I worked on.</h3>
+            <p className="text-2xl md:text-4xl font-bold text-[#c921ff]">At a glance.</p>
+          </div>
+        </div>
         {/* tabs */}
         <div className="flex justify-between w-full lg:w-[70%] mx-auto my-10 text-[12px] lg:text-[18px] gap-3">
           <button

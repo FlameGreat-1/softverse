@@ -399,21 +399,29 @@ const ExperiencePage = () => {
   return (
     <section
       id="experience"
-      className="relative space-y-16 my-40 px-3 sm:px-12 lg:px-32 scroll-mt-10 md:scroll-mt-32"
+      className="relative space-y-16 mt-16 mb-20 lg:my-40 px-3 sm:px-12 lg:px-32 scroll-mt-10 md:scroll-mt-32"
     >
-      <h2 className="font-semibold text-[24px] lg:text-[32px] flex items-center mb-20">
-        <span className="text-my-primary">#</span>experience{" "}
-        <span className="ml-6">
-          <Image
-            src="/assets/line.png"
-            alt="line"
-            width={22}
-            height={1}
-            className="w-40 h-[0.5px]"
-          />
-        </span>
-      </h2>
+      {/* Experience Header (Yuyu style) */}
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-20">
+        <div className="flex flex-col">
+          {/* Pill Badge */}
+          <div className="inline-flex items-center gap-2 px-5 py-2 rounded-l-xl rounded-r-full border border-my-primary/50 text-white w-max mb-6">
+            <span className="text-sm font-semibold"><span className="text-my-primary">#</span>Work Experience</span>
+            <span className="text-lg">💼</span>
+          </div>
+          
+          <h3 className="text-3xl md:text-5xl font-bold text-white mb-2">Corporate Work Experience.</h3>
+          <p className="text-2xl md:text-4xl font-bold text-[#c921ff] mb-6">6 years of excellence</p>
+          <p className="text-gray-400 text-sm md:text-base">... and counting</p>
+        </div>
 
+        <div className="mt-8 md:mt-0 flex flex-col items-start md:items-end gap-3">
+          <p className="text-gray-400 text-sm md:text-base">Wanna know more?</p>
+          <a href="/assets/resume.pdf" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-6 py-3 bg-[#c921ff] shadow-[0_0_12px_rgba(201,33,255,0.4)] text-white rounded-l-full rounded-r-xl hover:bg-[#b01be0] transition-colors font-bold">
+            Download CV <img src="https://api.iconify.design/vscode-icons/file-type-pdf2.svg" alt="PDF" className="w-5 h-5" />
+          </a>
+        </div>
+      </div>
       <div ref={timelineRef} className="relative md:pl-[73px] md:pr-4 lg:pr-[73px]">
         {/* Vertical line */}
         <div className="absolute left-0 sm:left-4 lg:left-24 top-0 bottom-0 w-[2px] bg-white/10 rounded-full"></div>

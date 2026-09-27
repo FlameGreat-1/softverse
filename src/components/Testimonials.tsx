@@ -56,7 +56,7 @@ export default function Testimonials() {
         
         {/* Left Side: Titles and Floater */}
         <div className="flex flex-col items-start relative z-10">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-gray-700 bg-transparent mb-8">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-l-xl rounded-r-full border border-gray-700 bg-transparent mb-8">
             <span className="text-sm font-semibold tracking-wide">Testimonials</span>
             <span>🏅</span>
           </div>

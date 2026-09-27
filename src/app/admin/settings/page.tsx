@@ -61,7 +61,7 @@ export default function SettingsPage() {
   }
 
   return (
-    <div className="p-8 lg:p-12 max-w-4xl mx-auto text-white">
+    <div className="p-4 md:p-8 lg:p-12 w-full text-white overflow-x-hidden">
       <div className="mb-8 border-b border-white/10 pb-6">
         <h1 className="text-3xl font-bold mb-2 flex items-center gap-3">
           <Key className="text-my-primary" /> Integrations & API Keys

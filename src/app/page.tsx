@@ -16,7 +16,7 @@ const titles = [
 ];
 
 const services = [
-  { text: "Full-Stack website development services", color: "#60A5FA" }, // Blue
+  { text: "Full-Stack website development", color: "#60A5FA" }, // Blue
   { text: "AI-powered solutions", color: "#A78BFA" }, // Purple
   { text: "automation workflows", color: "#34D399" }, // Green
   { text: "cloud infrastructure services", color: "#F472B6" }, // Pink
@@ -77,8 +77,8 @@ export default function Home() {
   // function to download CV
   const handleDownload = () => {
     const link = document.createElement("a");
-    link.href = "/files/Emmanuel-Resume.pdf";
-    link.download = "Emmanuel-Resume.pdf";
+    link.href = "/files/Emmanuel-CV.pdf";
+    link.download = "Emmanuel-CV.pdf";
     link.click();
   };
 
@@ -146,7 +146,12 @@ export default function Home() {
             id="home"
           >
             <div className="flex flex-col justify-center">
-              <div className="text-center mt-[25vh] md:mt-[30vh] lg:mt-[38vh]">
+              <div className="text-center mt-[20vh] md:mt-[25vh] lg:mt-[30vh]">
+                <div className="flex justify-center mb-10 animate-fade-in-up">
+                  <div className="inline-flex items-center gap-3 px-7 py-3 md:py-4 md:px-9 rounded-l-2xl rounded-r-full border-[1.5px] border-my-primary bg-transparent text-sm sm:text-base font-bold text-white shadow-[0_0_15px_rgba(199,120,221,0.2)] hover:shadow-[0_0_25px_rgba(199,120,221,0.4)] transition-all duration-300 cursor-default">
+                    Yo! I Was Expecting You 👋🏿
+                  </div>
+                </div>
                 <h3 className="font-bold text-[18px] sm:text-[28px] md:text-[30px]">
                   Hi, I&apos;m{" "}
                   <span className="text-my-primary">Emmanuel U. Iziogo</span>
@@ -203,7 +208,7 @@ export default function Home() {
             </div>
 
             {/* Robot */}
-            <div className="absolute bottom-6 right-3">
+            <div className="absolute bottom-12 md:bottom-6 right-3">
               <FloatingRobot />
             </div>
           </section>

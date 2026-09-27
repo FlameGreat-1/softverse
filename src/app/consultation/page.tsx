@@ -21,48 +21,50 @@ export default function ConsultationPage() {
     <div className="min-h-screen bg-[#0A0A0F] text-white pt-32 pb-20 px-4 sm:px-8 font-sans overflow-x-hidden relative flex flex-col items-center">
       
       {/* Background Decorations (Matching Home Page) */}
-      <Image
-        src="/assets/dots-small.svg"
-        alt="Background pattern"
-        className="absolute top-16 left-10 sm:left-40 md:left-80 w-10 sm:w-16 pointer-events-none"
-        width={80}
-        height={80}
-      />
-      <Image
-        src="/assets/pattern-small.svg"
-        alt="Background pattern"
-        className="absolute top-64 right-0 w-14 md:w-16 opacity-30 pointer-events-none"
-        width={80}
-        height={80}
-      />
-      <Image
-        src="/assets/pattern-big.svg"
-        alt="Background pattern"
-        className="absolute top-96 left-10 sm:left-1/4 w-28 md:w-36 opacity-30 pointer-events-none"
-        width={140}
-        height={140}
-      />
-      <Image
-        src="/assets/dots-small.svg"
-        alt="Background pattern"
-        className="absolute top-[650px] right-10 sm:right-44 w-10 sm:w-16 pointer-events-none"
-        width={80}
-        height={80}
-      />
-      <Image
-        src="/assets/ellipse-large.png"
-        alt="Background pattern"
-        className="absolute top-[-150px] right-[-150px] w-[250px] sm:w-[540px] h-auto pointer-events-none"
-        width={540}
-        height={540}
-      />
-      <Image
-        src="/assets/ellipse-large.png"
-        alt="Background pattern"
-        className="absolute top-[420px] left-[-120px] w-[250px] sm:w-[540px] h-auto pointer-events-none"
-        width={540}
-        height={540}
-      />
+      <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+        <Image
+          src="/assets/dots-small.svg"
+          alt="Background pattern"
+          className="absolute top-16 left-10 sm:left-40 md:left-80 w-10 sm:w-16 pointer-events-none"
+          width={80}
+          height={80}
+        />
+        <Image
+          src="/assets/pattern-small.svg"
+          alt="Background pattern"
+          className="absolute top-64 right-0 w-14 md:w-16 opacity-30 pointer-events-none"
+          width={80}
+          height={80}
+        />
+        <Image
+          src="/assets/pattern-big.svg"
+          alt="Background pattern"
+          className="absolute top-96 left-10 sm:left-1/4 w-28 md:w-36 opacity-30 pointer-events-none"
+          width={140}
+          height={140}
+        />
+        <Image
+          src="/assets/dots-small.svg"
+          alt="Background pattern"
+          className="absolute top-[650px] right-10 sm:right-44 w-10 sm:w-16 pointer-events-none"
+          width={80}
+          height={80}
+        />
+        <Image
+          src="/assets/ellipse-large.png"
+          alt="Background pattern"
+          className="absolute top-[-150px] right-[-150px] w-[250px] sm:w-[540px] h-auto pointer-events-none"
+          width={540}
+          height={540}
+        />
+        <Image
+          src="/assets/ellipse-large.png"
+          alt="Background pattern"
+          className="absolute top-[420px] left-[-120px] w-[250px] sm:w-[540px] h-auto pointer-events-none"
+          width={540}
+          height={540}
+        />
+      </div>
 
       <div className="max-w-6xl w-full mx-auto relative z-10">
         
@@ -81,10 +83,10 @@ export default function ConsultationPage() {
         </div>
 
         {/* Cal.com Embed Container */}
-        <div className="w-full relative min-h-[600px] mt-8">
+        <div className="w-full relative mt-8">
           <Cal 
             calLink="flame-great" // Links to the user's Cal.com profile
-            style={{ width: "100%", height: "100%", overflow: "scroll" }}
+            style={{ width: "100%", height: "100%" }}
             config={{ layout: "month_view", theme: "dark" }}
           />
         </div>

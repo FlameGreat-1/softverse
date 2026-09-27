@@ -19,27 +19,27 @@ export default function Footer() {
         
         {/* Massive CTA */}
         <div className="flex justify-center mb-32">
-          <Link href="/consultation" className="group flex items-center gap-4 hover:opacity-80 transition-opacity">
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-my-primary to-purple-400">
+          <Link href="/consultation" className="group flex items-center gap-3 md:gap-4 hover:opacity-80 transition-opacity whitespace-nowrap">
+            <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-my-primary to-purple-400">
               Let's Work
             </h1>
-            <span className="text-5xl md:text-7xl lg:text-8xl text-my-primary group-hover:translate-x-4 transition-transform duration-300">
+            <span className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl text-my-primary group-hover:translate-x-4 transition-transform duration-300">
               ➔
             </span>
           </Link>
         </div>
 
         {/* Main Footer Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 lg:gap-8 mb-24">
+        <div className="flex flex-col lg:flex-row gap-16 lg:gap-8 mb-24">
           
           {/* Brand & Bio */}
-          <div className="lg:col-span-1">
+          <div className="w-full lg:w-[35%] flex flex-col items-center md:items-start text-center md:text-left">
             <h2 className="text-3xl font-black text-white tracking-tight mb-6">EMMANUEL</h2>
-            <p className="text-gray-400 text-sm leading-relaxed mb-8">
+            <p className="text-gray-400 text-sm leading-relaxed mb-8 md:max-w-md lg:max-w-sm">
               Full-Stack Engineer harnessing AI, architecture, and code to rapidly deliver enterprise-grade global solutions.
             </p>
             
-            <div className="flex flex-wrap gap-3">
+            <div className="flex flex-wrap justify-center md:justify-start gap-3">
               <a href="https://wa.me/+2348136872013" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-full bg-[#1A1A24] flex items-center justify-center hover:bg-my-primary hover:scale-110 transition-all">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" className="w-6 h-6 object-contain" />
               </a>
@@ -49,65 +49,72 @@ export default function Footer() {
               <a href="https://www.linkedin.com/in/flamegreat/" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-full bg-[#1A1A24] flex items-center justify-center hover:bg-my-primary hover:scale-110 transition-all">
                 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/linkedin/linkedin-original.svg" alt="LinkedIn" className="w-6 h-6 object-contain" />
               </a>
-              <a href="https://www.facebook.com/" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-full bg-[#1A1A24] flex items-center justify-center hover:bg-my-primary hover:scale-110 transition-all">
-                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/facebook/facebook-original.svg" alt="Facebook" className="w-6 h-6 object-contain" />
+              <a href="https://www.facebook.com/" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-full bg-[#1A1A24] flex items-center justify-center hover:bg-my-primary hover:scale-110 transition-all shrink-0">
+                <img src="https://api.iconify.design/logos:facebook.svg" alt="Facebook" className="w-5 h-5 object-contain" />
+              </a>
+              <a href="mailto:hello@flamegreat.tech" className="w-10 h-10 rounded-full bg-[#1A1A24] flex items-center justify-center hover:bg-my-primary hover:scale-110 transition-all shrink-0">
+                <img src="https://api.iconify.design/logos:google-gmail.svg" alt="Email" className="w-5 h-5 object-contain" />
               </a>
             </div>
           </div>
 
-          {/* Pages */}
-          <div className="flex flex-col gap-4 lg:ml-auto">
-            <h3 className="text-white text-xs font-bold tracking-widest uppercase mb-2">Pages</h3>
-            <Link href="/" className="text-gray-400 hover:text-white transition-colors text-sm">Home</Link>
-            <Link href="/about" className="text-gray-400 hover:text-white transition-colors text-sm">About Me</Link>
-            <Link href="/#projects" className="text-gray-400 hover:text-white transition-colors text-sm">Projects</Link>
-            <Link href="/#experience" className="text-gray-400 hover:text-white transition-colors text-sm">Experience</Link>
-            <Link href="/blog" className="text-gray-400 hover:text-white transition-colors text-sm">Blog</Link>
-            <Link href="/consultation" className="text-gray-400 hover:text-white transition-colors text-sm">Consultation</Link>
-          </div>
+          {/* Links Grid */}
+          <div className="w-full lg:w-[65%] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+            
+            {/* Pages */}
+            <div className="flex flex-col items-center md:items-start gap-4">
+              <h3 className="text-white text-xs font-bold tracking-widest uppercase mb-2">Pages</h3>
+              <Link href="/" className="text-gray-400 hover:text-white transition-colors text-sm">Home</Link>
+              <Link href="/about" className="text-gray-400 hover:text-white transition-colors text-sm">About Me</Link>
+              <Link href="/#projects" className="text-gray-400 hover:text-white transition-colors text-sm">Projects</Link>
+              <Link href="/#experience" className="text-gray-400 hover:text-white transition-colors text-sm">Experience</Link>
+              <Link href="/blog" className="text-gray-400 hover:text-white transition-colors text-sm">Blog</Link>
+              <Link href="/consultation" className="text-gray-400 hover:text-white transition-colors text-sm">Consultation</Link>
+            </div>
 
-          {/* Learn */}
-          <div className="flex flex-col gap-4">
-            <h3 className="text-white text-xs font-bold tracking-widest uppercase mb-2">Learn</h3>
-            <Link href="https://github.com/FlameGreat-1" target="_blank" className="text-gray-400 hover:text-white transition-colors text-sm group flex items-center gap-1">
-              Source Code <ArrowUpRight className="w-3 h-3 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform" />
-            </Link>
-            <Link href="/consultation" className="text-gray-400 hover:text-white transition-colors text-sm group flex items-center gap-1">
-              Consult Me <ArrowUpRight className="w-3 h-3 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform" />
-            </Link>
-            <Link href="https://www.linkedin.com/in/flamegreat/" target="_blank" className="text-gray-400 hover:text-white transition-colors text-sm group flex items-center gap-1">
-              LinkedIn <ArrowUpRight className="w-3 h-3 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform" />
-            </Link>
-          </div>
+            {/* Learn */}
+            <div className="flex flex-col items-center md:items-start gap-4">
+              <h3 className="text-white text-xs font-bold tracking-widest uppercase mb-2">Learn</h3>
+              <Link href="https://github.com/FlameGreat-1" target="_blank" className="text-gray-400 hover:text-white transition-colors text-sm group flex items-center gap-1">
+                Source Code <ArrowUpRight className="w-3 h-3 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform" />
+              </Link>
+              <Link href="/consultation" className="text-gray-400 hover:text-white transition-colors text-sm group flex items-center gap-1">
+                Consult Me <ArrowUpRight className="w-3 h-3 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform" />
+              </Link>
+              <Link href="https://www.linkedin.com/in/flamegreat/" target="_blank" className="text-gray-400 hover:text-white transition-colors text-sm group flex items-center gap-1">
+                LinkedIn <ArrowUpRight className="w-3 h-3 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform" />
+              </Link>
+            </div>
 
-          {/* Downloads */}
-          <div className="flex flex-col gap-4">
-            <h3 className="text-white text-xs font-bold tracking-widest uppercase mb-2">Downloads</h3>
-            <Link href="/consultation" className="text-gray-400 hover:text-white transition-colors text-sm group flex items-center gap-1">
-              Corporate Profile <ArrowUpRight className="w-3 h-3 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform" />
-            </Link>
-            <Link href="/files/Emmanuel-Resume.pdf" target="_blank" className="text-gray-400 hover:text-white transition-colors text-sm">
-              CV / Résumé
-            </Link>
-          </div>
+            {/* Downloads */}
+            <div className="flex flex-col items-center md:items-start gap-4">
+              <h3 className="text-white text-xs font-bold tracking-widest uppercase mb-2">Downloads</h3>
+              <Link href="/consultation" className="text-gray-400 hover:text-white transition-colors text-sm group flex items-center gap-1">
+                Corporate Profile <ArrowUpRight className="w-3 h-3 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform" />
+              </Link>
+              <Link href="/files/Emmanuel-CV.pdf" target="_blank" className="text-gray-400 hover:text-white transition-colors text-sm">
+                CV / Résumé
+              </Link>
+            </div>
 
-          {/* Connect */}
-          <div className="flex flex-col gap-4">
-            <h3 className="text-white text-xs font-bold tracking-widest uppercase mb-2">Connect</h3>
-            <Link href="https://www.linkedin.com/in/flamegreat/" target="_blank" className="text-gray-400 hover:text-white transition-colors text-sm group flex items-center gap-1">
-              LinkedIn <ArrowUpRight className="w-3 h-3 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform" />
-            </Link>
-            <Link href="https://www.facebook.com/" target="_blank" className="text-gray-400 hover:text-white transition-colors text-sm group flex items-center gap-1">
-              Facebook <ArrowUpRight className="w-3 h-3 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform" />
-            </Link>
-            <Link href="https://wa.me/+2348136872013" target="_blank" className="text-gray-400 hover:text-white transition-colors text-sm group flex items-center gap-1">
-              WhatsApp <ArrowUpRight className="w-3 h-3 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform" />
-            </Link>
-            <Link href="https://github.com/FlameGreat-1" target="_blank" className="text-gray-400 hover:text-white transition-colors text-sm group flex items-center gap-1">
-              GitHub <ArrowUpRight className="w-3 h-3 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform" />
-            </Link>
-          </div>
+            {/* Connect */}
+            <div className="flex flex-col items-center md:items-start gap-4">
+              <h3 className="text-white text-xs font-bold tracking-widest uppercase mb-2">Connect</h3>
+              <Link href="https://www.linkedin.com/in/flamegreat/" target="_blank" className="text-gray-400 hover:text-white transition-colors text-sm group flex items-center gap-1">
+                LinkedIn <ArrowUpRight className="w-3 h-3 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform" />
+              </Link>
+              <Link href="https://www.facebook.com/" target="_blank" className="text-gray-400 hover:text-white transition-colors text-sm group flex items-center gap-1">
+                Facebook <ArrowUpRight className="w-3 h-3 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform" />
+              </Link>
+              <Link href="https://wa.me/+2348136872013" target="_blank" className="text-gray-400 hover:text-white transition-colors text-sm group flex items-center gap-1">
+                WhatsApp <ArrowUpRight className="w-3 h-3 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform" />
+              </Link>
+              <Link href="https://github.com/FlameGreat-1" target="_blank" className="text-gray-400 hover:text-white transition-colors text-sm group flex items-center gap-1">
+                GitHub <ArrowUpRight className="w-3 h-3 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform" />
+              </Link>
+            </div>
 
+          </div>
         </div>
 
         {/* Bottom Bar */}

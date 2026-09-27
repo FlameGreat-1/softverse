@@ -27,9 +27,9 @@ export default async function BlogFeed() {
         
         {/* Header Section */}
         <div className="space-y-6 max-w-3xl">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-md">
-            <span className="text-sm font-medium text-gray-300">Blog</span>
-            <span className="text-xl">✍️</span>
+          <div className="inline-flex items-center gap-2 px-5 py-2 rounded-l-xl rounded-r-full border border-my-primary/50 text-white w-max">
+            <span className="text-sm font-semibold">Blog</span>
+            <span className="text-lg">✍️</span>
           </div>
           <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight leading-[1.1]">
             Thoughts, ideas & <br/>
@@ -57,50 +57,49 @@ export default async function BlogFeed() {
           ) : (
             posts.map((post: any) => (
               <Link key={post.id} href={`/blog/${post.slug}`} className="group h-full">
-                <article className="flex flex-col h-full bg-[#0f0f13] border border-white/5 rounded-[2rem] overflow-hidden hover:border-my-primary/30 transition-all duration-500 hover:shadow-[0_0_40px_rgba(199,120,221,0.1)] hover:-translate-y-1">
+                <article className="flex flex-col h-full bg-[#0f0f13] border border-white/5 rounded-3xl overflow-hidden hover:border-my-primary/30 transition-all duration-500 hover:shadow-[0_0_40px_rgba(199,120,221,0.1)] hover:-translate-y-1">
                   
-                  {/* Image Header (Runpod Style) */}
+                  {/* Image Header */}
                   {post.coverImage ? (
-                    <div className="aspect-[16/10] w-full relative overflow-hidden bg-[#1a1a24]">
+                    <div className="aspect-[16/9] w-full relative overflow-hidden bg-[#1a1a24]">
                       <Image 
                         src={post.coverImage} 
                         alt={post.title} 
                         fill 
-                        className="object-cover opacity-90 group-hover:scale-105 group-hover:opacity-100 transition-all duration-700 ease-out"
+                        className="object-cover group-hover:scale-105 transition-all duration-700 ease-out"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#0f0f13] via-transparent to-transparent opacity-80" />
                     </div>
                   ) : (
-                    <div className="h-4" /> /* Spacer for YUYU style text-only cards */
+                    <div className="h-4" /> /* Spacer for text-only cards */
                   )}
 
                   {/* Content Body */}
-                  <div className={`flex flex-col flex-1 p-8 ${post.coverImage ? 'pt-6' : 'pt-8'}`}>
+                  <div className={`flex flex-col flex-1 p-6 ${post.coverImage ? 'pt-5' : 'pt-6'}`}>
                     
                     {/* Metadata */}
-                    <div className="flex items-center gap-3 text-xs font-medium text-gray-500 mb-4 uppercase tracking-wider">
+                    <div className="flex items-center gap-2 text-[11px] font-medium text-gray-500 mb-3 uppercase tracking-wider">
                       {post.author?.name ? <span>{post.author.name}</span> : <span>Emmanuel U.</span>}
                       <span className="w-1 h-1 rounded-full bg-white/20" />
                       <span>{new Date(post.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
                     </div>
 
                     {/* Title */}
-                    <div className="flex items-start justify-between gap-4 mb-4">
-                      <h2 className="text-2xl font-bold text-white group-hover:text-my-primary transition-colors duration-300 leading-snug">
+                    <div className="flex items-start justify-between gap-4 mb-3">
+                      <h2 className="text-xl md:text-2xl font-bold text-white group-hover:text-my-primary transition-colors duration-300 leading-snug">
                         {post.title}
                       </h2>
-                      <ArrowUpRight size={24} className="text-gray-600 group-hover:text-my-primary transition-colors flex-shrink-0 mt-1" />
+                      <ArrowUpRight size={20} className="text-gray-600 group-hover:text-my-primary transition-colors flex-shrink-0 mt-1" />
                     </div>
 
                     {/* Excerpt */}
                     {post.excerpt && (
-                      <p className="text-gray-400 leading-relaxed line-clamp-3 mb-8">
+                      <p className="text-gray-400 text-sm leading-relaxed line-clamp-2 mb-5">
                         {post.excerpt}
                       </p>
                     )}
 
-                    {/* Footer / Read More (YUYU Style) */}
-                    <div className="mt-auto pt-6 border-t border-white/5 flex items-center justify-between">
+                    {/* Footer / Read More */}
+                    <div className="mt-auto pt-4 border-t border-white/5 flex items-center justify-between">
                       <span className="text-my-primary font-medium text-sm flex items-center gap-2 group-hover:gap-3 transition-all duration-300">
                         Read article <ArrowRight size={16} />
                       </span>

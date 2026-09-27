@@ -72,7 +72,7 @@ export default function NewPost() {
   };
 
   return (
-    <div className="p-4 md:p-8 lg:p-12 max-w-6xl mx-auto text-white">
+    <div className="p-4 md:p-8 lg:p-12 w-full text-white overflow-x-hidden">
       <div className="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
         <div>
           <h1 className="text-3xl font-bold mb-2">Create New Post</h1>

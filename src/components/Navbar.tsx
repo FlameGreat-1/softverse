@@ -99,7 +99,7 @@ export default function Navbar() {
         </Link>
 
         {/* Desktop Links */}
-        <ul className="hidden md:flex gap-4 lg:gap-6 font-semibold text-[16px] lg:text-[17px]">
+        <ul className="hidden lg:flex gap-4 lg:gap-6 font-semibold text-[16px] lg:text-[17px]">
           {navLinks.map((link) => (
             <li key={link.href} className="relative">
               <a
@@ -121,7 +121,7 @@ export default function Navbar() {
         </ul>
 
         {/* Desktop Start Project Button inside Navbar */}
-        <div className="hidden md:block">
+        <div className="hidden lg:block">
           <Link 
             href="/start-project" 
             className="px-5 py-2 rounded-full border border-my-primary/50 bg-[#1a1523]/80 text-my-primary font-bold text-[13px] tracking-wide hover:bg-my-primary hover:text-white transition-all duration-300 shadow-[0_0_15px_rgba(199,121,221,0.3)] hover:shadow-[0_0_25px_rgba(199,121,221,0.6)] animate-pulse flex items-center gap-2 group"
@@ -132,9 +132,10 @@ export default function Navbar() {
 
         {/* Hamburger */}
         <button
-          className="md:hidden text-white ml-auto"
+          className="lg:hidden text-white ml-auto flex items-center gap-2"
           onClick={() => setIsOpen(!isOpen)}
         >
+          <span className="font-bold text-sm tracking-widest uppercase">Menu</span>
           <svg
             className="w-6 h-6"
             fill="none"
@@ -155,7 +156,7 @@ export default function Navbar() {
 
       {/* Full-screen Mobile Menu */}
       <div
-        className={`fixed inset-0 bg-[#0A0A0F] z-50 md:hidden flex flex-col transition-all duration-300 overflow-hidden ${
+        className={`fixed inset-0 bg-[#0A0A0F] z-50 lg:hidden flex flex-col transition-all duration-300 overflow-hidden ${
           isOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
         }`}
       >

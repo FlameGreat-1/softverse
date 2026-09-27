@@ -91,7 +91,7 @@ export default function EditPost({ params }: { params: Promise<{ id: string }> }
   }
 
   return (
-    <div className="p-8 lg:p-12 max-w-6xl mx-auto text-white">
+    <div className="p-4 md:p-8 lg:p-12 w-full text-white overflow-x-hidden">
       <div className="flex items-center justify-between mb-8">
         <div>
           <h1 className="text-3xl font-bold mb-2">Edit Post</h1>

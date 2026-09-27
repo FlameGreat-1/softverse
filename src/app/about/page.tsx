@@ -3,14 +3,65 @@
 import React from "react";
 import Image from "next/image";
 
-const skillsData = {
-  Languages: ["Go", "JavaScript", "Python", "TypeScript", "PHP (Laravel)", "Shell"],
-  Frontend: ["React.js", "Next.js", "Tailwind CSS", "HTML5", "SCSS"],
-  Backend: ["Node.js", "Express.js", "FastAPI", "Django", "REST APIs", "WebSockets", "Microservices"],
-  Security: ["JWT", "RBAC", "OAuth 2.0", "AES-256", "KMS / Vault", "TLS/SSL", "HIPAA", "GDPR", "MiFID II", "ISO 27001", "SOC 2", "PCI-DSS"],
-  Infrastructure: ["Kubernetes", "Docker", "CI/CD", "Azure", "AWS", "Oracle Cloud", "RunPod", "Linux VPS"],
-  "AI/ML": ["LLaMA 3", "QLoRA", "PEFT", "PyTorch", "LangChain", "RAG", "Vector DB", "OpenAI", "Gemini", "Claude", "Whisper", "VAPI"]
-};
+const allSkills = [
+  { name: "Go", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/go/go-original.svg" },
+  { name: "JavaScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg" },
+  { name: "Python", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" },
+  { name: "TypeScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg" },
+  { name: "PHP (Laravel)", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/laravel/laravel-original.svg" },
+  { name: "Shell", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/bash/bash-original.svg", invert: true },
+  { name: "React.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg" },
+  { name: "Next.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg", invert: true },
+  { name: "Tailwind CSS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg" },
+  { name: "Figma", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/figma/figma-original.svg" },
+  { name: "VS Code", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vscode/vscode-original.svg" },
+  { name: "HTML5", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg" },
+  { name: "SCSS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/sass/sass-original.svg" },
+  { name: "Node.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg" },
+  { name: "Express.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/express/express-original.svg", invert: true },
+  { name: "FastAPI", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/fastapi/fastapi-original.svg" },
+  { name: "Django", icon: "https://api.iconify.design/logos/django-icon.svg" },
+  { name: "REST APIs", icon: "https://api.iconify.design/mdi/api.svg?color=white" },
+  { name: "WebSockets", icon: "https://api.iconify.design/logos/websocket.svg" },
+  { name: "Microservices", icon: "https://api.iconify.design/logos/kubernetes.svg" },
+  { name: "JWT", icon: "https://api.iconify.design/logos/jwt-icon.svg" },
+  { name: "RBAC", icon: "https://api.iconify.design/flat-color-icons/privacy.svg" },
+  { name: "OAuth 2.0", icon: "https://api.iconify.design/logos/oauth.svg" },
+  { name: "AES-256", icon: "https://api.iconify.design/flat-color-icons/key.svg" },
+  { name: "KMS / Vault", icon: "https://api.iconify.design/logos/vault-icon.svg" },
+  { name: "TLS/SSL", icon: "https://api.iconify.design/flat-color-icons/lock.svg" },
+  { name: "HIPAA", icon: "https://api.iconify.design/mdi/hospital-box.svg?color=white" },
+  { name: "GDPR", icon: "https://api.iconify.design/flat-color-icons/ok.svg" },
+  { name: "MiFID II", icon: "https://api.iconify.design/mdi/bank.svg?color=white" },
+  { name: "ISO 27001", icon: "https://api.iconify.design/mdi/certificate.svg?color=white" },
+  { name: "SOC 2", icon: "https://api.iconify.design/flat-color-icons/document.svg" },
+  { name: "PCI-DSS", icon: "https://api.iconify.design/flat-color-icons/safe.svg" },
+  { name: "Kubernetes", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/kubernetes/kubernetes-plain.svg" },
+  { name: "Docker", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg" },
+  { name: "CI/CD", icon: "https://api.iconify.design/logos/github-actions.svg" },
+  { name: "GitHub", icon: "https://api.iconify.design/mdi/github.svg?color=white" },
+  { name: "Cloudflare", icon: "https://api.iconify.design/logos/cloudflare-icon.svg" },
+  { name: "Azure", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/azure/azure-original.svg" },
+  { name: "AWS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original-wordmark.svg", invert: true },
+  { name: "Oracle Cloud", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/oracle/oracle-original.svg" },
+  { name: "RunPod", icon: "/images/runpod.png" },
+  { name: "Linux VPS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/linux/linux-original.svg" },
+  { name: "LLaMA 3", icon: "https://api.iconify.design/logos/meta-icon.svg" },
+  { name: "QLoRA", icon: "https://api.iconify.design/flat-color-icons/mind-map.svg" },
+  { name: "PEFT", icon: "https://api.iconify.design/flat-color-icons/settings.svg" },
+  { name: "PyTorch", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/pytorch/pytorch-original.svg" },
+  { name: "LangChain", icon: "https://api.iconify.design/simple-icons/langchain.svg?color=white" },
+  { name: "RAG", icon: "https://api.iconify.design/flat-color-icons/search.svg" },
+  { name: "Vector DB", icon: "https://api.iconify.design/mdi/database-outline.svg?color=white" },
+  { name: "OpenAI", icon: "https://api.iconify.design/simple-icons/openai.svg?color=white" },
+  { name: "Gemini", icon: "https://api.iconify.design/logos/google-gemini.svg" },
+  { name: "Claude", icon: "https://api.iconify.design/simple-icons/anthropic.svg?color=white" },
+  { name: "Whisper", icon: "https://api.iconify.design/flat-color-icons/voice-presentation.svg" },
+  { name: "VAPI", icon: "https://api.iconify.design/mdi/microphone-message.svg?color=white" },
+];
+
+const row1 = allSkills.slice(0, Math.ceil(allSkills.length / 2));
+const row2 = allSkills.slice(Math.ceil(allSkills.length / 2));
 
 const aboutPage = () => {
   return (
@@ -49,9 +100,12 @@ const aboutPage = () => {
       />
       <div className="flex lg:flex-row flex-col gap-20 justify-between items-center px-3 sm:px-12 lg:px-32 w-full">
         <div className="flex-[1.2]">
-          <h2 className="font-semibold text-[24px] lg:text-[32px] flex items-center mb-6">
-            <span className="text-my-primary">#</span>about-me{" "}
-            <span className="ml-6">
+          <div className="flex items-center mb-6">
+            <div className="inline-flex items-center gap-2 px-5 py-2 rounded-l-xl rounded-r-full border border-my-primary/50 text-white w-max shrink-0 whitespace-nowrap">
+              <span className="text-lg font-semibold"><span className="text-my-primary">#</span>about-me</span>
+              <span className="text-lg">🤩</span>
+            </div>
+            <div className="ml-4 sm:ml-6">
               <Image
                 src="/assets/line.png"
                 alt="line"
@@ -59,8 +113,8 @@ const aboutPage = () => {
                 height={1}
                 className="sm:w-60 w-32 h-auto"
               />
-            </span>
-          </h2>
+            </div>
+          </div>
           <p className="text-center sm:text-left text-[1rem] pt-5 leading-relaxed font-mono">
             Full Stack Engineer and Founder with 6+ years of experience building scalable, production-grade systems across fintech, healthtech, edtech, and algorithmic trading. Expert in backend engineering, AI/LLM integration, cloud infrastructure, and system security — delivering high-performance, compliant platforms from microservices and real-time systems to fine-tuned LLMs and automated trading engines.
           </p>
@@ -104,29 +158,41 @@ const aboutPage = () => {
         </div>
       </div>
 
-      <div className="mx-1 sm:mx-6 lg:mx-32 px-2 sm:px-6 lg:px-8 py-4 sm:py-6 rounded-2xl border border-white/20 bg-white/5 backdrop-blur-sm font-semibold shadow-[inset_1px_1px_2px_rgba(255,255,255,0.4)] mt-12 sm:mt-0">
-        <p className="text-[22px]">
-          <span className="text-my-primary text-[26px]">/</span>skills
-        </p>
+      <div className="mx-1 sm:mx-6 lg:mx-32 px-0 py-8 sm:py-10 lg:rounded-2xl lg:border lg:border-white/20 lg:bg-white/5 lg:backdrop-blur-sm lg:shadow-[inset_1px_1px_2px_rgba(255,255,255,0.4)] mt-12 sm:mt-0 overflow-hidden relative">
+        <div className="flex items-center mb-8 px-4 sm:px-8">
+          <div className="inline-flex items-center gap-2 px-5 py-2 rounded-l-xl rounded-r-full border border-my-primary/50 text-white w-max">
+            <span className="text-lg font-semibold"><span className="text-my-primary">/</span>skills</span>
+            <span className="text-lg">🛠️</span>
+          </div>
+        </div>
+        {/* Fading Edges for the marquee container */}
+        <div className="hidden lg:block absolute left-0 top-[80px] bottom-0 w-8 sm:w-16 bg-gradient-to-r from-[#17141f] to-transparent z-10 pointer-events-none rounded-l-2xl"></div>
+        <div className="hidden lg:block absolute right-0 top-[80px] bottom-0 w-8 sm:w-16 bg-gradient-to-l from-[#17141f] to-transparent z-10 pointer-events-none rounded-r-2xl"></div>
 
-        <div className="space-y-5 mt-5">
-          {Object.entries(skillsData).map(([category, skills]) => (
-            <div key={category}>
-              <h3 className="text-[16px] font-semibold mb-3 text-my-primary">
-                {category}
-              </h3>
-              <div className="flex flex-wrap gap-3 text-[14px] font-light">
-                {skills.map((skill) => (
-                  <p
-                    key={skill}
-                    className="px-3 sm:px-4 py-1.5 sm:py-2 flex items-center justify-between rounded-full bg-white/5 backdrop-blur-sm shadow-[inset_1px_1px_2px_rgba(255,255,255,0.4)]"
-                  >
-                    {skill}
-                  </p>
-                ))}
-              </div>
+        <div className="space-y-6">
+          {/* Marquee Row 1 */}
+          <div className="relative w-full flex overflow-hidden whitespace-nowrap">
+            <div className="animate-marquee flex gap-8 sm:gap-12 shrink-0 min-w-full group hover:[animation-play-state:paused]">
+              {[...row1, ...row1, ...row1].map((skill, idx) => (
+                <div key={`r1-${idx}`} className="flex flex-col items-center justify-center gap-2 px-4 py-2 hover:text-my-primary transition-colors cursor-default">
+                  <img src={skill.icon} alt={skill.name} className={`w-8 h-8 md:w-10 md:h-10 object-contain ${skill.invert ? 'invert opacity-90' : ''}`} />
+                  <span className="text-[14px] md:text-[16px] font-bold text-white/90">{skill.name}</span>
+                </div>
+              ))}
             </div>
-          ))}
+          </div>
+
+          {/* Marquee Row 2 (Reverse) */}
+          <div className="relative w-full flex overflow-hidden whitespace-nowrap">
+            <div className="animate-marquee-reverse flex gap-8 sm:gap-12 shrink-0 min-w-full group hover:[animation-play-state:paused]">
+              {[...row2, ...row2, ...row2].map((skill, idx) => (
+                <div key={`r2-${idx}`} className="flex flex-col items-center justify-center gap-2 px-4 py-2 hover:text-my-primary transition-colors cursor-default">
+                  <img src={skill.icon} alt={skill.name} className={`w-8 h-8 md:w-10 md:h-10 object-contain ${skill.invert ? 'invert opacity-90' : ''}`} />
+                  <span className="text-[14px] md:text-[16px] font-bold text-white/90">{skill.name}</span>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>
