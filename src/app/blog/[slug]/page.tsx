@@ -2,7 +2,6 @@ import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import { Calendar, User as UserIcon } from "lucide-react";
-import DOMPurify from 'isomorphic-dompurify';
 // Important: We render TipTap HTML output directly, so we need a prose wrapper.
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
@@ -84,10 +83,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
         <div 
           className="prose prose-invert prose-lg max-w-none prose-headings:text-white prose-a:text-my-primary hover:prose-a:text-white prose-img:rounded-2xl"
           dangerouslySetInnerHTML={{ 
-            __html: DOMPurify.sanitize(post.content, {
-              ADD_TAGS: ['iframe'],
-              ADD_ATTR: ['allow', 'allowfullscreen', 'frameborder', 'scrolling']
-            }) 
+            __html: post.content 
           }}
         />
       </div>
