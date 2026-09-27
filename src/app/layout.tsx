@@ -42,6 +42,9 @@ export const metadata: Metadata = {
   verification: {
     google: "3tVbPHEteGqMaeFM55uziuPmeqEb7xkEACxbDzcUahE",
   },
+  icons: {
+    icon: "/assets/softverse.svg",
+  },
 };
 
 export default function RootLayout({

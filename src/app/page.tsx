@@ -124,6 +124,7 @@ export default function Home() {
         className="absolute top-[-150px] right-[-150px] w-[250px] sm:w-[540px] h-auto"
         width={540}
         height={540}
+        priority={true}
       />
       <Image
         src="/assets/ellipse-large.png"
@@ -131,6 +132,7 @@ export default function Home() {
         className="absolute top-[420px] left-[-120px] w-[250px] sm:w-[540px] h-auto"
         width={540}
         height={540}
+        priority={true}
       />
 
       <section className="relative z-10">

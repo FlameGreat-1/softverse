@@ -157,7 +157,7 @@ export async function POST(req: Request) {
         const autoReplyHtml = `
           <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 40px 20px; background-color: #0b090f; color: #ffffff; border-radius: 12px; border: 1px solid #1a1a1a;">
             <div style="text-align: center; margin-bottom: 30px;">
-              <img src="https://flamegreat.tech/assets/softverse.svg" alt="Emmanuel Logo" style="height: 36px; margin-bottom: 20px;" />
+              <img src="https://flamegreat.tech/assets/softverse.svg" alt="Emmanuel Logo" style="height: 24px; margin-bottom: 20px;" />
               <h2 style="color: #ffffff; font-size: 24px; font-weight: 600; margin: 0;">Project Request Received</h2>
             </div>
 

@@ -92,9 +92,9 @@ export default function Navbar() {
           <Image
             src="/assets/softverse.svg"
             alt="Softverse Logo"
-            width={35}
-            height={35}
-            className="sm:w-[75px] h-auto"
+            width={30}
+            height={30}
+            className="w-[24px] sm:w-[32px] h-auto"
           />
         </Link>
 
@@ -163,7 +163,7 @@ export default function Navbar() {
         {/* Header */}
         <div className="flex items-center justify-between p-6 border-b border-gray-800">
           <Link href="/" onClick={() => setIsOpen(false)}>
-            <Image src="/assets/softverse.svg" alt="Logo" width={50} height={50} className="w-[100px] h-auto" />
+            <Image src="/assets/softverse.svg" alt="Logo" width={32} height={32} className="w-[32px] h-auto" />
           </Link>
           <button onClick={() => setIsOpen(false)} className="text-white hover:text-my-primary transition-colors p-2">
             <X className="w-8 h-8" />
