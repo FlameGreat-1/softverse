@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 
 export default function LoadingScreen() {
   const [isLoading, setIsLoading] = useState(true);
@@ -74,7 +75,7 @@ export default function LoadingScreen() {
           transition={{ duration: 0.6, ease: "easeInOut" }}
           className="fixed inset-0 z-[100] bg-[#0A0A0F] flex flex-col items-center justify-center"
         >
-          <div className="relative flex items-center justify-center w-40 h-40 md:w-48 md:h-48">
+          <div className="relative flex items-center justify-center w-32 h-32 md:w-40 md:h-40">
             {/* SVG Spinner */}
             <svg
               className="absolute inset-0 w-full h-full animate-[spin_1.5s_linear_infinite]"
@@ -116,24 +117,16 @@ export default function LoadingScreen() {
 
             {/* Inner Content */}
             <div className="relative z-10 flex items-center">
-              <span className="text-3xl md:text-4xl font-extrabold text-my-primary tracking-wider">
-                &lt;
-              </span>
               <motion.div
                 className="flex items-center origin-center"
                 animate={{ scale: [1, 0.85, 1.15, 1] }}
                 transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
               >
-                <span className="text-3xl md:text-4xl font-extrabold text-my-primary tracking-wider">
-                  Dev
-                </span>
-                <span className="w-4 h-4 md:w-5 md:h-5 rounded-full bg-white text-my-primary text-[9px] md:text-[11px] font-bold flex items-center justify-center mx-0.5 -translate-y-2.5 md:-translate-y-3 relative z-20">
-                  A+
+                <Image src="/assets/softverse.svg" alt="Logo" width={40} height={40} className="w-[32px] md:w-[40px] h-auto" />
+                <span className="w-3.5 h-3.5 md:w-4 md:h-4 rounded-full bg-white text-my-primary text-[8px] md:text-[10px] font-bold flex items-center justify-center -ml-2 md:-ml-2.5 -translate-y-2.5 md:-translate-y-3 relative z-20">
+                  2
                 </span>
               </motion.div>
-              <span className="text-3xl md:text-4xl font-extrabold text-my-primary tracking-wider">
-                /&gt;
-              </span>
             </div>
           </div>
         </motion.div>
