@@ -115,11 +115,11 @@ export default function RagChat() {
   }
 
   return (
-    <div className="flex flex-col h-[450px] w-full">
+    <div className="flex flex-col h-[520px] md:h-[580px] w-full max-w-full overflow-hidden">
       {/* CHAT WINDOW — hidden scrollbar */}
       <div
         ref={scrollRef}
-        className="chat-scroll flex-1 overflow-y-auto rounded-xl bg-white/[0.03] border border-white/[0.06] p-5 space-y-5"
+        className="chat-scroll flex-1 overflow-x-hidden overflow-y-auto rounded-xl bg-white/[0.03] border border-white/[0.06] p-2 md:p-4 space-y-4 md:space-y-5"
         style={{
           scrollbarWidth: "none",
           msOverflowStyle: "none",
@@ -131,14 +131,14 @@ export default function RagChat() {
         `}</style>
 
         {messages.length === 0 && (
-          <div className="flex flex-col items-center justify-center h-full gap-3 text-center">
+          <div className="flex flex-col items-center justify-center h-full gap-3 text-center px-1">
             <div className="w-12 h-12 rounded-full bg-my-primary/10 border border-my-primary/20 flex items-center justify-center text-2xl">
               💬
             </div>
-            <p className="text-gray-400 text-sm font-medium">
+            <p className="text-gray-400 text-sm font-medium w-full break-words">
               Ask me anything about Emmanuel
             </p>
-            <p className="text-gray-500 text-xs max-w-[260px]">
+            <p className="text-gray-500 text-[11px] md:text-xs w-full max-w-[260px] break-words">
               Projects, skills, experience, tech stack — I&apos;m here to help.
             </p>
           </div>
@@ -159,9 +159,7 @@ export default function RagChat() {
               }`}
             >
               {msg.sender === "bot" && (
-                <span className="block text-[10px] uppercase tracking-widest text-my-primary/60 font-semibold mb-2">
-                  AI
-                </span>
+                <span className="block text-base mb-1.5">🤖</span>
               )}
               {msg.text || (
                 isStreaming &&
@@ -185,7 +183,7 @@ export default function RagChat() {
       </div>
 
       {/* INPUT BAR */}
-      <div className="mt-4 flex items-center gap-3 bg-white/[0.04] border border-white/[0.08] rounded-xl p-2">
+      <div className="mt-3 md:mt-4 flex items-center gap-2 bg-white/[0.04] border border-white/[0.08] rounded-xl p-1.5 md:p-2 w-full min-w-0">
         <input
           value={input}
           onChange={(e) => setInput(e.target.value)}
@@ -195,14 +193,14 @@ export default function RagChat() {
             }
           }}
           disabled={loading}
-          className="flex-1 px-3 py-2.5 text-sm bg-transparent outline-none placeholder:text-gray-500 disabled:opacity-50 disabled:cursor-not-allowed"
-          placeholder="Type your question..."
+          className="flex-1 min-w-0 px-2 md:px-3 py-2 md:py-2.5 text-sm bg-transparent outline-none placeholder:text-gray-500 disabled:opacity-50 disabled:cursor-not-allowed"
+          placeholder="Type your question ..."
         />
 
         <button
           onClick={sendMessage}
           disabled={loading || !input.trim()}
-          className="px-5 py-2.5 bg-my-primary text-black text-sm font-bold rounded-lg
+          className="flex-shrink-0 px-3 md:px-5 py-2 md:py-2.5 bg-my-primary text-black text-sm font-bold rounded-lg
           hover:shadow-[0_0_20px_rgba(199,120,221,0.3)] transition-all duration-200
           disabled:opacity-40 disabled:cursor-not-allowed disabled:shadow-none
           active:scale-95"
