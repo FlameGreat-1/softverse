@@ -27,6 +27,7 @@ export default function AdminLogin() {
       setLoading(false);
     } else {
       router.push("/admin");
+      router.refresh();
     }
   };
 
