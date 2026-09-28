@@ -72,7 +72,14 @@ export default function RagChat({
       new Promise((resolve, reject) => {
         const reader = new FileReader();
         reader.onload = () => {
-          const result = reader.result as string;
+          const result = reader.result;
+          // reader.result is typed as string|ArrayBuffer|null. Since we called
+          // readAsDataURL, it must be a string. Guard defensively to prevent
+          // a cryptic TypeError if a browser ever returns a non-string value.
+          if (typeof result !== "string" || !result) {
+            reject(new Error(`Unexpected FileReader result type for file: ${file.name}`));
+            return;
+          }
           const base64 = result.split(",")[1];
           resolve({ name: file.name, mimeType: file.type || "application/octet-stream", data: base64 });
         };

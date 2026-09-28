@@ -25,7 +25,9 @@ const TTL_DAYS = 7; // Auto-clears after 7 days of inactivity
 interface StoredSession {
   messages: Message[];
   input?: string;
-  stagedFiles?: Attachment[];
+  // stagedFiles intentionally omitted: base64 is stripped before saving to prevent
+  // localStorage QuotaExceeded. Without binary data, restoration is meaningless.
+  // Users must re-select files after a page refresh. This is by design.
   expiresAt: number; // Unix timestamp ms
 }
 
@@ -63,8 +65,11 @@ export default function FloatingRobot() {
   // Persist to localStorage on every message or input change, refreshing the TTL each time
   useEffect(() => {
     try {
-      if (messages.length > 0 || input.trim() || selectedFiles.length > 0) {
-        // Strip heavy base64 data before caching to prevent QuotaExceeded errors
+      if (messages.length > 0 || input.trim()) {
+        // Strip heavy base64 data before caching to prevent QuotaExceeded errors.
+        // Staged files (selectedFiles) are intentionally NOT saved — their base64
+        // data cannot be stored safely within localStorage's 5-10MB quota limit.
+        // Users must re-select files after a page refresh. This is by design.
         const safeMessages = messages.map((msg) => {
           if (msg.attachments && msg.attachments.length > 0) {
             return {
@@ -75,16 +80,9 @@ export default function FloatingRobot() {
           return msg;
         });
 
-        // Also strip base64 from staged files — localStorage cannot hold large binaries.
-        // We persist name+mimeType so the badge is visible on restore, but we do NOT
-        // restore them into selectedFiles (binary is unrecoverable). This is intentional
-        // and consistent with the sent-message strip policy above.
-        const safeStagedFiles = selectedFiles.map(f => ({ ...f, data: "" }));
-
         const session: StoredSession = {
           messages: safeMessages,
           input,
-          stagedFiles: safeStagedFiles,
           expiresAt: Date.now() + TTL_DAYS * 24 * 60 * 60 * 1000,
         };
         localStorage.setItem(STORAGE_KEY, JSON.stringify(session));
@@ -92,7 +90,7 @@ export default function FloatingRobot() {
     } catch {
       // localStorage unavailable or Quota Exceeded — silently ignore
     }
-  }, [messages, input, selectedFiles]);
+  }, [messages, input]);
 
   return (
     <div className="flex flex-col items-center gap-3 z-50">
