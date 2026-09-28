@@ -49,36 +49,52 @@ export default function RagChat({
   }, [messages]);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = Array.from(e.target.files || []);
-    if (!files.length) return;
+    // CRITICAL: Snapshot the FileList immediately — on real mobile devices (Android/iOS)
+    // the FileList reference can be invalidated as soon as we touch the input element.
+    const fileList = e.target.files;
+    if (!fileList || fileList.length === 0) return;
+
+    // Snapshot into a plain array before any async work
+    const files = Array.from(fileList);
 
     const validFiles = files.filter((f) => {
       if (f.size > 5 * 1024 * 1024) {
-        alert(`File ${f.name} is too large. Please select an image or PDF smaller than 5MB.`);
+        alert(`"${f.name}" is too large. Max file size is 5MB.`);
         return false;
       }
       return true;
     });
 
-    validFiles.forEach((file) => {
-      const reader = new FileReader();
-      reader.onload = () => {
-        const base64String = (reader.result as string).split(",")[1];
-        setSelectedFiles((prev) => [
-          ...prev,
-          {
-            name: file.name,
-            mimeType: file.type,
-            data: base64String,
-          },
-        ]);
-      };
-      reader.readAsDataURL(file);
-    });
+    if (validFiles.length === 0) return;
 
-    if (fileInputRef.current) {
-      fileInputRef.current.value = "";
-    }
+    // Wrap each FileReader in a Promise so we can use Promise.all
+    const readFile = (file: File): Promise<{ name: string; mimeType: string; data: string }> =>
+      new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => {
+          const result = reader.result as string;
+          const base64 = result.split(",")[1];
+          resolve({ name: file.name, mimeType: file.type || "application/octet-stream", data: base64 });
+        };
+        reader.onerror = () => reject(new Error(`Failed to read file: ${file.name}`));
+        reader.readAsDataURL(file);
+      });
+
+    // Read ALL files concurrently, then append to state in one atomic update
+    Promise.all(validFiles.map(readFile))
+      .then((attachments) => {
+        setSelectedFiles((prev) => [...prev, ...attachments]);
+      })
+      .catch((err) => {
+        console.error("File read error:", err);
+        alert("Failed to read one or more files. Please try again.");
+      })
+      .finally(() => {
+        // Reset ONLY after all reads are complete — prevents mobile race condition
+        if (fileInputRef.current) {
+          fileInputRef.current.value = "";
+        }
+      });
   };
 
   async function sendMessage() {
@@ -332,7 +348,7 @@ export default function RagChat({
               type="file" 
               ref={fileInputRef} 
               className="hidden" 
-              accept="image/*,application/pdf"
+              accept="image/jpeg,image/png,image/gif,image/webp,image/heic,image/heif,image/svg+xml,application/pdf"
               multiple
               onChange={handleFileChange}
             />
