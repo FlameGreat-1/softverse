@@ -6,6 +6,7 @@ import robotSaysHi from "../animations/robot-says-hi.json";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { DialogTitle } from "@radix-ui/react-dialog";
 import RagChat from "./RagChat";
+import { loadStagedFiles, saveStagedFiles, clearStagedFiles } from "@/lib/fileStore";
 
 export interface Attachment {
   name: string;
@@ -61,6 +62,28 @@ export default function FloatingRobot() {
       // localStorage unavailable (private browsing, SSR) — silently ignore
     }
   }, []);
+
+  // Load staged files from IndexedDB on mount.
+  // IndexedDB is async, so this runs after the initial render.
+  // It correctly restores full binary data — unlike localStorage which could not hold base64.
+  useEffect(() => {
+    loadStagedFiles().then((files) => {
+      if (files.length > 0) {
+        setSelectedFiles(files);
+      }
+    });
+  }, []);
+
+  // Persist staged files to IndexedDB whenever they change.
+  // IndexedDB has no practical size limit — stores full base64 binary safely.
+  // When the array is empty (files sent or removed), clear the store.
+  useEffect(() => {
+    if (selectedFiles.length > 0) {
+      saveStagedFiles(selectedFiles);
+    } else {
+      clearStagedFiles();
+    }
+  }, [selectedFiles]);
 
   // Persist to localStorage on every message or input change, refreshing the TTL each time
   useEffect(() => {
