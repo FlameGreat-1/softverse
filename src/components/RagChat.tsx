@@ -13,6 +13,8 @@ interface RagChatProps {
   setLoading: Dispatch<SetStateAction<boolean>>;
   isStreaming: boolean;
   setIsStreaming: Dispatch<SetStateAction<boolean>>;
+  selectedFiles: Attachment[];
+  setSelectedFiles: Dispatch<SetStateAction<Attachment[]>>;
 }
 
 export default function RagChat({
@@ -24,11 +26,12 @@ export default function RagChat({
   setLoading,
   isStreaming,
   setIsStreaming,
+  selectedFiles,
+  setSelectedFiles,
 }: RagChatProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const [selectedFiles, setSelectedFiles] = useState<Attachment[]>([]);
 
   // Auto-resize textarea
   useEffect(() => {

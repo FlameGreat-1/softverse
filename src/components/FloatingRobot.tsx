@@ -25,6 +25,7 @@ const TTL_DAYS = 7; // Auto-clears after 7 days of inactivity
 interface StoredSession {
   messages: Message[];
   input?: string;
+  stagedFiles?: Attachment[];
   expiresAt: number; // Unix timestamp ms
 }
 
@@ -32,6 +33,7 @@ export default function FloatingRobot() {
   // State lives here — survives modal open/close, persists across all browser sessions
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
+  const [selectedFiles, setSelectedFiles] = useState<Attachment[]>([]);
   const [loading, setLoading] = useState(false);
   const [isStreaming, setIsStreaming] = useState(false);
 
@@ -44,6 +46,7 @@ export default function FloatingRobot() {
         if (Date.now() < session.expiresAt) {
           setMessages(session.messages);
           if (session.input) setInput(session.input);
+          if (session.stagedFiles) setSelectedFiles(session.stagedFiles);
         } else {
           // TTL expired — silently remove stale session
           localStorage.removeItem(STORAGE_KEY);
@@ -57,7 +60,7 @@ export default function FloatingRobot() {
   // Persist to localStorage on every message or input change, refreshing the TTL each time
   useEffect(() => {
     try {
-      if (messages.length > 0 || input.trim()) {
+      if (messages.length > 0 || input.trim() || selectedFiles.length > 0) {
         // Strip heavy base64 data before caching to prevent QuotaExceeded errors
         const safeMessages = messages.map((msg) => {
           if (msg.attachments && msg.attachments.length > 0) {
@@ -72,14 +75,15 @@ export default function FloatingRobot() {
         const session: StoredSession = {
           messages: safeMessages,
           input,
+          stagedFiles: selectedFiles,
           expiresAt: Date.now() + TTL_DAYS * 24 * 60 * 60 * 1000,
         };
         localStorage.setItem(STORAGE_KEY, JSON.stringify(session));
       }
     } catch {
-      // localStorage unavailable — silently ignore
+      // localStorage unavailable or Quota Exceeded — silently ignore
     }
-  }, [messages, input]);
+  }, [messages, input, selectedFiles]);
 
   return (
     <div className="flex flex-col items-center gap-3 z-50">
@@ -134,6 +138,8 @@ export default function FloatingRobot() {
               setLoading={setLoading}
               isStreaming={isStreaming}
               setIsStreaming={setIsStreaming}
+              selectedFiles={selectedFiles}
+              setSelectedFiles={setSelectedFiles}
             />
           </div>
         </DialogContent>
