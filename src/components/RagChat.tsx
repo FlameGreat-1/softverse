@@ -1,12 +1,8 @@
 "use client";
 
-import { useRef, useEffect, Dispatch, SetStateAction } from "react";
-import { ArrowUp } from "lucide-react";
-
-interface Message {
-  sender: "user" | "bot";
-  text: string;
-}
+import { useRef, useEffect, useState, Dispatch, SetStateAction } from "react";
+import { ArrowUp, X } from "lucide-react";
+import { Attachment, Message } from "./FloatingRobot";
 
 interface RagChatProps {
   messages: Message[];
@@ -31,11 +27,13 @@ export default function RagChat({
 }: RagChatProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [selectedFile, setSelectedFile] = useState<Attachment | null>(null);
 
   // Auto-resize textarea
   useEffect(() => {
     if (textareaRef.current) {
-      textareaRef.current.style.height = 'auto';
+      textareaRef.current.style.height = "auto";
       textareaRef.current.style.height = `${Math.min(textareaRef.current.scrollHeight, 200)}px`;
     }
   }, [input]);
@@ -47,12 +45,44 @@ export default function RagChat({
     }
   }, [messages]);
 
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    if (file.size > 5 * 1024 * 1024) {
+      alert("File is too large. Please select an image or PDF smaller than 5MB.");
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      const base64String = (reader.result as string).split(",")[1];
+      setSelectedFile({
+        name: file.name,
+        mimeType: file.type,
+        data: base64String,
+      });
+    };
+    reader.readAsDataURL(file);
+
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
+    }
+  };
+
   async function sendMessage() {
-    if (!input.trim() || loading) return;
+    if ((!input.trim() && !selectedFile) || loading) return;
 
     const userQuery = input.trim();
-    setMessages((prev) => [...prev, { sender: "user", text: userQuery }]);
+    const attachmentPayload = selectedFile || undefined;
+
+    setMessages((prev) => [
+      ...prev,
+      { sender: "user", text: userQuery, attachment: attachmentPayload },
+    ]);
+    
     setInput("");
+    setSelectedFile(null);
     setLoading(true);
     setIsStreaming(true);
 
@@ -64,7 +94,11 @@ export default function RagChat({
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ query: userQuery, history: messages }),
+        body: JSON.stringify({ 
+          query: userQuery, 
+          history: messages, 
+          attachment: attachmentPayload 
+        }),
       });
 
       if (!res.ok) {
@@ -192,6 +226,24 @@ export default function RagChat({
               {msg.sender === "bot" && (
                 <span className="block text-base mb-1.5">🤖</span>
               )}
+              {msg.attachment && (
+                <div className="mb-2">
+                  {msg.attachment.mimeType.startsWith('image/') && msg.attachment.data ? (
+                    /* eslint-disable-next-line @next/next/no-img-element */
+                    <img 
+                      src={`data:${msg.attachment.mimeType};base64,${msg.attachment.data}`} 
+                      alt={msg.attachment.name} 
+                      className="max-w-full h-auto rounded-lg border border-white/10"
+                      style={{ maxHeight: '200px' }}
+                    />
+                  ) : (
+                    <div className="flex items-center gap-2 bg-black/20 px-3 py-2 rounded-lg border border-white/10 inline-flex max-w-full">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="shrink-0"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                      <span className="text-xs truncate">{msg.attachment.name}</span>
+                    </div>
+                  )}
+                </div>
+              )}
               {msg.text || (
                 isStreaming &&
                 i === messages.length - 1 && (
@@ -215,6 +267,24 @@ export default function RagChat({
 
       {/* INPUT BAR */}
       <div className="mt-2 relative bg-[#2f2f2f] rounded-[24px] w-full min-w-0 flex flex-col px-1.5 md:px-2 py-1 transition-colors focus-within:bg-[#383838]">
+        {/* File Preview Area */}
+        {selectedFile && (
+          <div className="px-3 md:px-4 pt-3 pb-1">
+            <div className="relative inline-flex items-center gap-2 bg-white/10 rounded-lg px-3 py-2 border border-white/20">
+              <span className="text-xs text-white font-medium truncate max-w-[150px] md:max-w-[200px]">
+                {selectedFile.name}
+              </span>
+              <button
+                onClick={() => setSelectedFile(null)}
+                className="text-gray-400 hover:text-white transition-colors"
+                aria-label="Remove file"
+              >
+                <X size={14} strokeWidth={2.5} />
+              </button>
+            </div>
+          </div>
+        )}
+
         <textarea
           ref={textareaRef}
           value={input}
@@ -225,7 +295,7 @@ export default function RagChat({
               const isMobile = typeof window !== "undefined" && window.innerWidth <= 768;
               if (!isMobile) {
                 e.preventDefault(); // Prevent new line on desktop
-                if (!loading && input.trim()) {
+                if (!loading && (input.trim() || selectedFile)) {
                   sendMessage();
                 }
               }
@@ -233,7 +303,7 @@ export default function RagChat({
           }}
           disabled={loading}
           rows={1}
-          className="w-full px-3 md:px-4 pt-3 pb-1 text-[16px] leading-relaxed bg-transparent outline-none placeholder:text-[#9b9b9b] text-white disabled:opacity-50 disabled:cursor-not-allowed resize-none overflow-y-auto no-scrollbar"
+          className={`w-full px-3 md:px-4 ${selectedFile ? 'pt-1' : 'pt-3'} pb-1 text-[16px] leading-relaxed bg-transparent outline-none placeholder:text-[#9b9b9b] text-white disabled:opacity-50 disabled:cursor-not-allowed resize-none overflow-y-auto no-scrollbar`}
           placeholder="Ask anything"
           style={{ minHeight: "44px", maxHeight: "200px" }}
         />
@@ -241,7 +311,19 @@ export default function RagChat({
         <div className="flex justify-between items-center px-2 pb-1.5 pt-1">
           {/* Left action icons (matching ChatGPT + icon) */}
           <div className="flex items-center gap-2">
-            <button className="p-1.5 text-[#b4b4b4] hover:text-white transition-colors rounded-full" aria-label="Attach">
+            <input 
+              type="file" 
+              ref={fileInputRef} 
+              className="hidden" 
+              accept="image/*,application/pdf"
+              onChange={handleFileChange}
+            />
+            <button 
+              onClick={() => fileInputRef.current?.click()}
+              className="p-1.5 text-[#b4b4b4] hover:text-white transition-colors rounded-full" 
+              aria-label="Attach file"
+              disabled={loading}
+            >
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 5v14m-7-7h14"/></svg>
             </button>
           </div>
@@ -249,9 +331,9 @@ export default function RagChat({
           {/* Right Send Button */}
           <button
             onClick={sendMessage}
-            disabled={loading || !input.trim()}
+            disabled={loading || (!input.trim() && !selectedFile)}
             className={`flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-full transition-all duration-200 
-              ${input.trim() ? 'bg-white text-black hover:bg-gray-200' : 'bg-transparent text-[#b4b4b4]'}
+              ${input.trim() || selectedFile ? 'bg-white text-black hover:bg-gray-200' : 'bg-transparent text-[#b4b4b4]'}
               disabled:opacity-50 disabled:cursor-not-allowed`}
             aria-label="Send message"
           >

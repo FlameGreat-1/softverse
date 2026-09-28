@@ -7,9 +7,16 @@ import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { DialogTitle } from "@radix-ui/react-dialog";
 import RagChat from "./RagChat";
 
-interface Message {
+export interface Attachment {
+  name: string;
+  mimeType: string;
+  data: string;
+}
+
+export interface Message {
   sender: "user" | "bot";
   text: string;
+  attachment?: Attachment;
 }
 
 const STORAGE_KEY = "flamo_chat_session";
@@ -51,8 +58,19 @@ export default function FloatingRobot() {
   useEffect(() => {
     try {
       if (messages.length > 0 || input.trim()) {
+        // Strip heavy base64 data before caching to prevent QuotaExceeded errors
+        const safeMessages = messages.map((msg) => {
+          if (msg.attachment) {
+            return {
+              ...msg,
+              attachment: { ...msg.attachment, data: "" }, // We drop the base64 on refresh
+            };
+          }
+          return msg;
+        });
+
         const session: StoredSession = {
-          messages,
+          messages: safeMessages,
           input,
           expiresAt: Date.now() + TTL_DAYS * 24 * 60 * 60 * 1000,
         };
