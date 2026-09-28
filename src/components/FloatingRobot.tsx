@@ -46,7 +46,10 @@ export default function FloatingRobot() {
         if (Date.now() < session.expiresAt) {
           setMessages(session.messages);
           if (session.input) setInput(session.input);
-          if (session.stagedFiles) setSelectedFiles(session.stagedFiles);
+          // NOTE: staged files are NOT restored into selectedFiles.
+          // Their base64 data is stripped before saving to prevent QuotaExceeded.
+          // Without the binary data, the files cannot be re-sent to Gemini.
+          // The user must re-select any files they want to send after a page refresh.
         } else {
           // TTL expired — silently remove stale session
           localStorage.removeItem(STORAGE_KEY);
@@ -66,16 +69,22 @@ export default function FloatingRobot() {
           if (msg.attachments && msg.attachments.length > 0) {
             return {
               ...msg,
-              attachments: msg.attachments.map(att => ({ ...att, data: "" })), // We drop the base64 on refresh
+              attachments: msg.attachments.map(att => ({ ...att, data: "" })),
             };
           }
           return msg;
         });
 
+        // Also strip base64 from staged files — localStorage cannot hold large binaries.
+        // We persist name+mimeType so the badge is visible on restore, but we do NOT
+        // restore them into selectedFiles (binary is unrecoverable). This is intentional
+        // and consistent with the sent-message strip policy above.
+        const safeStagedFiles = selectedFiles.map(f => ({ ...f, data: "" }));
+
         const session: StoredSession = {
           messages: safeMessages,
           input,
-          stagedFiles: selectedFiles,
+          stagedFiles: safeStagedFiles,
           expiresAt: Date.now() + TTL_DAYS * 24 * 60 * 60 * 1000,
         };
         localStorage.setItem(STORAGE_KEY, JSON.stringify(session));

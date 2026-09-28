@@ -89,24 +89,33 @@ export async function POST(req: Request) {
       })
       .filter(Boolean); // Remove nulls from turns that had only stripped attachments
 
-    // Add current user query
+    // Add current user query parts
     const currentUserParts: any[] = [];
     if (query) currentUserParts.push({ text: query });
     if (body.attachments && body.attachments.length > 0) {
       body.attachments.forEach((att: any) => {
-        currentUserParts.push({
-          inlineData: {
-            mimeType: att.mimeType,
-            data: att.data,
-          },
-        });
+        // Guard: only push inlineData when data is a non-empty string
+        if (att.data && att.mimeType) {
+          currentUserParts.push({
+            inlineData: {
+              mimeType: att.mimeType,
+              data: att.data,
+            },
+          });
+        }
       });
     }
 
-    contents.push({
-      role: "user",
-      parts: currentUserParts,
-    });
+    // Only push if we have actual content — empty parts array causes Gemini 400
+    if (currentUserParts.length > 0) {
+      contents.push({
+        role: "user",
+        parts: currentUserParts,
+      });
+    } else {
+      // This should never happen given the guard above, but if it does, return early
+      return NextResponse.json({ answer: "Please include a message or a valid file." });
+    }
 
     const response = await fetch(apiUrl, {
       method: "POST",
@@ -252,7 +261,6 @@ function buildSystemPrompt(
 ): string {
   const {
     maxTokens = 300,
-    responseStyle = 'adaptive'
   } = config;
 
   const typedRagData = ragData as RagDataItem[];

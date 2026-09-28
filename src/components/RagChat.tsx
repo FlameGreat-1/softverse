@@ -307,6 +307,7 @@ export default function RagChat({
                   {file.name}
                 </span>
                 <button
+                  type="button"
                   onClick={() => setSelectedFiles(prev => prev.filter((_, i) => i !== idx))}
                   className="text-gray-400 hover:text-white transition-colors"
                   aria-label="Remove file"
