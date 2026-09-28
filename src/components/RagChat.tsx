@@ -194,7 +194,8 @@ export default function RagChat({
         body: JSON.stringify({ 
           query: userQuery, 
           history: messages, 
-          attachments: attachmentPayload 
+          attachments: attachmentPayload,
+          timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone
         }),
       });
 
@@ -233,6 +234,13 @@ export default function RagChat({
 
               try {
                 const bookingData = JSON.parse(bookingDataStr);
+                
+                // Calculate local browser time and convert to strict UTC ISO string
+                // LLM outputs date as YYYY-MM-DD and time as HH:MM
+                const localDateObj = new Date(`${bookingData.date}T${bookingData.time}:00`);
+                bookingData.start = localDateObj.toISOString();
+                bookingData.timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
                 const bookRes = await fetch("/api/book", {
                   method: "POST",
                   headers: { "Content-Type": "application/json" },
@@ -242,18 +250,23 @@ export default function RagChat({
                 
                 setMessages((prev) => {
                   const newMessages = [...prev];
-                  if (newMessages.length > 0) {
-                    const msg = newMessages[newMessages.length - 1];
-                    msg.text = msg.text.replace("\n\n⏳ *Booking your appointment...*", "\n\n" + (bookResult.message || bookResult.error));
+                  // Find the specific bot message with the loading indicator to prevent race conditions
+                  for (let i = newMessages.length - 1; i >= 0; i--) {
+                    if (newMessages[i].sender === "bot" && newMessages[i].text.includes("⏳ *Booking your appointment...*")) {
+                      newMessages[i].text = newMessages[i].text.replace("\n\n⏳ *Booking your appointment...*", "\n\n" + (bookResult.message || bookResult.error));
+                      break;
+                    }
                   }
                   return newMessages;
                 });
               } catch (e) {
                 setMessages((prev) => {
                   const newMessages = [...prev];
-                  if (newMessages.length > 0) {
-                    const msg = newMessages[newMessages.length - 1];
-                    msg.text = msg.text.replace("\n\n⏳ *Booking your appointment...*", "\n\n❌ Failed to process booking request. Please try again.");
+                  for (let i = newMessages.length - 1; i >= 0; i--) {
+                    if (newMessages[i].sender === "bot" && newMessages[i].text.includes("⏳ *Booking your appointment...*")) {
+                      newMessages[i].text = newMessages[i].text.replace("\n\n⏳ *Booking your appointment...*", "\n\n❌ Failed to process booking request. Please try again.");
+                      break;
+                    }
                   }
                   return newMessages;
                 });
@@ -267,7 +280,8 @@ export default function RagChat({
 
           // Hide [BOOK_MEETING: ...] from the UI and extract the JSON
           let displayText = accumulatedText;
-          const bookMatch = accumulatedText.match(/\[BOOK_MEETING:\s*(\{.*?\})\s*\]/);
+          // Use 's' flag so .*? matches newlines if the LLM pretty-prints the JSON
+          const bookMatch = accumulatedText.match(/\[BOOK_MEETING:\s*(\{.*?\})\s*\]/s);
           
           if (bookMatch) {
              bookingDataStr = bookMatch[1];

@@ -44,8 +44,10 @@ export async function POST(req: Request) {
       });
     }
 
+    const timeZone = body.timeZone || "UTC";
+
     // Build the system instruction with full context injection
-    const systemPrompt = buildSystemPrompt();
+    const systemPrompt = buildSystemPrompt(timeZone);
 
     // gemini-3.5-flash model
     const modelName = "gemini-flash-latest";
@@ -258,7 +260,7 @@ function getFriendlyError(status: number, errorData: any): string {
   return "Flamo is having a moment. Please try again shortly.";
 }
 
-function buildSystemPrompt(): string {
+function buildSystemPrompt(userTimeZone: string): string {
   const typedRagData = ragData as RagDataItem[];
   const fullContext = typedRagData.map(item => {
     let content = `### ${item.title}\n${item.content}`;
@@ -312,15 +314,16 @@ Failure Modes to Avoid:
 - Robotic or templated responses.
 
 ## APPOINTMENT BOOKING
-If a user wants to book a meeting, schedule a call, or consult with Emmanuel, you must collect:
+The user chatting with you is currently in the following timezone: ${userTimeZone}
+If they want to book a meeting, schedule a call, or consult with Emmanuel, you must collect:
 1. Their Name
 2. Their Email
 3. Duration ("15min" or "30min")
 4. Date (YYYY-MM-DD)
-5. Time (HH:MM in 24h format, Africa/Lagos time)
+5. Time (HH:MM in 24h format. IMPORTANT: This MUST be the agreed time in THEIR local timezone (${userTimeZone}). Do not output the time in Lagos time unless they are in Lagos.)
 
-If any of this information is missing, politely ask the user for it.
-Once you have ALL 5 pieces of information, output the following EXACT tag on a new line at the end of your response:
+If any of this information is missing, politely ask the user for it. Make sure you both agree on the time based on their timezone.
+Once you have ALL 5 pieces of information, output the following EXACT tag on a new line at the end of your response (DO NOT wrap it in markdown code blocks or backticks):
 [BOOK_MEETING: {"name": "...", "email": "...", "duration": "...", "date": "...", "time": "..."}]
 
 Generate response:`;
