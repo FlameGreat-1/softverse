@@ -7,23 +7,23 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const testimonials = [
   {
-    text: "Emmanuel is the ultimate engineer you want to have on your team. I am always impressed with the depth and level of quality he produces. He saves us loads of time on iterations. It's just amazing how he makes complex backend architecture look easy.",
+    text: "Emmanuel, I honestly can't thank you enough. You just got the work done — no hand-holding, no drama, no chasing. I watched the BuildHive and NSW deliveries unfold and kept thinking 'he's going further than we even asked for.' The performance numbers made me smile every morning. And the team? They adored working with you. That kind of combination is genuinely rare.",
+    name: "Marie Christ",
+    title: "Co-Founder, BuildHive, AUSTRALIA",
+    avatar: "/images/avatar-Nifemi.avif",
+  },
+  {
+    text: "Let me be direct — rebuilding JTNC's infrastructure was not a small ask. You came in, understood the trading mechanics without needing things explained twice, and completely transformed QuantumFlow. The low-latency improvements alone changed how we run operations. Your fintech instincts are sharp. I've worked with many engineers. Very few think at this level.",
     name: "Chris Anthony",
     title: "Founder & CEO, JTNC GROUP, U.S.A",
     avatar: "/images/avatar-Chris.webp",
   },
   {
-    text: "We have been working with Emmanuel and I'll tell you what, he has an incredible talent for blending technical expertise with product strategy. His systems are not just robust but also scalable. He worked magic on our infrastructure, and the results blew us away.",
+    text: "I'll be honest — my expectations were already high, and you still exceeded them. Instapay and Inflexa both needed an engineer who could think beyond just shipping features. You brought the security thinking, the architecture thinking, and the execution discipline all at once. Zero critical incidents post-launch. That's the bar I now hold every engineer to.",
     name: "Emmanuel Chibuike",
     title: "Founder, ESQ1 Tech, Nigeria",
     avatar: "/images/Emma.avif",
   },
-  {
-    text: "Emmanuel really gets it. His applications aren't just highly performant, they're built to scale. He understands system architecture like no one else, and it shows in the uptime and speed. Our platform has never been more stable. Plus, he's just a great guy to work with.",
-    name: "Marie Christ",
-    title: "Co-Founder BuildHive, AUSTRALIA",
-    avatar: "/images/avatar-Nifemi.avif",
-  }
 ];
 
 export default function Testimonials() {

@@ -14,16 +14,19 @@ const ProjectsPage = () => {
 
   const achievements = [
     {
-      src: "/images/Loading_1.gif",
-      caption: "Leader of the year award",
+      pdf: "/files/Python_Essentials.pdf",
+      caption: "Python Essentials",
+      issuer: "Cisco Networking Academy",
     },
     {
-      src: "/images/Loading_1.gif",
-      caption: "B.ENG (chemical engineering) from Federal University of Technology Owerri",
+      pdf: "/files/Introduction_to_Cybersecurity_certificate.pdf",
+      caption: "Introduction to Cybersecurity",
+      issuer: "Cisco Networking Academy",
     },
     {
-      src: "/images/Loading_1.gif",
-      caption: "Full-Stack Engineering Certification from Coursera",
+      pdf: "/files/Cert%20Introduction%20to%20agent%20skills.pdf",
+      caption: "Introduction to Agent Skills",
+      issuer: "Salesforce / Trailhead",
     },
   ];
 

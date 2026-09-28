@@ -5,8 +5,10 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 
 type Slide = {
-  src: string;
+  src?: string;
   caption?: string;
+  pdf?: string;       // path to PDF file in /public
+  issuer?: string;    // certificate issuer name
 };
 
 type Props = {
@@ -116,18 +118,66 @@ export default function Carousel({
               handleDragEnd(offset.x, velocity.x)
             }
           >
-            <Image
-              src={slides[imageIndex].src}
-              alt={`slide-${imageIndex}`}
-              fill
-              sizes="(max-width: 1024px) 100vw, 80vw"
-              className="object-cover object-top w-full h-full bg-[#15121b]"
-              priority
-              unoptimized={slides[imageIndex].src.toLowerCase().endsWith('.gif')}
-            />
+            {/* PDF slide */}
+            {slides[imageIndex].pdf ? (
+              <div className="absolute inset-0 flex flex-col bg-[#0e0c14]">
+                {/* Desktop: iframe PDF viewer */}
+                <iframe
+                  src={slides[imageIndex].pdf}
+                  className="hidden sm:block w-full flex-1 border-0"
+                  title={slides[imageIndex].caption || "Certificate"}
+                />
+                {/* Mobile: friendly card */}
+                <div className="flex sm:hidden flex-col items-center justify-center h-full gap-4 px-6 text-center">
+                  <div className="w-14 h-14 rounded-2xl bg-my-primary/10 border border-my-primary/30 flex items-center justify-center text-3xl">
+                    📜
+                  </div>
+                  <p className="text-white font-semibold text-sm">{slides[imageIndex].caption}</p>
+                  {slides[imageIndex].issuer && (
+                    <p className="text-gray-400 text-xs">{slides[imageIndex].issuer}</p>
+                  )}
+                  <a
+                    href={slides[imageIndex].pdf}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="mt-2 px-5 py-2 bg-my-primary text-black text-xs font-bold rounded-full hover:opacity-90 transition"
+                  >
+                    View Certificate ↗
+                  </a>
+                </div>
+                {/* Caption bar (desktop) */}
+                {slides[imageIndex].caption && (
+                  <div className="hidden sm:flex items-center justify-between bg-black/60 backdrop-blur-sm px-4 py-2 text-white text-xs">
+                    <span>{slides[imageIndex].caption}</span>
+                    {slides[imageIndex].issuer && (
+                      <span className="text-gray-400">{slides[imageIndex].issuer}</span>
+                    )}
+                    <a
+                      href={slides[imageIndex].pdf}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="ml-4 px-3 py-1 bg-my-primary text-black text-[11px] font-bold rounded-full hover:opacity-90 transition"
+                    >
+                      Open ↗
+                    </a>
+                  </div>
+                )}
+              </div>
+            ) : (
+              // Image slide
+              <Image
+                src={slides[imageIndex].src || ""}
+                alt={`slide-${imageIndex}`}
+                fill
+                sizes="(max-width: 1024px) 100vw, 80vw"
+                className="object-cover object-top w-full h-full bg-[#15121b]"
+                priority
+                unoptimized={slides[imageIndex].src?.toLowerCase().endsWith('.gif')}
+              />
+            )}
 
-            {/* Caption */}
-            {slides[imageIndex].caption && (
+            {/* Caption for image slides */}
+            {!slides[imageIndex].pdf && slides[imageIndex].caption && (
               <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/10 backdrop-blur-[2px] text-white w-[90%] px-2 py-1 md:px-4 md:py-2 rounded-md text-[7px] md:text-sm text-center">
                 {slides[imageIndex].caption}
               </div>
