@@ -67,25 +67,25 @@ export default function RagChat({
 
     if (validFiles.length === 0) return;
 
-    // Wrap each FileReader in a Promise so we can use Promise.all
-    const readFile = (file: File): Promise<{ name: string; mimeType: string; data: string }> =>
-      new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onload = () => {
-          const result = reader.result;
-          // reader.result is typed as string|ArrayBuffer|null. Since we called
-          // readAsDataURL, it must be a string. Guard defensively to prevent
-          // a cryptic TypeError if a browser ever returns a non-string value.
-          if (typeof result !== "string" || !result) {
-            reject(new Error(`Unexpected FileReader result type for file: ${file.name}`));
-            return;
-          }
-          const base64 = result.split(",")[1];
-          resolve({ name: file.name, mimeType: file.type || "application/octet-stream", data: base64 });
-        };
-        reader.onerror = () => reject(new Error(`Failed to read file: ${file.name}`));
-        reader.readAsDataURL(file);
-      });
+    // Wrap file reading in an async function returning a Promise.
+    // Use `file.arrayBuffer()` because it is much more reliable on Android devices
+    // handling `content://` URIs compared to `FileReader.readAsDataURL()`.
+    const readFile = async (file: File): Promise<{ name: string; mimeType: string; data: string }> => {
+      try {
+        const buffer = await file.arrayBuffer();
+        const bytes = new Uint8Array(buffer);
+        let binary = '';
+        // Chunk the conversion to prevent 'Maximum call stack size exceeded' on large files (e.g. 5MB)
+        const chunkSize = 1024 * 32;
+        for (let i = 0; i < bytes.byteLength; i += chunkSize) {
+          binary += String.fromCharCode.apply(null, Array.from(bytes.subarray(i, i + chunkSize)));
+        }
+        const base64 = window.btoa(binary);
+        return { name: file.name, mimeType: file.type || "application/octet-stream", data: base64 };
+      } catch (err) {
+        throw new Error(`Failed to read file: ${file.name}`);
+      }
+    };
 
     // Read ALL files concurrently, then append to state in one atomic update
     Promise.all(validFiles.map(readFile))
