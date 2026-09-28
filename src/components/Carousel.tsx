@@ -221,9 +221,9 @@ export default function Carousel({
         </>
       )}
 
-      {/* Indicators */}
+      {/* Indicators — below the carousel, never overlapping */}
       {showIndicators && (
-        <div className="flex gap-2 absolute bottom-3 left-1/2 -translate-x-1/2 z-20">
+        <div className="flex gap-2 justify-center mt-4">
           {slides.map((_, i) => (
             <button
               key={i}
