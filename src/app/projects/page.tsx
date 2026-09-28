@@ -14,16 +14,19 @@ const ProjectsPage = () => {
 
   const achievements = [
     {
+      src: "/images/certs/cert-python-1.png",
       pdf: "/files/Python_Essentials.pdf",
       caption: "Python Essentials",
       issuer: "Cisco Networking Academy",
     },
     {
+      src: "/images/certs/cert-cybersecurity-1.png",
       pdf: "/files/Introduction_to_Cybersecurity_certificate.pdf",
       caption: "Introduction to Cybersecurity",
       issuer: "Cisco Networking Academy",
     },
     {
+      src: "/images/certs/cert-agent-skills-1.png",
       pdf: "/files/Cert%20Introduction%20to%20agent%20skills.pdf",
       caption: "Introduction to Agent Skills",
       issuer: "Salesforce / Trailhead",

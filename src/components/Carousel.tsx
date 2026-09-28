@@ -118,77 +118,34 @@ export default function Carousel({
               handleDragEnd(offset.x, velocity.x)
             }
           >
-            {/* PDF slide */}
-            {slides[imageIndex].pdf ? (
-              <div className="absolute inset-0 flex flex-col bg-white">
-                {/* Desktop: iframe fills container using scale trick */}
-                <div className="hidden sm:block relative w-full flex-1 overflow-hidden">
-                  <iframe
-                    src={`${slides[imageIndex].pdf}#toolbar=0&navpanes=0&scrollbar=0&view=Fit`}
-                    style={{
-                      position: "absolute",
-                      top: 0,
-                      left: 0,
-                      width: "100%",
-                      height: "100%",
-                      border: "none",
-                    }}
-                    title={slides[imageIndex].caption || "Certificate"}
-                  />
-                  {/* Caption overlay — bottom bar */}
-                  {slides[imageIndex].caption && (
-                    <div className="absolute bottom-0 left-0 right-0 flex items-center justify-between bg-black/70 backdrop-blur-sm px-4 py-2 text-white text-xs z-10">
-                      <span className="font-semibold">{slides[imageIndex].caption}</span>
-                      {slides[imageIndex].issuer && (
-                        <span className="text-gray-300">{slides[imageIndex].issuer}</span>
-                      )}
-                      <a
-                        href={slides[imageIndex].pdf}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="ml-4 px-3 py-1 bg-my-primary text-black text-[11px] font-bold rounded-full hover:opacity-90 transition flex-shrink-0"
-                      >
-                        Open ↗
-                      </a>
-                    </div>
-                  )}
-                </div>
-                {/* Mobile: friendly card */}
-                <div className="flex sm:hidden flex-col items-center justify-center h-full gap-4 px-6 text-center bg-[#0e0c14]">
-                  <div className="w-14 h-14 rounded-2xl bg-my-primary/10 border border-my-primary/30 flex items-center justify-center text-3xl">
-                    📜
-                  </div>
-                  <p className="text-white font-semibold text-sm">{slides[imageIndex].caption}</p>
-                  {slides[imageIndex].issuer && (
-                    <p className="text-gray-400 text-xs">{slides[imageIndex].issuer}</p>
-                  )}
+            {/* Slide: image (with optional PDF open link in caption) */}
+            <Image
+              src={slides[imageIndex].src || ""}
+              alt={slides[imageIndex].caption || `slide-${imageIndex}`}
+              fill
+              sizes="(max-width: 1024px) 100vw, 80vw"
+              className="object-contain object-center w-full h-full bg-white"
+              priority
+              unoptimized={slides[imageIndex].src?.toLowerCase().endsWith('.gif')}
+            />
+
+            {/* Caption bar — shows for all slides, adds Open PDF if available */}
+            {slides[imageIndex].caption && (
+              <div className="absolute bottom-0 left-0 right-0 flex items-center justify-between bg-black/70 backdrop-blur-sm px-3 md:px-4 py-2 text-white text-[10px] md:text-xs z-10">
+                <span className="font-semibold truncate">{slides[imageIndex].caption}</span>
+                {slides[imageIndex].issuer && (
+                  <span className="text-gray-300 truncate mx-2 hidden sm:inline">{slides[imageIndex].issuer}</span>
+                )}
+                {slides[imageIndex].pdf && (
                   <a
                     href={slides[imageIndex].pdf}
                     target="_blank"
                     rel="noreferrer"
-                    className="mt-2 px-5 py-2 bg-my-primary text-black text-xs font-bold rounded-full hover:opacity-90 transition"
+                    className="ml-2 px-2 sm:px-3 py-1 bg-my-primary text-black text-[10px] sm:text-[11px] font-bold rounded-full hover:opacity-90 transition flex-shrink-0"
                   >
-                    View Certificate ↗
+                    Open ↗
                   </a>
-                </div>
-              </div>
-            ) : (
-              // Image slide
-              <Image
-                src={slides[imageIndex].src || ""}
-                alt={`slide-${imageIndex}`}
-                fill
-                sizes="(max-width: 1024px) 100vw, 80vw"
-                className="object-cover object-top w-full h-full bg-[#15121b]"
-                priority
-                unoptimized={slides[imageIndex].src?.toLowerCase().endsWith('.gif')}
-              />
-            )}
-
-            {/* Caption for image slides */}
-            {!slides[imageIndex].pdf && slides[imageIndex].caption && (
-              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/10 backdrop-blur-[2px] text-white w-[90%] px-2 py-1 md:px-4 md:py-2 rounded-md text-[7px] md:text-sm text-center">
-                {slides[imageIndex].caption}
+                )}
               </div>
             )}
           </motion.div>
