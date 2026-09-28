@@ -12,12 +12,12 @@ export async function GET() {
       return NextResponse.json({ message: "Admin already exists!" });
     }
 
-    const hashedPassword = await bcrypt.hash("$$123abcChuks", 10);
+    const hashedPassword = await bcrypt.hash("adminpassword", 10);
 
     const admin = await prisma.user.create({
       data: {
-        name: "FlameGreat",
-        email: "admin@flamegreat.com",
+        name: "Example",
+        email: "admin@example.com",
         password: hashedPassword,
         role: "ADMIN",
       }
@@ -25,8 +25,8 @@ export async function GET() {
 
     return NextResponse.json({
       message: "Admin created successfully!",
-      email: "admin@flamegreat.com",
-      password: "$$123abcChuks"
+      email: "admin@example.com",
+      password: "adminpassword"
     });
   } catch (error: any) {
     return NextResponse.json({ error: error.message }, { status: 500 });
