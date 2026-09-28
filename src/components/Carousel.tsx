@@ -87,7 +87,7 @@ export default function Carousel({
   return (
     <div className="relative w-full select-none">
       <div
-        className={`relative w-full overflow-hidden ${className || 'h-[180px] sm:h-[450px] rounded-md'}`}
+        className={`relative w-full overflow-hidden ${className || 'h-[250px] sm:h-[720px] rounded-md'}`}
         onMouseEnter={() => {
           isPaused.current = true;
           stopAutoPlay();
@@ -120,15 +120,41 @@ export default function Carousel({
           >
             {/* PDF slide */}
             {slides[imageIndex].pdf ? (
-              <div className="absolute inset-0 flex flex-col bg-[#0e0c14]">
-                {/* Desktop: iframe PDF viewer — toolbar hidden */}
-                <iframe
-                  src={`${slides[imageIndex].pdf}#toolbar=0&navpanes=0&scrollbar=0&view=FitH`}
-                  className="hidden sm:block w-full flex-1 border-0"
-                  title={slides[imageIndex].caption || "Certificate"}
-                />
+              <div className="absolute inset-0 flex flex-col bg-white">
+                {/* Desktop: iframe fills container using scale trick */}
+                <div className="hidden sm:block relative w-full flex-1 overflow-hidden">
+                  <iframe
+                    src={`${slides[imageIndex].pdf}#toolbar=0&navpanes=0&scrollbar=0&view=Fit`}
+                    style={{
+                      position: "absolute",
+                      top: 0,
+                      left: 0,
+                      width: "100%",
+                      height: "100%",
+                      border: "none",
+                    }}
+                    title={slides[imageIndex].caption || "Certificate"}
+                  />
+                  {/* Caption overlay — bottom bar */}
+                  {slides[imageIndex].caption && (
+                    <div className="absolute bottom-0 left-0 right-0 flex items-center justify-between bg-black/70 backdrop-blur-sm px-4 py-2 text-white text-xs z-10">
+                      <span className="font-semibold">{slides[imageIndex].caption}</span>
+                      {slides[imageIndex].issuer && (
+                        <span className="text-gray-300">{slides[imageIndex].issuer}</span>
+                      )}
+                      <a
+                        href={slides[imageIndex].pdf}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="ml-4 px-3 py-1 bg-my-primary text-black text-[11px] font-bold rounded-full hover:opacity-90 transition flex-shrink-0"
+                      >
+                        Open ↗
+                      </a>
+                    </div>
+                  )}
+                </div>
                 {/* Mobile: friendly card */}
-                <div className="flex sm:hidden flex-col items-center justify-center h-full gap-4 px-6 text-center">
+                <div className="flex sm:hidden flex-col items-center justify-center h-full gap-4 px-6 text-center bg-[#0e0c14]">
                   <div className="w-14 h-14 rounded-2xl bg-my-primary/10 border border-my-primary/30 flex items-center justify-center text-3xl">
                     📜
                   </div>
@@ -145,23 +171,6 @@ export default function Carousel({
                     View Certificate ↗
                   </a>
                 </div>
-                {/* Caption bar (desktop) */}
-                {slides[imageIndex].caption && (
-                  <div className="hidden sm:flex items-center justify-between bg-black/60 backdrop-blur-sm px-4 py-2 text-white text-xs">
-                    <span>{slides[imageIndex].caption}</span>
-                    {slides[imageIndex].issuer && (
-                      <span className="text-gray-400">{slides[imageIndex].issuer}</span>
-                    )}
-                    <a
-                      href={slides[imageIndex].pdf}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="ml-4 px-3 py-1 bg-my-primary text-black text-[11px] font-bold rounded-full hover:opacity-90 transition"
-                    >
-                      Open ↗
-                    </a>
-                  </div>
-                )}
               </div>
             ) : (
               // Image slide
