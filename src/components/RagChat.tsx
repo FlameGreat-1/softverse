@@ -213,24 +213,76 @@ export default function RagChat({
         }
 
         let accumulatedText = "";
+        let bookingDataStr = "";
 
         while (true) {
           const { done, value } = await reader.read();
 
           if (done) {
             setIsStreaming(false);
+
+            // Handle booking request post-stream
+            if (bookingDataStr) {
+              setMessages((prev) => {
+                const newMessages = [...prev];
+                if (newMessages.length > 0) {
+                  newMessages[newMessages.length - 1].text += "\n\n⏳ *Booking your appointment...*";
+                }
+                return newMessages;
+              });
+
+              try {
+                const bookingData = JSON.parse(bookingDataStr);
+                const bookRes = await fetch("/api/book", {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify(bookingData),
+                });
+                const bookResult = await bookRes.json();
+                
+                setMessages((prev) => {
+                  const newMessages = [...prev];
+                  if (newMessages.length > 0) {
+                    const msg = newMessages[newMessages.length - 1];
+                    msg.text = msg.text.replace("\n\n⏳ *Booking your appointment...*", "\n\n" + (bookResult.message || bookResult.error));
+                  }
+                  return newMessages;
+                });
+              } catch (e) {
+                setMessages((prev) => {
+                  const newMessages = [...prev];
+                  if (newMessages.length > 0) {
+                    const msg = newMessages[newMessages.length - 1];
+                    msg.text = msg.text.replace("\n\n⏳ *Booking your appointment...*", "\n\n❌ Failed to process booking request. Please try again.");
+                  }
+                  return newMessages;
+                });
+              }
+            }
             break;
           }
 
           const chunk = decoder.decode(value, { stream: true });
           accumulatedText += chunk;
 
+          // Hide [BOOK_MEETING: ...] from the UI and extract the JSON
+          let displayText = accumulatedText;
+          const bookMatch = accumulatedText.match(/\[BOOK_MEETING:\s*(\{.*?\})\s*\]/);
+          
+          if (bookMatch) {
+             bookingDataStr = bookMatch[1];
+             displayText = accumulatedText.replace(bookMatch[0], "").trim();
+          } else if (accumulatedText.includes("[BOOK_MEETING:")) {
+             // We're currently streaming the JSON part, so cut off the display text before it
+             displayText = accumulatedText.split("[BOOK_MEETING:")[0].trim();
+          }
+
           setMessages((prev) => {
             const newMessages = [...prev];
             if (newMessages.length > 0) {
               newMessages[newMessages.length - 1] = {
                 sender: "bot",
-                text: accumulatedText,
+                text: displayText,
               };
             }
             return newMessages;
