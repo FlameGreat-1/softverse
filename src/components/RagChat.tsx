@@ -62,29 +62,91 @@ export default function RagChat({
         alert(`"${f.name}" is too large. Max file size is 5MB.`);
         return false;
       }
+      // Guard against cloud file references not yet downloaded to device.
+      // On Android, a Google Drive file that isn't cached locally has size 0
+      // and cannot be read by any browser API.
+      if (f.size === 0) {
+        alert(`"${f.name}" could not be read. If it is a cloud file, download it to your device first.`);
+        return false;
+      }
       return true;
     });
 
     if (validFiles.length === 0) return;
 
-    // Wrap file reading in an async function returning a Promise.
-    // Use `file.arrayBuffer()` because it is much more reliable on Android devices
-    // handling `content://` URIs compared to `FileReader.readAsDataURL()`.
-    const readFile = async (file: File): Promise<{ name: string; mimeType: string; data: string }> => {
-      try {
-        const buffer = await file.arrayBuffer();
-        const bytes = new Uint8Array(buffer);
-        let binary = '';
-        // Chunk the conversion to prevent 'Maximum call stack size exceeded' on large files (e.g. 5MB)
-        const chunkSize = 1024 * 32;
-        for (let i = 0; i < bytes.byteLength; i += chunkSize) {
-          binary += String.fromCharCode.apply(null, Array.from(bytes.subarray(i, i + chunkSize)));
-        }
-        const base64 = window.btoa(binary);
-        return { name: file.name, mimeType: file.type || "application/octet-stream", data: base64 };
-      } catch (err) {
-        throw new Error(`Failed to read file: ${file.name}`);
+    /**
+     * Converts an ArrayBuffer to a base64 string safely.
+     * Uses byte-by-byte loop — avoids String.fromCharCode.apply() argument
+     * stack limits that crash low-end Android devices on files larger than ~500KB.
+     */
+    const bufferToBase64 = (buffer: ArrayBuffer): string => {
+      const bytes = new Uint8Array(buffer);
+      let binary = '';
+      for (let i = 0; i < bytes.length; i++) {
+        binary += String.fromCharCode(bytes[i]);
       }
+      return btoa(binary);
+    };
+
+    /**
+     * 3-strategy fallback file reader — each strategy falls through to the next on failure.
+     *
+     * Strategy 1 — file.arrayBuffer() [PRIMARY]
+     *   Promise-based, handles Android content:// URIs most reliably.
+     *   Supported: Chrome 76+, Safari 14+, Firefox 69+.
+     *
+     * Strategy 2 — FileReader.readAsArrayBuffer() [FALLBACK A]
+     *   Callback-based, wrapped in a Promise. Reads binary without data-URL parsing.
+     *   Works on older Android Chrome versions where arrayBuffer() may not exist.
+     *
+     * Strategy 3 — FileReader.readAsDataURL() [FALLBACK B - LEGACY]
+     *   Last resort for the oldest browsers. Parses data:mime;base64,DATA format.
+     */
+    const readFile = async (file: File): Promise<{ name: string; mimeType: string; data: string }> => {
+      const mimeType = file.type || 'application/octet-stream';
+
+      // Strategy 1
+      if (typeof file.arrayBuffer === 'function') {
+        try {
+          const buffer = await file.arrayBuffer();
+          return { name: file.name, mimeType, data: bufferToBase64(buffer) };
+        } catch {
+          // Fall through to Strategy 2
+        }
+      }
+
+      // Strategy 2
+      try {
+        const buffer = await new Promise<ArrayBuffer>((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onload = () => resolve(reader.result as ArrayBuffer);
+          reader.onerror = () => reject(reader.error);
+          reader.readAsArrayBuffer(file);
+        });
+        return { name: file.name, mimeType, data: bufferToBase64(buffer) };
+      } catch {
+        // Fall through to Strategy 3
+      }
+
+      // Strategy 3 (legacy)
+      return new Promise<{ name: string; mimeType: string; data: string }>((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => {
+          const result = reader.result;
+          if (typeof result !== 'string' || !result) {
+            reject(new Error(`Could not read: ${file.name}`));
+            return;
+          }
+          const parts = result.split(',');
+          if (parts.length < 2 || !parts[1]) {
+            reject(new Error(`Invalid data URL for: ${file.name}`));
+            return;
+          }
+          resolve({ name: file.name, mimeType, data: parts[1] });
+        };
+        reader.onerror = () => reject(new Error(`All strategies failed for: ${file.name}`));
+        reader.readAsDataURL(file);
+      });
     };
 
     // Read ALL files concurrently, then append to state in one atomic update
@@ -92,9 +154,10 @@ export default function RagChat({
       .then((attachments) => {
         setSelectedFiles((prev) => [...prev, ...attachments]);
       })
-      .catch((err) => {
-        console.error("File read error:", err);
-        alert("Failed to read one or more files. Please try again.");
+      .catch((err: unknown) => {
+        const msg = err instanceof Error ? err.message : String(err);
+        console.error('File read error:', msg);
+        alert('Failed to read file. If it is stored in the cloud (Google Drive, iCloud), please download it to your device first, then try again.');
       })
       .finally(() => {
         // Reset ONLY after all reads are complete — prevents mobile race condition
