@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Lottie from "lottie-react";
 import robotSaysHi from "../animations/robot-says-hi.json";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
@@ -40,6 +40,11 @@ export default function FloatingRobot() {
   const [loading, setLoading] = useState(false);
   const [isStreaming, setIsStreaming] = useState(false);
 
+  // Guards the save/clear IndexedDB effect from firing on the initial render
+  // before the async load from IndexedDB has completed.
+  // Without this, clearStagedFiles() would wipe IndexedDB before loadStagedFiles() reads it.
+  const indexedDBReady = useRef(false);
+
   // Restore from localStorage on mount, respecting TTL
   useEffect(() => {
     try {
@@ -64,20 +69,25 @@ export default function FloatingRobot() {
   }, []);
 
   // Load staged files from IndexedDB on mount.
-  // IndexedDB is async, so this runs after the initial render.
-  // It correctly restores full binary data — unlike localStorage which could not hold base64.
+  // IndexedDB is async — this resolves AFTER the initial render cycle.
+  // We set indexedDBReady AFTER the load completes so the save/clear effect
+  // does not fire and wipe IndexedDB before we have had a chance to read it.
   useEffect(() => {
     loadStagedFiles().then((files) => {
       if (files.length > 0) {
         setSelectedFiles(files);
       }
+      // Mark ready AFTER setting state — subsequent selectedFiles changes can now save/clear safely
+      indexedDBReady.current = true;
     });
   }, []);
 
   // Persist staged files to IndexedDB whenever they change.
-  // IndexedDB has no practical size limit — stores full base64 binary safely.
-  // When the array is empty (files sent or removed), clear the store.
+  // Guard: do NOT run until indexedDBReady is true — prevents clearing IndexedDB
+  // on the initial render before loadStagedFiles() has had a chance to read it.
   useEffect(() => {
+    if (!indexedDBReady.current) return;
+
     if (selectedFiles.length > 0) {
       saveStagedFiles(selectedFiles);
     } else {
