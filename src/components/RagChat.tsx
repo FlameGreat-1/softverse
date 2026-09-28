@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useEffect, useState, Dispatch, SetStateAction } from "react";
+import { useRef, useEffect, Dispatch, SetStateAction } from "react";
 import { ArrowUp, X } from "lucide-react";
 import { Attachment, Message } from "./FloatingRobot";
 
@@ -353,6 +353,7 @@ export default function RagChat({
               onChange={handleFileChange}
             />
             <button 
+              type="button"
               title="Add files"
               onClick={() => fileInputRef.current?.click()}
               className="p-1.5 text-[#b4b4b4] hover:text-white transition-colors rounded-full" 
@@ -365,6 +366,7 @@ export default function RagChat({
           
           {/* Right Send Button */}
           <button
+            type="button"
             onClick={sendMessage}
             disabled={loading || (!input.trim() && selectedFiles.length === 0)}
             className={`flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-full transition-all duration-200 

@@ -34,8 +34,10 @@ export async function POST(req: Request) {
     const query = body.query as string;
     const history = body.history || [];
 
-    if (!query) {
-      return NextResponse.json({ answer: "Please ask a question!" });
+    // Allow file-only messages (no text, just attachment) — block only if truly empty
+    const hasAttachments = body.attachments && body.attachments.length > 0;
+    if (!query && !hasAttachments) {
+      return NextResponse.json({ answer: "Please ask a question or attach a file!" });
     }
 
     const apiKey = process.env.GEMINI_API_KEY;
@@ -56,27 +58,36 @@ export async function POST(req: Request) {
     const modelName = "gemini-flash-latest";
     const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:streamGenerateContent?alt=sse&key=${apiKey}`;
 
-    // Map history to Gemini API contents structure, ensuring strict alternation and no empty text
+    // Map history to Gemini API contents structure, ensuring strict alternation and no empty text.
+    // NOTE: History attachments loaded from localStorage have their base64 data stripped to ""
+    // to prevent QuotaExceeded. We intentionally skip those inlineData parts — do NOT send
+    // empty data to Gemini as it will cause a 400 INVALID_ARGUMENT error.
     const contents = history
-      .filter((msg: any) => (msg.text && msg.text.trim() !== "") || (msg.attachments && msg.attachments.length > 0))
+      .filter((msg: any) => (msg.text && msg.text.trim() !== "") || (msg.attachments && msg.attachments.some((a: any) => a.data)))
       .map((msg: any) => {
         const parts: any[] = [];
         if (msg.text) parts.push({ text: msg.text });
         if (msg.attachments && msg.attachments.length > 0) {
           msg.attachments.forEach((att: any) => {
-            parts.push({
-              inlineData: {
-                mimeType: att.mimeType,
-                data: att.data,
-              },
-            });
+            // Only include inlineData if the base64 data is actually present
+            if (att.data) {
+              parts.push({
+                inlineData: {
+                  mimeType: att.mimeType,
+                  data: att.data,
+                },
+              });
+            }
           });
         }
+        // Ensure this turn still has at least one part after filtering
+        if (parts.length === 0) return null;
         return {
           role: msg.sender === "user" ? "user" : "model",
           parts,
         };
-      });
+      })
+      .filter(Boolean); // Remove nulls from turns that had only stripped attachments
 
     // Add current user query
     const currentUserParts: any[] = [];
