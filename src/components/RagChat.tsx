@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useEffect, Dispatch, SetStateAction } from "react";
+import { ArrowUp } from "lucide-react";
 
 interface Message {
   sender: "user" | "bot";
@@ -29,6 +30,15 @@ export default function RagChat({
   setIsStreaming,
 }: RagChatProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+  // Auto-resize textarea
+  useEffect(() => {
+    if (textareaRef.current) {
+      textareaRef.current.style.height = 'auto';
+      textareaRef.current.style.height = `${Math.min(textareaRef.current.scrollHeight, 200)}px`;
+    }
+  }, [input]);
 
   // Auto-scroll to bottom when messages update
   useEffect(() => {
@@ -204,27 +214,34 @@ export default function RagChat({
       </div>
 
       {/* INPUT BAR */}
-      <div className="mt-3 md:mt-4 flex items-center gap-2 bg-white/[0.04] border border-white/[0.08] rounded-xl p-1.5 md:p-2 w-full min-w-0">
-        <input
+      <div className="mt-3 md:mt-4 flex items-end gap-2 bg-[#1a1a24] border border-white/[0.08] rounded-2xl p-2 w-full min-w-0 transition-colors focus-within:bg-[#1f1f2e] focus-within:border-white/[0.15]">
+        <textarea
+          ref={textareaRef}
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={(e) => {
-            if (e.key === "Enter" && !loading && input.trim()) {
-              sendMessage();
+            if (e.key === "Enter" && !e.shiftKey) {
+              e.preventDefault(); // Prevent new line on simple Enter
+              if (!loading && input.trim()) {
+                sendMessage();
+              }
             }
           }}
           disabled={loading}
-          className="flex-1 min-w-0 px-2 md:px-3 py-2 md:py-2.5 text-sm bg-transparent outline-none placeholder:text-gray-500 disabled:opacity-50 disabled:cursor-not-allowed"
+          rows={1}
+          className="flex-1 min-w-0 px-2 md:px-3 py-2 md:py-2.5 text-sm md:text-[15px] bg-transparent outline-none placeholder:text-gray-500 text-gray-100 disabled:opacity-50 disabled:cursor-not-allowed resize-none overflow-y-auto"
           placeholder="Type your question ..."
+          style={{ minHeight: "44px", maxHeight: "200px" }}
         />
 
         <button
           onClick={sendMessage}
           disabled={loading || !input.trim()}
-          className="flex-shrink-0 px-3 md:px-5 py-2 md:py-2.5 bg-my-primary text-black text-sm font-bold rounded-lg
-          hover:shadow-[0_0_20px_rgba(199,120,221,0.3)] transition-all duration-200
-          disabled:opacity-40 disabled:cursor-not-allowed disabled:shadow-none
-          active:scale-95"
+          className="flex-shrink-0 w-10 h-10 flex items-center justify-center bg-my-primary text-black rounded-full
+          hover:shadow-[0_0_15px_rgba(199,120,221,0.4)] hover:bg-[#d48be8] transition-all duration-200
+          disabled:opacity-30 disabled:cursor-not-allowed disabled:shadow-none disabled:hover:bg-my-primary
+          active:scale-95 mb-0.5"
+          aria-label="Send message"
         >
           {loading ? (
             <span className="inline-flex gap-1">
@@ -233,7 +250,7 @@ export default function RagChat({
               <span className="w-1.5 h-1.5 bg-black/60 rounded-full animate-bounce" style={{ animationDelay: "0.3s" }}></span>
             </span>
           ) : (
-            "Send"
+            <ArrowUp size={20} strokeWidth={2.5} />
           )}
         </button>
       </div>

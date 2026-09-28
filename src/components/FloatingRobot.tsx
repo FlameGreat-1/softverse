@@ -17,6 +17,7 @@ const TTL_DAYS = 7; // Auto-clears after 7 days of inactivity
 
 interface StoredSession {
   messages: Message[];
+  input?: string;
   expiresAt: number; // Unix timestamp ms
 }
 
@@ -35,6 +36,7 @@ export default function FloatingRobot() {
         const session: StoredSession = JSON.parse(raw);
         if (Date.now() < session.expiresAt) {
           setMessages(session.messages);
+          if (session.input) setInput(session.input);
         } else {
           // TTL expired — silently remove stale session
           localStorage.removeItem(STORAGE_KEY);
@@ -45,12 +47,13 @@ export default function FloatingRobot() {
     }
   }, []);
 
-  // Persist to localStorage on every message, refreshing the TTL each time
+  // Persist to localStorage on every message or input change, refreshing the TTL each time
   useEffect(() => {
     try {
-      if (messages.length > 0) {
+      if (messages.length > 0 || input.trim()) {
         const session: StoredSession = {
           messages,
+          input,
           expiresAt: Date.now() + TTL_DAYS * 24 * 60 * 60 * 1000,
         };
         localStorage.setItem(STORAGE_KEY, JSON.stringify(session));
@@ -58,7 +61,7 @@ export default function FloatingRobot() {
     } catch {
       // localStorage unavailable — silently ignore
     }
-  }, [messages]);
+  }, [messages, input]);
 
   return (
     <div className="flex flex-col items-center gap-3 z-50">
