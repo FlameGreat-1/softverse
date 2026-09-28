@@ -86,6 +86,7 @@ export default function FloatingRobot() {
         </DialogTrigger>
 
         <DialogContent
+          aria-describedby={undefined}
           className="w-[calc(100vw-1rem)] max-w-2xl md:w-full rounded-2xl shadow-[0_0_60px_rgba(199,120,221,0.15)] p-0 overflow-hidden
           bg-gradient-to-b from-[#111118] to-[#0A0A0F] border border-white/10 text-white"
         >

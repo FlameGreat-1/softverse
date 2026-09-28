@@ -52,8 +52,8 @@ export async function POST(req: Request) {
       responseStyle: 'adaptive'
     });
 
-    // Gemini 2.0 Flash model
-    const modelName = "gemini-2.0-flash";
+    // gemini-3.5-flash model
+    const modelName = "gemini-3.5-flash";
     const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:streamGenerateContent?alt=sse&key=${apiKey}`;
 
     // Map history to Gemini API contents structure, ensuring strict alternation and no empty text
@@ -121,7 +121,7 @@ export async function POST(req: Request) {
 
             buffer += decoder.decode(value, { stream: true });
             const lines = buffer.split("\n");
-            
+
             // Keep the last incomplete line in the buffer
             buffer = lines.pop() || "";
 
@@ -203,9 +203,9 @@ function getFriendlyError(status: number, errorData: any): string {
 function buildSystemPrompt(
   config: PromptConfig = {}
 ): string {
-  const { 
-    maxTokens = 300, 
-    responseStyle = 'adaptive' 
+  const {
+    maxTokens = 300,
+    responseStyle = 'adaptive'
   } = config;
 
   const typedRagData = ragData as RagDataItem[];

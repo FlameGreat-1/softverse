@@ -31,6 +31,12 @@ const ProjectsPage = () => {
       caption: "Introduction to Agent Skills",
       issuer: "Salesforce / Trailhead",
     },
+    {
+      src: "/images/certs/cert-claude-api-1.png",
+      pdf: "/files/Cert%20Building%20with%20the%20Claude%20API%20(1).pdf",
+      caption: "Building with the Claude API",
+      issuer: "Anthropic",
+    },
   ];
 
   return (
