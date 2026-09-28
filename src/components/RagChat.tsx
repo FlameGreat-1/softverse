@@ -1,18 +1,33 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useRef, useEffect, Dispatch, SetStateAction } from "react";
 
 interface Message {
   sender: "user" | "bot";
   text: string;
 }
 
-export default function RagChat() {
-  const [messages, setMessages] = useState<Message[]>([]);
-  const [input, setInput] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [isStreaming, setIsStreaming] = useState(false);
+interface RagChatProps {
+  messages: Message[];
+  setMessages: Dispatch<SetStateAction<Message[]>>;
+  input: string;
+  setInput: Dispatch<SetStateAction<string>>;
+  loading: boolean;
+  setLoading: Dispatch<SetStateAction<boolean>>;
+  isStreaming: boolean;
+  setIsStreaming: Dispatch<SetStateAction<boolean>>;
+}
 
+export default function RagChat({
+  messages,
+  setMessages,
+  input,
+  setInput,
+  loading,
+  setLoading,
+  isStreaming,
+  setIsStreaming,
+}: RagChatProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
 
   // Auto-scroll to bottom when messages update
@@ -147,16 +162,17 @@ export default function RagChat() {
         {messages.map((msg, i) => (
           <div
             key={i}
-            className={`flex ${
+            className={`flex w-full min-w-0 ${
               msg.sender === "user" ? "justify-end" : "justify-start"
             }`}
           >
             <div
-              className={`px-4 py-3 text-[14px] leading-relaxed whitespace-pre-wrap ${
+              className={`px-4 py-3 text-[14px] leading-relaxed overflow-hidden break-words [word-break:break-word] ${
                 msg.sender === "user"
-                  ? "max-w-[75%] bg-my-primary/15 border border-my-primary/30 rounded-2xl rounded-br-sm text-gray-100"
-                  : "w-full bg-white/[0.04] border border-white/[0.08] rounded-2xl text-gray-300"
+                  ? "max-w-[80%] min-w-0 bg-my-primary/15 border border-my-primary/30 rounded-2xl rounded-br-sm text-gray-100"
+                  : "w-full min-w-0 bg-white/[0.04] border border-white/[0.08] rounded-2xl text-gray-300"
               }`}
+              style={{ whiteSpace: "pre-wrap", overflowWrap: "break-word" }}
             >
               {msg.sender === "bot" && (
                 <span className="block text-base mb-1.5">🤖</span>

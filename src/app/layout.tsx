@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   title: "Emmanuel U. Iziogo | Full-Stack Engineer",
   description:
     "Portfolio of Emmanuel U. Iziogo, a Full-Stack Engineer skilled in FastAPI, Django, Express.js, TypeScript, React, Next.js, Tailwind CSS, UI/UX and cloud-based integrations.",
-  metadataBase: new URL("https://softvers-e.vercel.app"),
+  metadataBase: new URL("https://www.flamegreat.tech"),
   keywords: [
     "Emmanuel U. Iziogo",
     "Emmanuel U. Iziogo portfolio",
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     title: "Emmanuel U. Iziogo | Full-Stack Engineer",
     description:
       "Showcasing projects in Python, FastAPI, Django, Express.js, TypeScript, React, Next.js, and full-stack development.",
-    url: "https://softvers-e.vercel.app",
+    url: "https://www.flamegreat.tech",
     siteName: "Emmanuel U. Iziogo Portfolio",
     images: ["/images/Portfolio.png"],
   },
@@ -69,7 +69,7 @@ export default function RootLayout({
               jobTitle: "Full-Stack Engineer",
               description:
                 "Full-Stack Engineer skilled in FastAPI, Django, Express.js, TypeScript, React, Next.js, Tailwind CSS, UI/UX Design, and building modern web experiences.",
-              url: "https://softvers-e.vercel.app",
+              url: "https://www.flamegreat.tech",
               sameAs: [
                 "https://github.com/FlameGreat-1",
                 "https://www.linkedin.com/in/flamegreat",

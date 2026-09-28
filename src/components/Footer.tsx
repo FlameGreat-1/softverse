@@ -40,7 +40,7 @@ export default function Footer() {
             </p>
             
             <div className="flex flex-wrap justify-center md:justify-start gap-3">
-              <a href="https://wa.me/+2348136872013" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-full bg-[#1A1A24] flex items-center justify-center hover:bg-my-primary hover:scale-110 transition-all">
+              <a href="https://wa.me/2348136872013" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-full bg-[#1A1A24] flex items-center justify-center hover:bg-my-primary hover:scale-110 transition-all">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" className="w-6 h-6 object-contain" />
               </a>
               <a href="https://github.com/FlameGreat-1" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-full bg-[#1A1A24] flex items-center justify-center hover:bg-my-primary hover:scale-110 transition-all">
@@ -52,7 +52,7 @@ export default function Footer() {
               <a href="https://www.facebook.com/" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-full bg-[#1A1A24] flex items-center justify-center hover:bg-my-primary hover:scale-110 transition-all shrink-0">
                 <img src="https://api.iconify.design/logos:facebook.svg" alt="Facebook" className="w-5 h-5 object-contain" />
               </a>
-              <a href="mailto:hello@flamegreat.tech" className="w-10 h-10 rounded-full bg-[#1A1A24] flex items-center justify-center hover:bg-my-primary hover:scale-110 transition-all shrink-0">
+              <a href="mailto:great@exoper.com" className="w-10 h-10 rounded-full bg-[#1A1A24] flex items-center justify-center hover:bg-my-primary hover:scale-110 transition-all shrink-0">
                 <img src="https://api.iconify.design/logos:google-gmail.svg" alt="Email" className="w-5 h-5 object-contain" />
               </a>
             </div>
@@ -106,7 +106,7 @@ export default function Footer() {
               <Link href="https://www.facebook.com/" target="_blank" className="text-gray-400 hover:text-white transition-colors text-sm group flex items-center gap-1">
                 Facebook <ArrowUpRight className="w-3 h-3 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform" />
               </Link>
-              <Link href="https://wa.me/+2348136872013" target="_blank" className="text-gray-400 hover:text-white transition-colors text-sm group flex items-center gap-1">
+              <Link href="https://wa.me/2348136872013" target="_blank" className="text-gray-400 hover:text-white transition-colors text-sm group flex items-center gap-1">
                 WhatsApp <ArrowUpRight className="w-3 h-3 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform" />
               </Link>
               <Link href="https://github.com/FlameGreat-1" target="_blank" className="text-gray-400 hover:text-white transition-colors text-sm group flex items-center gap-1">

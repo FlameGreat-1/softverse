@@ -198,7 +198,7 @@ export async function POST(req: Request) {
               </p>
               
               <div style="margin-bottom: 24px;">
-                <a href="https://wa.me/+2348136872013" style="display: inline-block; margin: 0 8px; text-decoration: none;">
+                <a href="https://wa.me/2348136872013" style="display: inline-block; margin: 0 8px; text-decoration: none;">
                   <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" width="24" height="24" />
                 </a>
                 <a href="https://github.com/FlameGreat-1" style="display: inline-block; margin: 0 8px; text-decoration: none;">

@@ -9,6 +9,7 @@ interface RagDataItem {
   github?: string;
   linkedin?: string;
   portfolio?: string;
+  whatsapp?: string;
 }
 
 interface GeminiStreamChunk {
@@ -186,6 +187,7 @@ function buildSystemPrompt(
     if (item.github) content += `\nGitHub: ${item.github}`;
     if (item.linkedin) content += `\nLinkedIn: ${item.linkedin}`;
     if (item.portfolio) content += `\nPortfolio: ${item.portfolio}`;
+    if (item.whatsapp) content += `\nWhatsApp: ${item.whatsapp}`;
     return content;
   }).join('\n\n');
 

@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://softvers-e.vercel.app/sitemap.xml
+Sitemap: https://www.flamegreat.tech/sitemap.xml

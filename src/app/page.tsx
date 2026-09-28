@@ -283,7 +283,7 @@ export default function Home() {
                 className="sm:w-[45px] hover:scale-110 transition-all"
               />
             </a>
-            <a href="mailto:softverse.com@gmail.com" target="_blank">
+            <a href="mailto:great@exoper.com" target="_blank">
               <Image
                 src="/assets/gmail-icon.svg"
                 alt="Gmail"
@@ -292,7 +292,7 @@ export default function Home() {
                 className="sm:w-[45px] hover:scale-110 transition-all"
               />
             </a>
-            <a href="https://wa.me/+2348136872013" target="_blank">
+            <a href="https://wa.me/2348136872013" target="_blank">
               <Image
                 src="/assets/whatsapp-icon.svg"
                 alt="WhatsApp"
