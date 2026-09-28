@@ -58,16 +58,18 @@ export async function POST(req: Request) {
 
     // Map history to Gemini API contents structure, ensuring strict alternation and no empty text
     const contents = history
-      .filter((msg: any) => (msg.text && msg.text.trim() !== "") || msg.attachment)
+      .filter((msg: any) => (msg.text && msg.text.trim() !== "") || (msg.attachments && msg.attachments.length > 0))
       .map((msg: any) => {
         const parts: any[] = [];
         if (msg.text) parts.push({ text: msg.text });
-        if (msg.attachment) {
-          parts.push({
-            inlineData: {
-              mimeType: msg.attachment.mimeType,
-              data: msg.attachment.data,
-            },
+        if (msg.attachments && msg.attachments.length > 0) {
+          msg.attachments.forEach((att: any) => {
+            parts.push({
+              inlineData: {
+                mimeType: att.mimeType,
+                data: att.data,
+              },
+            });
           });
         }
         return {
@@ -79,12 +81,14 @@ export async function POST(req: Request) {
     // Add current user query
     const currentUserParts: any[] = [];
     if (query) currentUserParts.push({ text: query });
-    if (body.attachment) {
-      currentUserParts.push({
-        inlineData: {
-          mimeType: body.attachment.mimeType,
-          data: body.attachment.data,
-        },
+    if (body.attachments && body.attachments.length > 0) {
+      body.attachments.forEach((att: any) => {
+        currentUserParts.push({
+          inlineData: {
+            mimeType: att.mimeType,
+            data: att.data,
+          },
+        });
       });
     }
 

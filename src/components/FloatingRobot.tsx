@@ -16,7 +16,7 @@ export interface Attachment {
 export interface Message {
   sender: "user" | "bot";
   text: string;
-  attachment?: Attachment;
+  attachments?: Attachment[];
 }
 
 const STORAGE_KEY = "flamo_chat_session";
@@ -60,10 +60,10 @@ export default function FloatingRobot() {
       if (messages.length > 0 || input.trim()) {
         // Strip heavy base64 data before caching to prevent QuotaExceeded errors
         const safeMessages = messages.map((msg) => {
-          if (msg.attachment) {
+          if (msg.attachments && msg.attachments.length > 0) {
             return {
               ...msg,
-              attachment: { ...msg.attachment, data: "" }, // We drop the base64 on refresh
+              attachments: msg.attachments.map(att => ({ ...att, data: "" })), // We drop the base64 on refresh
             };
           }
           return msg;
