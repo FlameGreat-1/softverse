@@ -167,12 +167,17 @@ export default function RagChat({
             }`}
           >
             <div
-              className={`px-4 py-3 text-[14px] leading-relaxed overflow-hidden break-words [word-break:break-word] ${
+              className={`px-4 py-3 text-[14px] leading-relaxed min-w-0 ${
                 msg.sender === "user"
-                  ? "max-w-[80%] min-w-0 bg-my-primary/15 border border-my-primary/30 rounded-2xl rounded-br-sm text-gray-100"
-                  : "w-full min-w-0 bg-white/[0.04] border border-white/[0.08] rounded-2xl text-gray-300"
+                  ? "max-w-[80%] bg-my-primary/15 border border-my-primary/30 rounded-2xl rounded-br-sm text-gray-100"
+                  : "w-full bg-white/[0.04] border border-white/[0.08] rounded-2xl text-gray-300"
               }`}
-              style={{ whiteSpace: "pre-wrap", overflowWrap: "break-word" }}
+              style={{
+                whiteSpace: "pre-wrap",
+                overflowWrap: "anywhere",
+                wordBreak: "break-word",
+                overflow: "hidden",
+              }}
             >
               {msg.sender === "bot" && (
                 <span className="block text-base mb-1.5">🤖</span>
