@@ -23,10 +23,6 @@ interface GeminiStreamChunk {
   }>;
 }
 
-interface PromptConfig {
-  maxTokens?: number;
-  responseStyle?: 'concise' | 'detailed' | 'adaptive';
-}
 
 export async function POST(req: Request) {
   try {
@@ -49,10 +45,7 @@ export async function POST(req: Request) {
     }
 
     // Build the system instruction with full context injection
-    const systemPrompt = buildSystemPrompt({
-      maxTokens: 300,
-      responseStyle: 'adaptive'
-    });
+    const systemPrompt = buildSystemPrompt();
 
     // gemini-3.5-flash model
     const modelName = "gemini-flash-latest";
@@ -129,7 +122,9 @@ export async function POST(req: Request) {
         contents,
         generationConfig: {
           temperature: 0.7,
-          maxOutputTokens: 1024,
+          // 8192 tokens supports full document analysis, detailed resumes, and long explanations
+          // without ever truncating mid-sentence. Gemini Flash supports up to 8192 output tokens.
+          maxOutputTokens: 8192,
         },
       }),
     });
@@ -191,8 +186,15 @@ export async function POST(req: Request) {
                     controller.enqueue(encoder.encode(text));
                   }
 
-                  // Check if generation is complete
-                  if (data.candidates?.[0]?.finishReason) {
+                  // Distinguish finish reasons — MAX_TOKENS means truncation, not clean completion
+                  const finishReason = data.candidates?.[0]?.finishReason;
+                  if (finishReason) {
+                    if (finishReason === 'MAX_TOKENS') {
+                      // Response was cut off by token limit — notify the user clearly
+                      controller.enqueue(encoder.encode(
+                        "\n\n(Response reached its length limit. Ask me to continue or be more specific to get a focused answer.)"
+                      ));
+                    }
                     try { controller.close(); } catch(e) {}
                     return;
                   }
@@ -256,13 +258,7 @@ function getFriendlyError(status: number, errorData: any): string {
   return "Flamo is having a moment. Please try again shortly.";
 }
 
-function buildSystemPrompt(
-  config: PromptConfig = {}
-): string {
-  const {
-    maxTokens = 300,
-  } = config;
-
+function buildSystemPrompt(): string {
   const typedRagData = ragData as RagDataItem[];
   const fullContext = typedRagData.map(item => {
     let content = `### ${item.title}\n${item.content}`;
@@ -304,7 +300,7 @@ Primary Objectives:
 
 Quality Standards:
 - Accuracy: Only cite information explicitly present in the context; flag gaps transparently.
-- Brevity: Target ${maxTokens} tokens unless complexity demands expansion (auto-detect).
+- Brevity: For simple conversational questions, target 300-500 tokens. For file analysis, document review, or detailed technical questions, respond completely and thoroughly — do not truncate. Always complete your final sentence.
 - Tone: Calibrated professionalism — think "senior consultant" not "corporate robot".
 - Pronouns: Use "he/him" when referencing Emmanuel; maintain grammatical consistency.
 - Formatting: DO NOT use markdown bold/italics (like **) or headers (##). The frontend only supports plain text. You may use simple dashes (-) for lists and blank lines for spacing.
