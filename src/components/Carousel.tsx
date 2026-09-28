@@ -121,9 +121,9 @@ export default function Carousel({
             {/* PDF slide */}
             {slides[imageIndex].pdf ? (
               <div className="absolute inset-0 flex flex-col bg-[#0e0c14]">
-                {/* Desktop: iframe PDF viewer */}
+                {/* Desktop: iframe PDF viewer — toolbar hidden */}
                 <iframe
-                  src={slides[imageIndex].pdf}
+                  src={`${slides[imageIndex].pdf}#toolbar=0&navpanes=0&scrollbar=0&view=FitH`}
                   className="hidden sm:block w-full flex-1 border-0"
                   title={slides[imageIndex].caption || "Certificate"}
                 />
