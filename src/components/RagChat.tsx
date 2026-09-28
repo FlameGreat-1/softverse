@@ -214,7 +214,7 @@ export default function RagChat({
       </div>
 
       {/* INPUT BAR */}
-      <div className="mt-3 md:mt-4 flex items-end gap-2 bg-[#1a1a24] border border-white/[0.08] rounded-2xl p-2 w-full min-w-0 transition-colors focus-within:bg-[#1f1f2e] focus-within:border-white/[0.15]">
+      <div className="mt-3 md:mt-4 relative bg-[#1a1a24] border border-white/[0.08] rounded-2xl p-1.5 md:p-2 w-full transition-colors focus-within:bg-[#1f1f2e] focus-within:border-white/[0.15]">
         <textarea
           ref={textareaRef}
           value={input}
@@ -229,7 +229,7 @@ export default function RagChat({
           }}
           disabled={loading}
           rows={1}
-          className="flex-1 min-w-0 px-2 md:px-3 py-2 md:py-2.5 text-sm md:text-[15px] bg-transparent outline-none placeholder:text-gray-500 text-gray-100 disabled:opacity-50 disabled:cursor-not-allowed resize-none overflow-y-auto no-scrollbar"
+          className="w-full px-2 md:px-3 py-2 md:py-2.5 pr-12 md:pr-14 text-sm md:text-[15px] bg-transparent outline-none placeholder:text-gray-500 text-gray-100 disabled:opacity-50 disabled:cursor-not-allowed resize-none overflow-y-auto no-scrollbar block"
           placeholder="Type your question ..."
           style={{ minHeight: "44px", maxHeight: "200px" }}
         />
@@ -237,10 +237,10 @@ export default function RagChat({
         <button
           onClick={sendMessage}
           disabled={loading || !input.trim()}
-          className="flex-shrink-0 w-10 h-10 flex items-center justify-center bg-my-primary text-black rounded-full
+          className="absolute bottom-1.5 right-1.5 md:bottom-2 md:right-2 w-9 h-9 md:w-10 md:h-10 flex items-center justify-center bg-my-primary text-black rounded-full
           hover:shadow-[0_0_15px_rgba(199,120,221,0.4)] hover:bg-[#d48be8] transition-all duration-200
           disabled:opacity-30 disabled:cursor-not-allowed disabled:shadow-none disabled:hover:bg-my-primary
-          active:scale-95 mb-0.5"
+          active:scale-95"
           aria-label="Send message"
         >
           {loading ? (
