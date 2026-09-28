@@ -280,8 +280,8 @@ export default function RagChat({
 
           // Hide [BOOK_MEETING: ...] from the UI and extract the JSON
           let displayText = accumulatedText;
-          // Use 's' flag so .*? matches newlines if the LLM pretty-prints the JSON
-          const bookMatch = accumulatedText.match(/\[BOOK_MEETING:\s*(\{.*?\})\s*\]/s);
+          // Use [\s\S]*? to match newlines if the LLM pretty-prints the JSON (ES5 compatible, avoids TS1501 error)
+          const bookMatch = accumulatedText.match(/\[BOOK_MEETING:\s*(\{[\s\S]*?\})\s*\]/);
           
           if (bookMatch) {
              bookingDataStr = bookMatch[1];
