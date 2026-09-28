@@ -90,11 +90,12 @@ export default function FloatingRobot() {
 
         <DialogContent
           aria-describedby={undefined}
-          className="!w-screen !h-[100dvh] !max-w-none md:!w-full md:!h-auto md:!max-w-2xl 
+          onOpenAutoFocus={(e) => e.preventDefault()}
+          className="!fixed !w-screen md:!h-auto !max-w-none md:!w-full md:!max-w-2xl 
           rounded-none md:rounded-2xl shadow-none md:shadow-[0_0_60px_rgba(199,120,221,0.15)] p-0 overflow-hidden
           bg-black md:bg-gradient-to-b md:from-[#111118] md:to-[#0A0A0F] border-none md:border md:border-white/10 text-white
           flex flex-col 
-          !top-0 !left-0 !translate-x-0 !translate-y-0 md:!top-[50%] md:!left-[50%] md:!-translate-x-1/2 md:!-translate-y-1/2"
+          !top-0 !left-0 !bottom-0 !right-0 !translate-x-0 !translate-y-0 md:!top-[50%] md:!left-[50%] md:!bottom-auto md:!right-auto md:!-translate-x-1/2 md:!-translate-y-1/2"
         >
           {/* Header */}
           <div className="px-4 py-2 md:px-6 md:py-4 flex items-center justify-between">
