@@ -114,16 +114,20 @@ export async function POST(req: Request) {
           while (true) {
             const { done, value } = await reader.read();
 
-            if (done) {
-              controller.close();
-              break;
+            if (value) {
+              buffer += decoder.decode(value, { stream: !done });
+            } else if (done) {
+              buffer += decoder.decode(); // flush remaining bytes
             }
 
-            buffer += decoder.decode(value, { stream: true });
             const lines = buffer.split("\n");
-
-            // Keep the last incomplete line in the buffer
-            buffer = lines.pop() || "";
+            
+            // If not done, keep the last incomplete line in the buffer
+            if (!done) {
+              buffer = lines.pop() || "";
+            } else {
+              buffer = "";
+            }
 
             for (const line of lines) {
               if (line.startsWith("data: ")) {
@@ -142,13 +146,18 @@ export async function POST(req: Request) {
 
                   // Check if generation is complete
                   if (data.candidates?.[0]?.finishReason) {
-                    controller.close();
+                    try { controller.close(); } catch(e) {}
                     return;
                   }
                 } catch (parseError) {
                   console.error("Error parsing chunk:", parseError, "Line:", jsonStr);
                 }
               }
+            }
+
+            if (done) {
+              try { controller.close(); } catch (e) {}
+              break;
             }
           }
         } catch (error) {
