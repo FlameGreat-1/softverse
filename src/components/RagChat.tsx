@@ -221,9 +221,13 @@ export default function RagChat({
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={(e) => {
             if (e.key === "Enter" && !e.shiftKey) {
-              e.preventDefault(); // Prevent new line on simple Enter
-              if (!loading && input.trim()) {
-                sendMessage();
+              // Enterprise standard: On mobile, Enter creates a new line. On desktop, Enter sends.
+              const isMobile = typeof window !== "undefined" && window.innerWidth <= 768;
+              if (!isMobile) {
+                e.preventDefault(); // Prevent new line on desktop
+                if (!loading && input.trim()) {
+                  sendMessage();
+                }
               }
             }
           }}

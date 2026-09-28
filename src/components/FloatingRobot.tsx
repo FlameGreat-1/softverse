@@ -97,10 +97,10 @@ export default function FloatingRobot() {
           !top-0 !left-0 !translate-x-0 !translate-y-0 md:!top-[50%] md:!left-[50%] md:!-translate-x-1/2 md:!-translate-y-1/2"
         >
           {/* Header */}
-          <div className="px-4 py-3 md:px-6 md:pt-5 md:pb-4 border-b border-white/5 flex items-center justify-between">
-            <DialogTitle className="text-base md:text-xl font-semibold tracking-tight">
+          <div className="px-4 py-2 md:px-6 md:py-4 flex items-center justify-between">
+            <DialogTitle className="text-sm md:text-lg font-semibold tracking-tight text-white/90">
               Chat Flamo{" "}
-              <span className="inline-block animate-bounce text-sm md:text-base">🤖</span>
+              <span className="inline-block animate-bounce text-xs md:text-sm">🤖</span>
             </DialogTitle>
           </div>
 
