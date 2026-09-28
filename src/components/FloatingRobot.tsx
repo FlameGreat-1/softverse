@@ -90,7 +90,7 @@ export default function FloatingRobot() {
 
         <DialogContent
           aria-describedby={undefined}
-          className="w-[calc(100vw-1rem)] max-w-2xl md:w-full h-[80dvh] md:h-[650px] max-h-[90dvh] flex flex-col rounded-2xl shadow-[0_0_60px_rgba(199,120,221,0.15)] p-0 overflow-hidden
+          className="w-[calc(100vw-1rem)] max-w-2xl md:w-full max-h-[90dvh] flex flex-col rounded-2xl shadow-[0_0_60px_rgba(199,120,221,0.15)] p-0 overflow-hidden
           bg-gradient-to-b from-[#111118] to-[#0A0A0F] border border-white/10 text-white"
         >
           {/* Header */}

@@ -140,7 +140,7 @@ export default function RagChat({
   }
 
   return (
-    <div className="flex flex-col h-full w-full max-w-full overflow-hidden">
+    <div className="flex flex-col h-[520px] md:h-[580px] shrink min-h-0 w-full max-w-full overflow-hidden">
       {/* CHAT WINDOW — hidden scrollbar */}
       <div
         ref={scrollRef}
