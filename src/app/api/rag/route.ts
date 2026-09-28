@@ -52,8 +52,8 @@ export async function POST(req: Request) {
       responseStyle: 'adaptive'
     });
 
-    // gemini-flash-latest model
-    const modelName = "gemini-flash-latest";
+    // Gemini 2.0 Flash model
+    const modelName = "gemini-2.0-flash";
     const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:streamGenerateContent?alt=sse&key=${apiKey}`;
 
     // Map history to Gemini API contents structure, ensuring strict alternation and no empty text
@@ -88,11 +88,12 @@ export async function POST(req: Request) {
     });
 
     if (!response.ok) {
-      const errorData = await response.json();
-      console.error("API Error:", errorData);
-      return NextResponse.json({
-        answer: `API Error: ${errorData.error?.message || "Unknown error"}`,
-      });
+      const errorData = await response.json().catch(() => ({}));
+      console.error("Gemini API Error:", response.status, errorData);
+
+      // Map raw API errors to clean, user-friendly messages
+      const friendlyError = getFriendlyError(response.status, errorData);
+      return NextResponse.json({ answer: friendlyError });
     }
 
     // Create a ReadableStream to forward the SSE data with proper accumulation
@@ -167,9 +168,36 @@ export async function POST(req: Request) {
   } catch (err) {
     console.error("RAG API error:", err);
     return NextResponse.json({
-      answer: "Sorry, I'm having trouble responding right now. Please try again!",
+      answer: "Flamo ran into an unexpected issue. Please try again in a moment.",
     });
   }
+}
+
+function getFriendlyError(status: number, errorData: any): string {
+  const message: string = errorData?.error?.message || "";
+
+  // Quota / rate limit
+  if (status === 429 || message.toLowerCase().includes("quota") || message.toLowerCase().includes("rate")) {
+    return "Flamo is a bit busy right now — too many questions at once! Please wait a moment and try again.";
+  }
+
+  // Model overloaded / service unavailable
+  if (status === 503 || message.toLowerCase().includes("overload") || message.toLowerCase().includes("unavailable")) {
+    return "Flamo is temporarily unavailable due to high demand. Please try again in a few seconds.";
+  }
+
+  // Invalid API key / auth
+  if (status === 401 || status === 403 || message.toLowerCase().includes("api key") || message.toLowerCase().includes("permission")) {
+    return "Flamo isn't properly configured at the moment. Please contact Emmanuel directly at great@exoper.com.";
+  }
+
+  // Bad request (e.g. invalid history format)
+  if (status === 400) {
+    return "Flamo couldn't understand that request. Try rephrasing your question.";
+  }
+
+  // Catch-all
+  return "Flamo is having a moment. Please try again shortly.";
 }
 
 function buildSystemPrompt(

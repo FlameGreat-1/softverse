@@ -118,7 +118,7 @@ export default function RagChat({
         if (newMessages.length > 0) {
           newMessages[newMessages.length - 1] = {
             sender: "bot",
-            text: "Sorry, I encountered an error. Please try again.",
+            text: "Flamo ran into an issue reaching the server. Please check your connection and try again.",
           };
         }
         return newMessages;
