@@ -140,11 +140,11 @@ export default function RagChat({
   }
 
   return (
-    <div className="flex flex-col h-[520px] md:h-[580px] shrink min-h-0 w-full max-w-full overflow-hidden">
+    <div className="flex flex-col h-full md:h-[580px] shrink min-h-0 w-full max-w-full overflow-hidden">
       {/* CHAT WINDOW — hidden scrollbar */}
       <div
         ref={scrollRef}
-        className="chat-scroll flex-1 overflow-x-hidden overflow-y-auto rounded-xl bg-white/[0.03] border border-white/[0.06] p-2 md:p-4 space-y-4 md:space-y-5"
+        className="chat-scroll flex-1 overflow-x-hidden overflow-y-auto p-2 md:p-4 space-y-6 md:space-y-8"
         style={{
           scrollbarWidth: "none",
           msOverflowStyle: "none",
@@ -214,7 +214,7 @@ export default function RagChat({
       </div>
 
       {/* INPUT BAR */}
-      <div className="mt-3 md:mt-4 relative bg-[#1a1a24] border border-white/[0.08] rounded-2xl p-1.5 md:p-2 w-full transition-colors focus-within:bg-[#1f1f2e] focus-within:border-white/[0.15]">
+      <div className="mt-2 relative bg-[#2f2f2f] rounded-[24px] w-full min-w-0 flex flex-col px-1.5 md:px-2 py-1 transition-colors focus-within:bg-[#383838]">
         <textarea
           ref={textareaRef}
           value={input}
@@ -229,30 +229,39 @@ export default function RagChat({
           }}
           disabled={loading}
           rows={1}
-          className="w-full px-2 md:px-3 py-2 md:py-2.5 pr-12 md:pr-14 text-sm md:text-[15px] bg-transparent outline-none placeholder:text-gray-500 text-gray-100 disabled:opacity-50 disabled:cursor-not-allowed resize-none overflow-y-auto no-scrollbar block"
-          placeholder="Type your question ..."
+          className="w-full px-3 md:px-4 pt-3 pb-1 text-[16px] leading-relaxed bg-transparent outline-none placeholder:text-[#9b9b9b] text-white disabled:opacity-50 disabled:cursor-not-allowed resize-none overflow-y-auto no-scrollbar"
+          placeholder="Ask anything"
           style={{ minHeight: "44px", maxHeight: "200px" }}
         />
 
-        <button
-          onClick={sendMessage}
-          disabled={loading || !input.trim()}
-          className="absolute bottom-1.5 right-1.5 md:bottom-2 md:right-2 w-9 h-9 md:w-10 md:h-10 flex items-center justify-center bg-my-primary text-black rounded-full
-          hover:shadow-[0_0_15px_rgba(199,120,221,0.4)] hover:bg-[#d48be8] transition-all duration-200
-          disabled:opacity-30 disabled:cursor-not-allowed disabled:shadow-none disabled:hover:bg-my-primary
-          active:scale-95"
-          aria-label="Send message"
-        >
-          {loading ? (
-            <span className="inline-flex gap-1">
-              <span className="w-1.5 h-1.5 bg-black/60 rounded-full animate-bounce"></span>
-              <span className="w-1.5 h-1.5 bg-black/60 rounded-full animate-bounce" style={{ animationDelay: "0.15s" }}></span>
-              <span className="w-1.5 h-1.5 bg-black/60 rounded-full animate-bounce" style={{ animationDelay: "0.3s" }}></span>
-            </span>
-          ) : (
-            <ArrowUp size={20} strokeWidth={2.5} />
-          )}
-        </button>
+        <div className="flex justify-between items-center px-2 pb-1.5 pt-1">
+          {/* Left action icons (matching ChatGPT + icon) */}
+          <div className="flex items-center gap-2">
+            <button className="p-1.5 text-[#b4b4b4] hover:text-white transition-colors rounded-full" aria-label="Attach">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 5v14m-7-7h14"/></svg>
+            </button>
+          </div>
+          
+          {/* Right Send Button */}
+          <button
+            onClick={sendMessage}
+            disabled={loading || !input.trim()}
+            className={`flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-full transition-all duration-200 
+              ${input.trim() ? 'bg-white text-black hover:bg-gray-200' : 'bg-transparent text-[#b4b4b4]'}
+              disabled:opacity-50 disabled:cursor-not-allowed`}
+            aria-label="Send message"
+          >
+            {loading ? (
+              <span className="inline-flex gap-1">
+                <span className="w-1 h-1 bg-black/60 rounded-full animate-bounce"></span>
+                <span className="w-1 h-1 bg-black/60 rounded-full animate-bounce" style={{ animationDelay: "0.15s" }}></span>
+                <span className="w-1 h-1 bg-black/60 rounded-full animate-bounce" style={{ animationDelay: "0.3s" }}></span>
+              </span>
+            ) : (
+              <ArrowUp size={18} strokeWidth={2.5} />
+            )}
+          </button>
+        </div>
       </div>
     </div>
   );
