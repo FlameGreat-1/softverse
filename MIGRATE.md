@@ -1,0 +1,348 @@
+Migrating from API v1 to v2
+
+Copy page
+
+Complete guide for migrating your Cal.com integration from v1 to v2
+
+API v1 was shut down on April 8, 2026. All v1 endpoints have been removed. Use this guide to migrate any remaining v1 integrations to API v2.
+​
+Why migrate to v2?
+The v2 API includes numerous enhancements and new features that are not available in v1:
+Performance improvements: Optimized for better performance and scalability
+User-friendly response objects: Improved response structure for better developer experience
+Enhanced security: Improved security measures to protect your data
+New features: Access to new Cal.com features only available in v2
+Better error handling: More descriptive error messages and status codes
+​
+Authentication changes
+In v1, you authenticated using an API key passed as a query parameter:
+curl https://api.cal.com/v1/bookings?apiKey=cal_test_xxxxxx
+In v2, you authenticate using an API key in the Authorization header:
+curl https://api.cal.com/v2/bookings \
+  -H "Authorization: Bearer cal_test_xxxxxx" \
+  -H "cal-api-version: 2024-08-13"
+​
+Endpoint-by-endpoint migration guide
+​
+Bookings
+​
+Create a booking
+v1 endpoint:
+POST /v1/bookings
+v1 request body:
+{
+  "eventTypeId": 123,
+  "start": "2023-05-24T13:00:00.000Z",
+  "end": "2023-05-24T13:30:00.000Z",
+  "responses": {
+    "name": "John Doe",
+    "email": "[email protected]",
+    "location": {
+      "value": "userPhone",
+      "optionValue": ""
+    }
+  },
+  "timeZone": "Europe/London",
+  "language": "en",
+  "metadata": {}
+}
+v2 endpoint:
+POST /v2/bookings
+v2 request body:
+{
+  "eventTypeId": 123,
+  "start": "2024-08-13T09:00:00Z",
+  "attendee": {
+    "name": "John Doe",
+    "email": "[email protected]",
+    "timeZone": "America/New_York",
+    "language": "en"
+  },
+  "location": {
+    "type": "phone"
+  },
+  "metadata": {}
+}
+Key differences:
+responses object replaced with attendee object
+end time is no longer required (calculated from event type duration)
+location structure changed from {value, optionValue} to {type}
+Must include cal-api-version: 2024-08-13 header
+Response structure is more detailed with status and data wrapper
+v1 response:
+{
+  "booking": {
+    "id": 91,
+    "uid": "bFJeNb2uX8ANpT3JL5EfXw",
+    "startTime": "2023-05-25T09:30:00.000Z",
+    "endTime": "2023-05-25T10:30:00.000Z",
+    "attendees": [...],
+    "status": "ACCEPTED"
+  }
+}
+v2 response:
+{
+  "status": "success",
+  "data": {
+    "id": 123,
+    "uid": "booking_uid_123",
+    "start": "2024-08-13T15:30:00Z",
+    "end": "2024-08-13T16:30:00Z",
+    "duration": 60,
+    "status": "accepted",
+    "hosts": [...],
+    "attendees": [...],
+    "eventType": {
+      "id": 1,
+      "slug": "some-event"
+    }
+  }
+}
+​
+Get all bookings
+v1: Not available as a dedicated endpoint
+v2 endpoint:
+GET /v2/bookings
+v2 query parameters:
+status: Filter by booking status (accepted, pending, cancelled, rejected)
+attendeeEmail: Filter by attendee email
+eventTypeId: Filter by event type
+afterStart, beforeEnd: Filter by date range
+take, skip: Pagination
+sortStart, sortEnd, sortCreated: Sorting options
+v2 response includes pagination:
+{
+  "status": "success",
+  "data": [...],
+  "pagination": {
+    "totalItems": 123,
+    "currentPage": 2,
+    "totalPages": 13,
+    "hasNextPage": true
+  }
+}
+​
+Cancel a booking
+v1 endpoint:
+DELETE /v1/bookings?id={id}&allRemainingBookings=false&cancellationReason=reason
+v2 endpoint:
+POST /v2/bookings/{uid}/cancel
+v2 request body:
+{
+  "cancellationReason": "User requested cancellation"
+}
+Key differences:
+Changed from DELETE to POST method
+Uses booking uid in path instead of id query parameter
+Cancellation reason in request body instead of query parameter
+​
+Reschedule a booking
+v1: Required creating a new booking with rescheduleUid
+v2 endpoint:
+POST /v2/bookings/{uid}/reschedule
+v2 request body:
+{
+  "start": "2024-08-14T10:00:00Z",
+  "reschedulingReason": "Conflict with another meeting"
+}
+Key differences:
+Dedicated reschedule endpoint in v2
+Simpler process - just provide new start time
+Automatically handles the relationship between old and new bookings
+​
+Event types
+​
+Get all event types
+v1 endpoint:
+GET /v1/event-types
+v2 endpoint:
+GET /v2/event-types
+Key differences:
+v2 response includes more detailed information about each event type
+v2 includes pagination support
+v2 response wrapped in {status, data} structure
+​
+Create an event type
+v1 endpoint:
+POST /v1/event-types
+v1 request body:
+{
+  "title": "30 Min Meeting",
+  "slug": "30min",
+  "length": 30,
+  "locations": [{"type": "integrations:zoom"}]
+}
+v2 endpoint:
+POST /v2/event-types
+v2 request body:
+{
+  "title": "30 Min Meeting",
+  "slug": "30min",
+  "lengthInMinutes": 30,
+  "locations": [{"type": "zoom"}]
+}
+Key differences:
+length renamed to lengthInMinutes for clarity
+Location types simplified (no integrations: prefix)
+More configuration options available in v2
+​
+Update an event type
+v1 endpoint:
+PATCH /v1/event-types/{id}
+v2 endpoint:
+PATCH /v2/event-types/{id}
+Key differences:
+Same HTTP method and path structure
+Request/response body structure differences match create endpoint
+v2 provides more granular control over event type settings
+v2 treats the teamId and parentId of an event type as immutable. Update requests that attempt to change either field are rejected. Delete and recreate the event type to move it to another team or change its managed parent.
+​
+Schedules
+​
+Get all schedules
+v1 endpoint:
+GET /v1/schedules
+v2 endpoint:
+GET /v2/schedules
+Key differences:
+v2 includes default schedule indicator
+v2 response includes more detailed availability information
+v2 supports filtering and pagination
+​
+Create a schedule
+v1 endpoint:
+POST /v1/schedules
+v1 request body:
+{
+  "name": "Working Hours",
+  "timeZone": "America/New_York",
+  "availability": [...]
+}
+v2 endpoint:
+POST /v2/schedules
+v2 request body:
+{
+  "name": "Working Hours",
+  "timeZone": "America/New_York",
+  "isDefault": false,
+  "schedule": [...]
+}
+Key differences:
+availability renamed to schedule in v2
+isDefault flag added to set default schedule
+More flexible schedule configuration options
+​
+Webhooks
+​
+Get all webhooks
+v1 endpoint:
+GET /v1/webhooks
+v2 endpoint:
+GET /v2/webhooks
+​
+Create a webhook
+v1 endpoint:
+POST /v1/webhooks
+v1 request body:
+{
+  "subscriberUrl": "https://example.com/webhook",
+  "eventTriggers": ["BOOKING_CREATED"],
+  "active": true
+}
+v2 endpoint:
+POST /v2/webhooks
+v2 request body:
+{
+  "payloadTemplate": null,
+  "triggers": ["BOOKING_CREATED"],
+  "subscriberUrl": "https://example.com/webhook",
+  "active": true
+}
+Key differences:
+eventTriggers renamed to triggers
+Added payloadTemplate for custom webhook payloads
+More webhook event types available in v2
+​
+Slots
+​
+Get available slots
+v1 endpoint:
+GET /v1/slots/available?eventTypeId=123&startTime=2024-01-01&endTime=2024-01-31
+v2 endpoint:
+GET /v2/slots/available?eventTypeId=123&startTime=2024-01-01T00:00:00Z&endTime=2024-01-31T23:59:59Z
+Key differences:
+v2 requires full ISO 8601 timestamps
+v2 response includes more metadata about slot availability
+v2 supports additional filtering options (username, teamSlug, etc.)
+​
+Teams
+​
+Get all teams
+v1 endpoint:
+GET /v1/teams
+v2 endpoint:
+GET /v2/teams
+Key differences:
+v2 includes organization context if team is part of an org
+v2 response includes more team metadata
+v2 supports pagination
+​
+Users
+​
+Get user profile
+v1 endpoint:
+GET /v1/users/{id}
+v2 endpoint:
+GET /v2/me
+Key differences:
+v2 uses /me endpoint for current user
+v2 returns more detailed profile information
+v2 includes organization and team memberships
+​
+Response structure changes
+​
+v1 response format
+{
+  "booking": {...}
+}
+​
+v2 response format
+{
+  "status": "success",
+  "data": {...}
+}
+All v2 responses follow this consistent structure with:
+status: Either “success” or “error”
+data: The actual response data
+error: Error details (only present when status is “error”)
+​
+Error handling
+​
+v1 errors
+{
+  "message": "Event type not found"
+}
+​
+v2 errors
+{
+  "status": "error",
+  "error": {
+    "code": "NOT_FOUND",
+    "message": "Event type not found"
+  }
+}
+v2 provides more structured error responses with error codes for better error handling.
+​
+Migration checklist
+Update authentication to use Authorization header instead of query parameter
+Add cal-api-version: 2024-08-13 header to all requests
+Update base URL from /v1/ to /v2/
+Update request body structures (especially responses → attendee for bookings)
+Update response parsing to handle {status, data} wrapper
+Update location object structures
+Update field names (length → lengthInMinutes, eventTriggers → triggers, etc.)
+Implement pagination handling for list endpoints
+Update error handling to parse new error structure
+Test all endpoints in your integration
+Update any stored booking/event type IDs if needed
+​

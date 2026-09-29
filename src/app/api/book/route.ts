@@ -34,34 +34,35 @@ export async function POST(req: Request) {
     const bookingPayload = {
       eventTypeId: parseInt(eventTypeId, 10),
       start: startDate.toISOString(),
-      end: endDate.toISOString(),
-      responses: {
+      attendee: {
         name: name,
         email: email,
-        location: {
-          value: "integrations:daily",
-          optionValue: ""
-        }
+        timeZone: timeZone || "Africa/Lagos",
+        language: "en"
       },
-      metadata: {},
-      timeZone: timeZone || "Africa/Lagos",
-      language: "en"
+      location: {
+        type: "daily"
+      },
+      metadata: {}
     };
 
-    // Call Cal.com API v1
-    const res = await fetch(`https://api.cal.com/v1/bookings?apiKey=${apiKey}`, {
+    // Call Cal.com API v2
+    const res = await fetch(`https://api.cal.com/v2/bookings`, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${apiKey}`,
+        "cal-api-version": "2024-08-13"
       },
       body: JSON.stringify(bookingPayload)
     });
 
     const data = await res.json();
 
-    if (!res.ok) {
-      console.error("Cal.com Booking Error:", data);
-      return NextResponse.json({ error: data.message || "Failed to confirm booking with Cal.com. The time slot might be unavailable." }, { status: res.status });
+    if (!res.ok || data.status === "error") {
+      console.error("Cal.com Booking Error:", JSON.stringify(data, null, 2));
+      const errorMsg = data.error?.message || data.message || "Failed to confirm booking with Cal.com. The time slot might be unavailable.";
+      return NextResponse.json({ error: errorMsg }, { status: res.status !== 200 ? res.status : 400 });
     }
 
     return NextResponse.json({ message: `✅ **Booking Confirmed!** A calendar invite has been sent to ${email}.` });

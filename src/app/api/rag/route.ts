@@ -165,7 +165,7 @@ export async function POST(req: Request) {
             }
 
             const lines = buffer.split("\n");
-            
+
             // If not done, keep the last incomplete line in the buffer
             if (!done) {
               buffer = lines.pop() || "";
@@ -197,7 +197,7 @@ export async function POST(req: Request) {
                         "\n\n(Response reached its length limit. Ask me to continue or be more specific to get a focused answer.)"
                       ));
                     }
-                    try { controller.close(); } catch(e) {}
+                    try { controller.close(); } catch (e) { }
                     return;
                   }
                 } catch (parseError) {
@@ -207,7 +207,7 @@ export async function POST(req: Request) {
             }
 
             if (done) {
-              try { controller.close(); } catch (e) {}
+              try { controller.close(); } catch (e) { }
               break;
             }
           }
