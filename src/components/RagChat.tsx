@@ -167,23 +167,32 @@ export default function RagChat({
       });
   };
 
-  async function sendMessage() {
-    if ((!input.trim() && selectedFiles.length === 0) || loading) return;
+  async function sendMessage(autoQuery?: string, autoHistory?: Message[]) {
+    const isAuto = autoQuery !== undefined;
+    const userQuery = isAuto ? autoQuery : input.trim();
+    if (!isAuto && (!userQuery && selectedFiles.length === 0 || loading)) return;
 
-    const userQuery = input.trim();
-    const attachmentPayload = selectedFiles.length > 0 ? selectedFiles : undefined;
+    const attachmentPayload = isAuto ? undefined : (selectedFiles.length > 0 ? selectedFiles : undefined);
+
+    let baseHistory = autoHistory || messages;
+    const newMessage: Message = { sender: "user", text: userQuery, attachments: attachmentPayload, isHidden: isAuto };
 
     setMessages((prev) => [
-      ...prev,
-      { sender: "user", text: userQuery, attachments: attachmentPayload },
+      ...baseHistory,
+      newMessage,
     ]);
     
-    setInput("");
-    setSelectedFiles([]);
+    if (!isAuto) {
+      setInput("");
+      setSelectedFiles([]);
+    }
     setLoading(true);
     setIsStreaming(true);
 
     setMessages((prev) => [...prev, { sender: "bot", text: "" }]);
+
+    // For the API call, we must pass the latest full history including the new message
+    const historyForApi = [...baseHistory, newMessage];
 
     try {
       const res = await fetch("/api/rag", {
@@ -193,7 +202,7 @@ export default function RagChat({
         },
         body: JSON.stringify({ 
           query: userQuery, 
-          history: messages, 
+          history: historyForApi, 
           attachments: attachmentPayload,
           timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone
         }),
@@ -248,28 +257,25 @@ export default function RagChat({
                 });
                 const bookResult = await bookRes.json();
                 
-                setMessages((prev) => {
-                  const newMessages = [...prev];
-                  // Find the specific bot message with the loading indicator to prevent race conditions
-                  for (let i = newMessages.length - 1; i >= 0; i--) {
-                    if (newMessages[i].sender === "bot" && newMessages[i].text.includes("⏳ *Booking your appointment...*")) {
-                      newMessages[i].text = newMessages[i].text.replace("\n\n⏳ *Booking your appointment...*", "\n\n" + (bookResult.message || bookResult.error));
-                      break;
-                    }
-                  }
-                  return newMessages;
-                });
+                let followUpQuery = "";
+                if (!bookRes.ok || bookResult.status === "error") {
+                   const errorMsg = bookResult.error || bookResult.message || "Failed to confirm booking.";
+                   followUpQuery = `[SYSTEM NOTIFICATION]: The booking failed with error: "${errorMsg}". Please apologize and ask the user if they want to try an alternative date/time.`;
+                } else {
+                   followUpQuery = `[SYSTEM NOTIFICATION]: The booking was successfully confirmed! Let the user know the booking is confirmed and provide any extra closing remarks.`;
+                }
+
+                const completedBotMessage: Message = { sender: "bot", text: accumulatedText.replace(/\[BOOK_MEETING:[\s\S]*?\]/, "").trim() };
+                const updatedHistory = [...historyForApi, completedBotMessage];
+                
+                // Trigger AI to read the response and naturally say it to the user
+                sendMessage(followUpQuery, updatedHistory);
+
               } catch (e) {
-                setMessages((prev) => {
-                  const newMessages = [...prev];
-                  for (let i = newMessages.length - 1; i >= 0; i--) {
-                    if (newMessages[i].sender === "bot" && newMessages[i].text.includes("⏳ *Booking your appointment...*")) {
-                      newMessages[i].text = newMessages[i].text.replace("\n\n⏳ *Booking your appointment...*", "\n\n❌ Failed to process booking request. Please try again.");
-                      break;
-                    }
-                  }
-                  return newMessages;
-                });
+                const followUpQuery = `[SYSTEM NOTIFICATION]: The booking failed due to a network or system error. Please apologize and ask the user if they want to try an alternative date/time.`;
+                const completedBotMessage: Message = { sender: "bot", text: accumulatedText.replace(/\[BOOK_MEETING:[\s\S]*?\]/, "").trim() };
+                const updatedHistory = [...historyForApi, completedBotMessage];
+                sendMessage(followUpQuery, updatedHistory);
               }
             }
             break;
@@ -366,7 +372,7 @@ export default function RagChat({
           </div>
         )}
 
-        {messages.map((msg, i) => (
+        {messages.filter(msg => !msg.isHidden).map((msg, i, arr) => (
           <div
             key={i}
             className={`flex w-full min-w-0 ${
@@ -413,7 +419,7 @@ export default function RagChat({
               )}
               {msg.text || (
                 isStreaming &&
-                i === messages.length - 1 && (
+                i === arr.length - 1 && (
                   <span className="inline-flex gap-1.5 py-1">
                     <span className="w-2 h-2 bg-my-primary/50 rounded-full animate-bounce"></span>
                     <span

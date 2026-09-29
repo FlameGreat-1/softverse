@@ -18,6 +18,7 @@ export interface Message {
   sender: "user" | "bot";
   text: string;
   attachments?: Attachment[];
+  isHidden?: boolean;
 }
 
 const STORAGE_KEY = "flamo_chat_session";
