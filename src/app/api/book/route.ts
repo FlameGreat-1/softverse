@@ -41,7 +41,8 @@ export async function POST(req: Request) {
         language: "en"
       },
       location: {
-        type: "daily"
+        type: "integration",
+        integration: "cal-video"
       },
       metadata: {}
     };
