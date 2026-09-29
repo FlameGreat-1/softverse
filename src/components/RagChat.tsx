@@ -181,7 +181,7 @@ export default function RagChat({
       ...baseHistory,
       newMessage,
     ]);
-    
+
     if (!isAuto) {
       setInput("");
       setSelectedFiles([]);
@@ -200,9 +200,9 @@ export default function RagChat({
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ 
-          query: userQuery, 
-          history: historyForApi, 
+        body: JSON.stringify({
+          query: userQuery,
+          history: historyForApi,
           attachments: attachmentPayload,
           timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone
         }),
@@ -243,7 +243,7 @@ export default function RagChat({
 
               try {
                 const bookingData = JSON.parse(bookingDataStr);
-                
+
                 // Calculate local browser time and convert to strict UTC ISO string
                 // LLM outputs date as YYYY-MM-DD and time as HH:MM
                 const localDateObj = new Date(`${bookingData.date}T${bookingData.time}:00`);
@@ -256,18 +256,18 @@ export default function RagChat({
                   body: JSON.stringify(bookingData),
                 });
                 const bookResult = await bookRes.json();
-                
+
                 let followUpQuery = "";
                 if (!bookRes.ok || bookResult.status === "error") {
-                   const errorMsg = bookResult.error || bookResult.message || "Failed to confirm booking.";
-                   followUpQuery = `[SYSTEM NOTIFICATION]: The booking failed with error: "${errorMsg}". Please apologize and ask the user if they want to try an alternative date/time.`;
+                  const errorMsg = bookResult.error || bookResult.message || "Failed to confirm booking.";
+                  followUpQuery = `[SYSTEM NOTIFICATION]: The booking failed with error: "${errorMsg}". Please apologize and ask the user if they want to try an alternative date/time.`;
                 } else {
-                   followUpQuery = `[SYSTEM NOTIFICATION]: The booking was successfully confirmed! Let the user know the booking is confirmed and provide any extra closing remarks.`;
+                  followUpQuery = `[SYSTEM NOTIFICATION]: The booking was successfully confirmed! Let the user know the booking is confirmed and provide any extra closing remarks.`;
                 }
 
                 const completedBotMessage: Message = { sender: "bot", text: accumulatedText.replace(/\[BOOK_MEETING:[\s\S]*?\]/, "").trim() };
                 const updatedHistory = [...historyForApi, completedBotMessage];
-                
+
                 // Trigger AI to read the response and naturally say it to the user
                 sendMessage(followUpQuery, updatedHistory);
 
@@ -288,13 +288,13 @@ export default function RagChat({
           let displayText = accumulatedText;
           // Use [\s\S]*? to match newlines if the LLM pretty-prints the JSON (ES5 compatible, avoids TS1501 error)
           const bookMatch = accumulatedText.match(/\[BOOK_MEETING:\s*(\{[\s\S]*?\})\s*\]/);
-          
+
           if (bookMatch) {
-             bookingDataStr = bookMatch[1];
-             displayText = accumulatedText.replace(bookMatch[0], "").trim();
+            bookingDataStr = bookMatch[1];
+            displayText = accumulatedText.replace(bookMatch[0], "").trim();
           } else if (accumulatedText.includes("[BOOK_MEETING:")) {
-             // We're currently streaming the JSON part, so cut off the display text before it
-             displayText = accumulatedText.split("[BOOK_MEETING:")[0].trim();
+            // We're currently streaming the JSON part, so cut off the display text before it
+            displayText = accumulatedText.split("[BOOK_MEETING:")[0].trim();
           }
 
           setMessages((prev) => {
@@ -375,16 +375,14 @@ export default function RagChat({
         {messages.filter(msg => !msg.isHidden).map((msg, i, arr) => (
           <div
             key={i}
-            className={`flex w-full min-w-0 ${
-              msg.sender === "user" ? "justify-end" : "justify-start"
-            }`}
+            className={`flex w-full min-w-0 ${msg.sender === "user" ? "justify-end" : "justify-start"
+              }`}
           >
             <div
-              className={`px-4 py-3 text-[14px] leading-relaxed min-w-0 ${
-                msg.sender === "user"
+              className={`px-4 py-3 text-[14px] leading-relaxed min-w-0 ${msg.sender === "user"
                   ? "max-w-[80%] bg-my-primary/15 border border-my-primary/30 rounded-2xl rounded-br-sm text-gray-100"
                   : "w-full bg-white/[0.04] border border-white/[0.08] rounded-2xl text-gray-300"
-              }`}
+                }`}
               style={{
                 whiteSpace: "pre-wrap",
                 overflowWrap: "anywhere",
@@ -401,15 +399,15 @@ export default function RagChat({
                     <div key={idx}>
                       {att.mimeType.startsWith('image/') && att.data ? (
                         /* eslint-disable-next-line @next/next/no-img-element */
-                        <img 
-                          src={`data:${att.mimeType};base64,${att.data}`} 
-                          alt={att.name} 
+                        <img
+                          src={`data:${att.mimeType};base64,${att.data}`}
+                          alt={att.name}
                           className="max-w-full h-auto rounded-lg border border-white/10"
                           style={{ maxHeight: '200px' }}
                         />
                       ) : (
                         <div className="flex items-center gap-2 bg-black/20 px-3 py-2 rounded-lg border border-white/10 inline-flex max-w-full">
-                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="shrink-0"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="shrink-0"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /><line x1="16" y1="13" x2="8" y2="13" /><line x1="16" y1="17" x2="8" y2="17" /><polyline points="10 9 9 9 8 9" /></svg>
                           <span className="text-xs truncate">{att.name}</span>
                         </div>
                       )}
@@ -487,30 +485,30 @@ export default function RagChat({
         <div className="flex justify-between items-center px-2 pb-1.5 pt-1">
           {/* Left action icons (matching ChatGPT + icon) */}
           <div className="flex items-center gap-2">
-            <input 
-              type="file" 
-              ref={fileInputRef} 
-              className="hidden" 
+            <input
+              type="file"
+              ref={fileInputRef}
+              className="hidden"
               accept="image/jpeg,image/png,image/gif,image/webp,image/heic,image/heif,image/svg+xml,application/pdf"
               multiple
               onChange={handleFileChange}
             />
-            <button 
+            <button
               type="button"
               title="Add files"
               onClick={() => fileInputRef.current?.click()}
-              className="p-1.5 text-[#b4b4b4] hover:text-white transition-colors rounded-full" 
+              className="p-1.5 text-[#b4b4b4] hover:text-white transition-colors rounded-full"
               aria-label="Attach file"
               disabled={loading}
             >
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 5v14m-7-7h14"/></svg>
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 5v14m-7-7h14" /></svg>
             </button>
           </div>
-          
+
           {/* Right Send Button */}
           <button
             type="button"
-            onClick={sendMessage}
+            onClick={() => sendMessage()}
             disabled={loading || (!input.trim() && selectedFiles.length === 0)}
             className={`flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-full transition-all duration-200 
               ${input.trim() || selectedFiles.length > 0 ? 'bg-white text-black hover:bg-gray-200' : 'bg-transparent text-[#b4b4b4]'}

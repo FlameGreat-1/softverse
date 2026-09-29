@@ -50,7 +50,7 @@ export async function POST(req: Request) {
     const systemPrompt = buildSystemPrompt(timeZone);
 
     // gemini-3.5-flash model
-    const modelName = "gemini-flash-latest";
+    const modelName = "gemini-3.5-flash";
     const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:streamGenerateContent?alt=sse&key=${apiKey}`;
 
     // Map history to Gemini API contents structure, ensuring strict alternation and no empty text.
